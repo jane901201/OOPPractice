@@ -4,12 +4,12 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class PlayerAttrTest
+public class saveDataTest
 {
+    
     [Test]
-    public void GetDamage()
+    public void saveDataTestSimplePasses()
     {
-        int str = PlayerAttr.Damage(10, 1);
-        Assert.AreEqual(9, str);
+        
     }
 }

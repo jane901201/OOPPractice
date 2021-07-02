@@ -9,17 +9,25 @@ public class PlayerAttr
     private int str; //力量
     private int def; //防禦
     private int mag; //魔力
-    private int spd; //速度
+    private int moveSpd; //移動速度
+    private int atkSpd; //攻擊速度
+    private int res; //魔法抵抗
 
     public int Hp { get => hp; set => hp = value; }
     public int Mp { get => mp; set => mp = value; }
     public int Str { get => str; set => str = value; }
     public int Def { get => def; set => def = value; }
     public int Mag { get => mag; set => mag = value; }
-    public int Spd { get => spd; set => spd = value; }
+    public int Spd { get => moveSpd; set => moveSpd = value; }
+    public int Res { get => res; set => res = value; }
 
-    public static int Damage(int str, int def)
+    public static int PhysicalDamage(int str, int def)
     {
         return str - def;
+    }
+
+    public static int MagicalDamage(int mag, int def)
+    {
+        return mag - def;
     }
 }
