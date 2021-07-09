@@ -11,5 +11,4 @@ public abstract class ICharacterAttr
 
     protected IAttrStrategy attrStrategy = null;
 
-
 }

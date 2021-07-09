@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttr
 {
+
     private int hp; //生命條
     private int mp; //魔力條
     private int str; //力量
