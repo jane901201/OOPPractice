@@ -2,17 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ICharacter : MonoBehaviour
+public class ICharacter
 {
-    // Start is called before the first frame update
-    void Start()
+    protected string name = "";
+    protected GameObject gameObject = null;
+    protected AudioSource audio = null;
+
+    protected bool killed = false;
+    protected bool canRemove = false;
+
+    public ICharacter()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetGameObject(GameObject theGameObject)
     {
-        
+        gameObject = theGameObject;
+        audio = gameObject.GetComponent<AudioSource>();
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
+    public void Release()
+    {
+        if(gameObject != null)
+        {
+            GameObject.Destroy(gameObject);
+        }
+    }
+
+    public string GetName()
+    {
+        return name;
     }
 }

@@ -9,6 +9,10 @@ public abstract class ICharacterAttr
     protected float moveSpd = 1.0f;
     protected string attrName = "";
 
-    protected IAttrStrategy attrStrategy = null;
+    private IAttrStrategy attrStrategy = null;
 
+    protected IAttrStrategy AttrStrategy 
+    {
+        get => attrStrategy; set => attrStrategy = value; 
+    }
 }
