@@ -1,7 +1,9 @@
 {
     "name": "BaseClass",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:21f16e534fa439e4694e3c152840e667"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

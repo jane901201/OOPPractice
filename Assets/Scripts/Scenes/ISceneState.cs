@@ -14,6 +14,28 @@ public class ISceneState
 
     protected SceneStateController controller = null;
 
+    public ISceneState(SceneStateController controller)
+    {
+        this.controller = controller;
+    }
 
+    public virtual void StateBegin()
+    {
+        //遊戲資料載入及初始
+    }
 
+    public virtual void StateUpdate()
+    {
+
+    }
+
+    public virtual void StateEnd()
+    {
+
+    }
+
+    public override string ToString() //Debug跟測試
+    {
+        return string.Format("[I_SceneState: StateName={0}]", StateName);
+    }
 }
