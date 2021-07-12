@@ -5,11 +5,13 @@ using UnityEngine;
 public class ControllerTest : MonoBehaviour
 {
     private PlayerActionController actionController;
-    private float speed = 1.0f, jumpSpeed;
+    private Animator animator;
+    private float speed = 10.0f, jumpSpeed;
 
     private void Awake()
     {
         actionController = new PlayerActionController();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -32,5 +34,7 @@ public class ControllerTest : MonoBehaviour
         float movementInput = actionController.Land.Move.ReadValue<float>();
         Vector3 currectPosition = transform.position;
         currectPosition.x += movementInput * speed * Time.deltaTime;
+        animator.SetFloat("Speed", Mathf.Abs(movementInput * speed));
+        transform.position = currectPosition;
     }
 }

@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "3dbfc266-9f00-4918-bae0-cee1fa77d0d7",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -27,7 +27,7 @@
                     "id": "2a6b902d-92fb-440c-b4a9-c19ee808d973",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Hold(duration=0.7,pressPoint=0.01)"
                 }
             ],
             "bindings": [
@@ -109,9 +109,20 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "UpAttack",
-                    "id": "69b5b970-90c2-4301-99aa-8686c5606d67",
-                    "path": "ButtonWithTwoModifiers",
+                    "name": "",
+                    "id": "3aad5503-47fa-466e-a58d-23043b824502",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Gamepad",
+                    "id": "9106ae3b-5063-4b7b-90e5-b8a77e927cb8",
+                    "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -120,34 +131,23 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier1",
-                    "id": "adbd99c6-9175-4d6c-ad61-bbacf860cc88",
-                    "path": "",
+                    "name": "modifier",
+                    "id": "456ff100-504d-4129-8bcd-ae6610357589",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "modifier2",
-                    "id": "e662e4b1-b462-4153-82d8-c1062070dd55",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "button",
-                    "id": "8383c2ea-1920-44e7-b3a9-e1cd6b72e33e",
-                    "path": "",
+                    "id": "db01accd-f5e5-44b4-8b69-13be0d966587",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
