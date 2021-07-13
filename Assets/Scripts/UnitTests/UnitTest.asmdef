@@ -4,7 +4,11 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Character"
+        "Character",
+        "Resources",
+        "UI",
+        "BaseClass",
+        "Scenes"
     ],
     "includePlatforms": [
         "Editor"
