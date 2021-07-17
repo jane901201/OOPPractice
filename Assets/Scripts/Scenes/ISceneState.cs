@@ -36,6 +36,6 @@ public class ISceneState
 
     public override string ToString() //Debug¸ò´ú¸Õ
     {
-        return string.Format("[I_SceneState: StateName={0}]", StateName);
+        return StateName;
     }
 }

@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class DialogueSystem : MonoBehaviour
+public class DialogueSystem
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public DialogueSystem(Converation converation)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetAvatarImage(Image image)
     {
-        
+
+    }
+
+    public void SetNameText(Text text)
+    {
+
+    }
+
+    public void SetConveration()
+    {
+
     }
 }

@@ -36,10 +36,8 @@ public class PlayerMovement : MonoBehaviour
         horizontalMove = movementInput * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(movementInput * runSpeed));
 
-        //Debug.Log(Input.GetAxisRaw("Horizontal"));
         if(controller.Land.Jump.ReadValue<float>() > 0f)
         {
-            //Debug.Log("Jump");
             jump = true;
             animator.SetBool("IsJumping", jump);
         }

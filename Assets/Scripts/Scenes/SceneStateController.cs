@@ -13,7 +13,7 @@ public class SceneStateController
     {
 
     }
-    public void setState(ISceneState state, string loadSceneName)
+    public void SetState(ISceneState state, string loadSceneName)
     {
         runBegin = false;
 
@@ -37,6 +37,25 @@ public class SceneStateController
 
     public void StateUpdate()
     {
-        //知道載入進度...之後會跟載入條的東西一起做，先暫時不理會
+
+        //這裡還要一個確認function是否有在載入
+
+        if(state != null && runBegin == false)
+        {
+            state.StateBegin();
+            runBegin = true;
+        }
+
+        if(state != null)
+        {
+            state.StateUpdate();
+        }
+    
     }
+
+    public ISceneState GetCurrectState()
+    {
+        return state;
+    }
+
 }

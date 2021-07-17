@@ -10,6 +10,7 @@ public class ProjectResources : IResources
 
     public const string PlayerPath = "Characters/Player/";
     public const string EnemyPath = "Characters/Enemy/";
+    public const string CharacterAvatarTestPath = "CharacterAvatar/CharacterAvatarTest";
     public const string WeaponPath = "Weapons/";
     public const string EffectPath = "Effects/";
     public const string AudioPath = "Audios/";
@@ -31,6 +32,18 @@ public class ProjectResources : IResources
         return res as GameObject;
     }
 
+
+    public override Sprite LoadCharacterAvatar(string CharacterAvatarName)
+    {
+        Sprite res = Resources.Load<Sprite>(SpritePath + CharacterAvatarName);
+
+        if (res == null)
+        {
+            Debug.Log("無法載入路徑" + SpritePath + CharacterAvatarName);
+            return null;
+        }
+        return res;
+    }
     public override void LoadEffect(string EffectName)
     {
         UnityEngine.Object res = LoadGameObjectFromResourcePath(EffectPath + EffectName);
@@ -57,16 +70,7 @@ public class ProjectResources : IResources
         return res as GameObject;
     }
 
-
-    // 產生GameObject
-    private GameObject InstantiateGameObject(string AssetName)
-    {
-        // 從Resrouce中載入
-        UnityEngine.Object res = LoadGameObjectFromResourcePath(AssetName);
-        if (res == null)
-            return null;
-        return UnityEngine.Object.Instantiate(res) as GameObject;
-    }
+   
 
     // 從Resrouce中載入
     public UnityEngine.Object LoadGameObjectFromResourcePath(string AssetPath)
@@ -79,4 +83,6 @@ public class ProjectResources : IResources
         }
         return res;
     }
+
+   
 }

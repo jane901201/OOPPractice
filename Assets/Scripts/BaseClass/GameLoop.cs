@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameLoop : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
+    SceneStateController sceneStateController = new SceneStateController();
+
+    private void Awake()
     {
-        
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        sceneStateController.SetState(new StartState(sceneStateController), "");
     }
+
+    private void Update()
+    {
+        sceneStateController.StateUpdate();
+    }
+
 }

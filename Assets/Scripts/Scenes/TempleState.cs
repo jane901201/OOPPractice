@@ -12,4 +12,19 @@ public class TempleState: ISceneState
     {
         StateName = "TempleState";
     }
+
+    public override void StateBegin()
+    {
+
+    }
+
+    public override void StateUpdate()
+    {
+
+    }
+
+    public override void StateEnd()
+    {
+
+    }
 }

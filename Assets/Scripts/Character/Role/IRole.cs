@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IRole : MonoBehaviour
+public class IRole
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int rolePhyStk;
+    private int roleMagStk;
+    private int roleAtkSpd;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

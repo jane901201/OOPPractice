@@ -2,6 +2,8 @@
     "name": "UnitTest",
     "rootNamespace": "",
     "references": [
+        "Unity.InputSystem",
+        "Unity.InputSystem.TestFramework",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Character",

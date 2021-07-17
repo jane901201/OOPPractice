@@ -26,11 +26,6 @@ public class StartState : ISceneState
 
     public override void StateUpdate()
     {
-        controller.setState(new TempleState(controller), "TempleState");
-    }
-
-    private void OnStartGameBtnClick(Button button)
-    {
-        controller.setState(new TempleState(controller), "TempleState");
+        controller.SetState(new MainMenuState(controller), "MainMenuState");
     }
 }

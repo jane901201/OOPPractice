@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class saveDataTest
+public class SaveDataTest
 {
     
     [Test]
