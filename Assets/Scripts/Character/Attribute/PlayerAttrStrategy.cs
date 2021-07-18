@@ -33,4 +33,10 @@ public class PlayerAttrStrategy : IAttrStrategy
     {
         throw new System.NotImplementedException();
     }
+
+    public override int TotalHp(ICharacter character)
+    {
+        int hp = 0;
+        return hp;
+    }
 }

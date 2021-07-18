@@ -61,7 +61,7 @@ public class @PlayerActionController : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouseGamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -72,7 +72,7 @@ public class @PlayerActionController : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouseGamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -116,7 +116,7 @@ public class @PlayerActionController : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouseGamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -185,6 +185,27 @@ public class @PlayerActionController : IInputActionCollection, IDisposable
                 },
                 {
                     ""devicePath"": ""<VirtualMouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""KeyboardMouseGamepad"",
+            ""bindingGroup"": ""KeyboardMouseGamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -298,6 +319,15 @@ public class @PlayerActionController : IInputActionCollection, IDisposable
         {
             if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
             return asset.controlSchemes[m_ControllerSchemeIndex];
+        }
+    }
+    private int m_KeyboardMouseGamepadSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseGamepadScheme
+    {
+        get
+        {
+            if (m_KeyboardMouseGamepadSchemeIndex == -1) m_KeyboardMouseGamepadSchemeIndex = asset.FindControlSchemeIndex("KeyboardMouseGamepad");
+            return asset.controlSchemes[m_KeyboardMouseGamepadSchemeIndex];
         }
     }
     public interface ILandActions

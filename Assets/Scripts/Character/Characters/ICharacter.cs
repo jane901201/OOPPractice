@@ -10,6 +10,7 @@ public class ICharacter
     protected IWeapon weapon = null;
     protected ICharacterAttr attribute = null;
     protected IRole role = null;
+    private IArmor armor = null;
 
     protected bool killed = false;
     protected bool canRemove = false;
@@ -43,6 +44,11 @@ public class ICharacter
         return name;
     }
 
+    public IRole Role
+    {
+        get { return role; }
+        set { role = value; }
+    }
 
-
+    public IArmor Armor { get => armor; set => armor = value; }
 }

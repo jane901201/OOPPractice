@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class IAttrStrategy
 {
+    public abstract int TotalHp(ICharacter character);
     public abstract int PhysicalDamage(int phyAtk, int phyDef);
     public abstract int MagicalDamage(int magAtk, int magDef);
     public abstract int Restorative(int restorative);

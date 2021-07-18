@@ -33,4 +33,9 @@ public class EnemyAttrStrategy : IAttrStrategy
     {
         throw new System.NotImplementedException();
     }
+
+    public override int TotalHp(ICharacter character)
+    {
+        throw new System.NotImplementedException();
+    }
 }
