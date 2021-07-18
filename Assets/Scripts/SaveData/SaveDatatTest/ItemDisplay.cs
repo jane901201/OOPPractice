@@ -13,6 +13,12 @@ public class ItemDisplay : MonoBehaviour
 
     public void Display()
     {
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+
         foreach(ItemEntry item in XMLManager.ins.itemDB.list)
         {
             ItemBlock newBlock = Instantiate(blockPrefab) as ItemBlock;

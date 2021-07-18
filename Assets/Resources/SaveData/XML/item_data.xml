@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ItemDataBase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <list>
+  <CombatEquipment>
     <ItemEntry>
       <itmeName>Showd</itmeName>
       <material>Wood</material>
@@ -11,5 +11,5 @@
       <material>Wood</material>
       <value>10</value>
     </ItemEntry>
-  </list>
+  </CombatEquipment>
 </ItemDataBase>

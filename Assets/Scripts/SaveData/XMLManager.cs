@@ -42,6 +42,7 @@ public class ItemEntry
 [System.Serializable]
 public class ItemDataBase
 {
+    [XmlArray("CombatEquipment")]
     public List<ItemEntry> list = new List<ItemEntry>();
 
 }
