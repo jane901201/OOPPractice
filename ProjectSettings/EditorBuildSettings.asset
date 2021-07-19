@@ -21,4 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SchoolScene.unity
     guid: 6d5ff5f93f9fbbf47aeca4eb5bdf91ef
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: c86eb38929bc982489397ec383346170, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: f8170bd0ab08f8b40a518532804983f5, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 9fe2bd7e5631ee94e9b3d6ae45919e22, type: 2}

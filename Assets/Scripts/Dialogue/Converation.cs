@@ -1,20 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Localization.Components;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
+using UnityEngine.Localization.Events;
 
-public class Converation
+public class Converation : MonoBehaviour
 {
-    private Topic topic; //整個對話的主題
-    private Sentences setences; //句子
-    private Avatar avatar;
-    private Name name;
-    private ArrayList converationList = new ArrayList
+    [SerializeField] private LocalizeStringEvent topic;
+    [SerializeField] private LocalizeStringEvent name;
+    [SerializeField] private LocalizeSpriteEvent avatar;
+    private UnityEventString updateString;
+
+    Text text;
+    public void ClickToContinue()
     {
+        topic.StringReference.StringChanged += StringReference_StringChanged;
+    }
 
-    };
-    
+    private void StringReference_StringChanged(string value)
+    {
+        throw new NotImplementedException();
+    }
+}
 
-
-
-
+[Serializable]
+public class ConverationList
+{
+    public List<Converation> converations = new List<Converation>();
 }
