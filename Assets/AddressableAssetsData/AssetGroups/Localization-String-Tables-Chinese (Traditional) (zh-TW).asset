@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-TW
+  - m_GUID: 1d13cdbb034e4c840b26b22891a263d4
+    m_Address: SaveData_zh-TW
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-TW
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 67e366ad19bd7c04caca723f72817947, type: 2}
   m_SchemaSet:

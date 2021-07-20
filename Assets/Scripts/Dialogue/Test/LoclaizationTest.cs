@@ -14,7 +14,8 @@ public class LoclaizationTest :MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        localizeStringEvent.StringReference.SetReference("Begin", "2");
+        //localizeStringEvent.StringReference.StringChanged +=
+        //localizeStringEvent.StringReference.SetReference("Begin", "2");
     }
 
     // Update is called once per frame

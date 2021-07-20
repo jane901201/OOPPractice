@@ -1,9 +1,7 @@
 {
-    "name": "BaseClass",
+    "name": "Unreal.BaseClass",
     "rootNamespace": "",
-    "references": [
-        "GUID:21f16e534fa439e4694e3c152840e667"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

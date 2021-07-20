@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SetUpUI : MonoBehaviour
+namespace Unreal.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    [AddComponentMenu("UnrealUI/SetUpUI")]
+    public class SetUpUI : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+      
     }
 }

@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterHPUI 
+namespace Unreal.BaseClass
 {
-    
+    public class UITool
+    {
+       
+    }
 }
+

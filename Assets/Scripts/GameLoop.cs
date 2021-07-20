@@ -12,7 +12,7 @@ public class GameLoop : MonoBehaviour
 
     private void Start()
     {
-        sceneStateController.SetState(new StartState(sceneStateController), "");
+        sceneStateController.SetState(new StartState(sceneStateController), "MainMenuScene");
     }
 
     private void Update()

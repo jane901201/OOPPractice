@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour
+namespace Unreal.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    [AddComponentMenu("UnrealUI/InventoryUI")]
+    public class InventoryUI : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
+

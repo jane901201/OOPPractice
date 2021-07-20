@@ -4,23 +4,23 @@ using UnityEngine;
 using UnityEngine.Localization.Events;
 using UnityEngine.UI;
 
-public class DialogueSystem : MonoBehaviour
+namespace Unreal.Dialogue
 {
-    [SerializeField] private Converation converation;
-    private UnityEventString updateString;
-    
-    [SerializeField] private Text sentenceText;
-    [SerializeField] private Text name;
-    [SerializeField] private Image avatar;
-    
-
-    public DialogueSystem(Converation converation)
+    public class DialogueSystem : MonoBehaviour
     {
+        [SerializeField] private Converation converation;
+        private UnityEventString updateString;
+    
+        [SerializeField] private Text sentenceText;
+        [SerializeField] private Text name;
+        [SerializeField] private Image avatar;
+    
 
+        public DialogueSystem(Converation converation)
+        {
+
+        }
+    
     }
 
-
-
-
-    
 }

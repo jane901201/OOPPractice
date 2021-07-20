@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueUI
+
+namespace Unreal.UI
 {
-    
+    [AddComponentMenu("UnrealUI/DialogueUI")]
+    public class DialogueUI : MonoBehaviour
+    {
+        
+    }
 }
+

@@ -1,0 +1,16 @@
+{
+    "name": "Unreal.UI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:37dff2a2231bf51408a1ff4dad281e87"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
