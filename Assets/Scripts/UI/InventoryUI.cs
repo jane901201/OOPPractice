@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Unreal.UI
 {
     [AddComponentMenu("UnrealUI/InventoryUI")]
-    public class InventoryUI : MonoBehaviour
+    public class InventoryUI : IUserInterface
     {
 
     }

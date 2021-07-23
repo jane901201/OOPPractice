@@ -1,9 +1,7 @@
 {
-    "name": "Scenes",
+    "name": "Unreal.Resources",
     "rootNamespace": "",
-    "references": [
-        "GUID:37dff2a2231bf51408a1ff4dad281e87"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

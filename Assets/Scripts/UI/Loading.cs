@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Unreal.UI
 {
-    [AddComponentMenu("UnrealUI/GamePauseUI")]
-    public class GamePauseUI : IUserInterface
+    [AddComponentMenu("UnrealUI/LoadingUI")]
+    public class Loading : IUserInterface
     {
-   
+
     }
 }
 

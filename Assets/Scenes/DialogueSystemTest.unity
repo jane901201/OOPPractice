@@ -708,8 +708,8 @@ GameObject:
   - component: {fileID: 1701496714}
   - component: {fileID: 1701496718}
   - component: {fileID: 1701496716}
-  - component: {fileID: 1701496720}
   - component: {fileID: 1701496719}
+  - component: {fileID: 1701496717}
   m_Layer: 5
   m_Name: ConversationPanel
   m_TagString: Untagged
@@ -810,6 +810,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1701496717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701496712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff32e163178bae4890951d671a24191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LocalizeStringEvent: {fileID: 0}
+  m_NameText: {fileID: 0}
+  m_SentenceText: {fileID: 0}
 --- !u!114 &1701496718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,22 +886,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topic: {fileID: 0}
-  name: {fileID: 0}
-  avatar: {fileID: 0}
---- !u!114 &1701496720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701496712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2cb2fc3fc651b469f87839a2becc45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  converation: {fileID: 0}
-  sentenceText: {fileID: 0}
   name: {fileID: 0}
   avatar: {fileID: 0}
 --- !u!1 &2062617899

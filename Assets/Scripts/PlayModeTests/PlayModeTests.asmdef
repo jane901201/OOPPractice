@@ -6,9 +6,9 @@
         "UnityEditor.TestRunner",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework",
-        "Resources",
         "Scenes",
-        "Dialogue"
+        "Unreal.Resources",
+        "Unreal.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

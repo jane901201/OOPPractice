@@ -7,10 +7,11 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Character",
-        "Resources",
-        "UI",
-        "BaseClass",
-        "Scenes"
+        "Scenes",
+        "Unreal.Resources",
+        "Unreal.Dialogue",
+        "Unreal.BaseClass",
+        "Unreal.Inventory"
     ],
     "includePlatforms": [
         "Editor"

@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization.Events;
 using UnityEngine.UI;
+using Unreal.BaseClass;
 
 namespace Unreal.Dialogue
 {
-    public class DialogueSystem : MonoBehaviour
+    public class DialogueSystem : IGameSystem
     {
-        [SerializeField] private Converation converation;
-        private UnityEventString updateString;
-    
-        [SerializeField] private Text sentenceText;
-        [SerializeField] private Text name;
-        [SerializeField] private Image avatar;
-    
+        private Converation converation;
+        private UnityEventString updateString;   
 
-        public DialogueSystem(Converation converation)
+        public DialogueSystem()
         {
 
         }

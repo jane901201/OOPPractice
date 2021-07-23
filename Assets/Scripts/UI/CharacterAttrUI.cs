@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAttrUI : MonoBehaviour
+namespace Unreal.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    [AddComponentMenu("UnrealUI/CharacterAttrUI")]
+    public class CharacterAttrUI : IUserInterface
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
     }
 }
+
