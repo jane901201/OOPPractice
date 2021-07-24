@@ -32,11 +32,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
-  - m_GUID: 7e496444abf237449aa23fd3d2d5983c
-    m_Address: My String Table Collection_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
   - m_GUID: bab8d9e9d7fe9f6468b559dcf17c86a3
     m_Address: SaveData_en
     m_ReadOnly: 1

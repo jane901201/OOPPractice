@@ -33,10 +33,6 @@ MonoBehaviour:
     m_Address: Assets/Localization/Tables/Name/Name Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
-  - m_GUID: 8c077ba0ba42fb04285e7d4ba399bd68
-    m_Address: Assets/Localization/Tables/My String Table Collection Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
   - m_GUID: b3b02a6f8f880cb49901d1f1a755ea97
     m_Address: Assets/Localization/Tables/SaveData/SaveData Shared Data.asset
     m_ReadOnly: 1

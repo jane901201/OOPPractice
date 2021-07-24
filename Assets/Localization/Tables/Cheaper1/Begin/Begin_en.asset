@@ -26,5 +26,13 @@ MonoBehaviour:
     m_Localized: Test 2
     m_Metadata:
       m_Items: []
+  - m_Id: 1628098301067264
+    m_Localized: 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1861594193920000
+    m_Localized: Begin
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

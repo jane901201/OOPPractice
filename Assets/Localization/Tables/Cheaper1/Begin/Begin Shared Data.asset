@@ -15,12 +15,22 @@ MonoBehaviour:
   m_TableCollectionName: Begin
   m_TableCollectionNameGuidString: 4e7e822bbf0795c4f95a8a5a4e1b435c
   m_Entries:
+  - m_Id: 1861594193920000
+    m_Key: '0
+
+'
+    m_Metadata:
+      m_Items: []
   - m_Id: 29148643328
     m_Key: 1
     m_Metadata:
       m_Items: []
   - m_Id: 35748328046592
     m_Key: 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1628098301067264
+    m_Key: SentenceNumber
     m_Metadata:
       m_Items: []
   m_Metadata:
