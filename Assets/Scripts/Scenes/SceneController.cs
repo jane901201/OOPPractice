@@ -6,25 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneController
 {
-    private IScene state;
+    private IScene m_Scene;
     private bool runBegin = false;
 
     public SceneController()
     {
 
     }
-    public void SetScene(IScene state, string loadSceneName)
+    public void SetScene(IScene scene, string loadSceneName)
     {
         runBegin = false;
 
         LoadScene(loadSceneName);
 
-        if(state != null)
+        if(scene != null)
         {
-            state.StateEnd();
+            scene.SceneEnd();
         }
 
-        this.state = state;
+        this.m_Scene = scene;
 
     }
 
@@ -40,22 +40,22 @@ public class SceneController
 
         //這裡還要一個確認function是否有在載入
 
-        if(state != null && runBegin == false)
+        if(m_Scene != null && runBegin == false)
         {
-            state.StateBegin();
+            m_Scene.SceneBegin();
             runBegin = true;
         }
 
-        if(state != null)
+        if(m_Scene != null)
         {
-            state.StateUpdate();
+            m_Scene.SceneUpdate();
         }
     
     }
 
-    public IScene GetCurrectState()
+    public IScene GetCurrectScene()
     {
-        return state;
+        return m_Scene;
     }
 
 }

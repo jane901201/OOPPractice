@@ -8,19 +8,4 @@ public class SchoolScene : IScene
         this.SceneName = "SchoolState";
     }
 
-    public override void StateBegin()
-    {
-
-    }
-
-    public override void StateUpdate()
-    {
-
-    }
-
-    public override void StateEnd()
-    {
-
-    }
-
 }

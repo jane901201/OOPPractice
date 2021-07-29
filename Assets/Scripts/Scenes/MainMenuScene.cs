@@ -9,21 +9,6 @@ public class MainMenuScene : IScene
         this.SceneName = "MainMenuState";
     }
 
-    public override void StateBegin()
-    {
-        
-    }
-
-    public override void StateUpdate()
-    {
-        
-    }
-
-    public override void StateEnd()
-    {
-        
-    }
-
     private void OnStartGameBtnClick(Button button)
     {
         controller.SetScene(new SchoolScene(controller), "SchoolScene");

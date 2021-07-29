@@ -29,7 +29,7 @@ public class SceneStateTest
         controller.SetScene(state, "MainMenuScene");
 
         //Assert
-        Assert.AreEqual(controller.GetCurrectState().ToString() , "MainMenuScene");
+        Assert.AreEqual(controller.GetCurrectScene().ToString() , "MainMenuScene");
         //Assert.AreEqual("MainMenuScene", "MainMenuScene");
 
         yield return null;
@@ -42,7 +42,7 @@ public class SceneStateTest
 
         controller.SetScene(state, "SchoolScene");
 
-        Assert.AreEqual(controller.GetCurrectState().ToString(), "SchoolScene");
+        Assert.AreEqual(controller.GetCurrectScene().ToString(), "SchoolScene");
 
         yield return null;
     }
