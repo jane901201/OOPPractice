@@ -1,10 +1,15 @@
 {
-    "name": "Unreal.UI",
+    "name": "Unreal",
     "rootNamespace": "",
     "references": [
         "GUID:37dff2a2231bf51408a1ff4dad281e87",
-        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5",
-        "GUID:918b28c43e7445b44bc5ba04a29e89ad"
+        "GUID:918b28c43e7445b44bc5ba04a29e89ad",
+        "GUID:b64dd141ca50401489aeb2473da38a94",
+        "GUID:b3b13cf3231e8494585bbcbac947a49c",
+        "GUID:9feb65f1cabace440ab5473f7c61c0b2",
+        "GUID:62875ceba2a236b4f8cc44d321b31320",
+        "GUID:2ea542a098a76c34f82f9c220aa240ac",
+        "GUID:21f16e534fa439e4694e3c152840e667"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

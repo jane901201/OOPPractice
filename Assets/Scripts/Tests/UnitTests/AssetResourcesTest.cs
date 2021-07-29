@@ -63,6 +63,11 @@ public class AssetResourcesTest : IPrebuildSetup
 
     }
 
-
+    [Test]
+    public void GetUI()
+    {
+        GameObject UI = resources.LoadUI("DialogueUI");
+        Assert.NotNull(UI);
+    }
 
 }

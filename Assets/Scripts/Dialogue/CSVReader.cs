@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CSVReader
 {
+    /*
     [SerializeField]
     private TextAsset textAssetData;
 
@@ -37,5 +38,5 @@ public class CSVReader
 
     }
 
-
+    */
 }

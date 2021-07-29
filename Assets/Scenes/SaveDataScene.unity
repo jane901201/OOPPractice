@@ -1343,7 +1343,6 @@ GameObject:
   - component: {fileID: 1151617928}
   - component: {fileID: 1151617930}
   - component: {fileID: 1151617929}
-  - component: {fileID: 1151617931}
   m_Layer: 5
   m_Name: SaveDataUI
   m_TagString: Untagged
@@ -1409,30 +1408,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151617927}
   m_CullTransparentMesh: 1
---- !u!114 &1151617931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151617927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: 
-    m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 1
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1193849106
 GameObject:
   m_ObjectHideFlags: 0

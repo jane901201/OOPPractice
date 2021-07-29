@@ -1,8 +1,9 @@
 {
-    "name": "Character",
+    "name": "Unreal.GameEvent",
     "rootNamespace": "",
     "references": [
-        "GUID:37dff2a2231bf51408a1ff4dad281e87"
+        "GUID:37dff2a2231bf51408a1ff4dad281e87",
+        "GUID:62875ceba2a236b4f8cc44d321b31320"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

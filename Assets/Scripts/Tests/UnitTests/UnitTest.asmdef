@@ -1,18 +1,23 @@
 {
-    "name": "PlayModeTests",
+    "name": "UnitTest",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
         "Scenes",
         "Unreal.Resources",
-        "Unreal.UI"
+        "Unreal.Dialogue",
+        "Unreal.BaseClass",
+        "Unreal.Inventory",
+        "Unreal.Chatacter"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
-    "allowUnsafeCode": true,
+    "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll"

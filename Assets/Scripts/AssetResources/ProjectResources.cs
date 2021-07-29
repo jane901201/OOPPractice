@@ -11,6 +11,7 @@ public class ProjectResources : IResources
     public const string PlayerPath = "Characters/Player/";
     public const string EnemyPath = "Characters/Enemy/";
     public const string CharacterAvatarTestPath = "CharacterAvatar/CharacterAvatarTest";
+    public const string UIPath = "UI/";
     public const string WeaponPath = "Weapons/";
     public const string EffectPath = "Effects/";
     public const string AudioPath = "Audios/";
@@ -47,6 +48,14 @@ public class ProjectResources : IResources
     public override void LoadEffect(string EffectName)
     {
         UnityEngine.Object res = LoadGameObjectFromResourcePath(EffectPath + EffectName);
+    }
+
+    public override GameObject LoadUI(string UIName)
+    {
+        UnityEngine.Object res = LoadGameObjectFromResourcePath(UIPath + UIName);
+        if (res == null)
+            return null;
+        return res as GameObject;
     }
 
     public override Sprite LoadSprite(string SpriteName)

@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// 
+/// </summary>
 public class GameLoop : MonoBehaviour
 {
     SceneStateController sceneStateController = new SceneStateController();
 
     private void Awake()
     {
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

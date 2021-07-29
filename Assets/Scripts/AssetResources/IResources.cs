@@ -10,5 +10,7 @@ public abstract class IResources
     public abstract AudioClip LoadAudioClip(string AudioClipName);
     public abstract void LoadEffect(string EffectName);
     public abstract Sprite LoadSprite(string SpriteName);
+
+    public abstract GameObject LoadUI(string UIName);
    
 }
