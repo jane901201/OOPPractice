@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveDataState : ISceneState
 {
-    public SaveDataState(SceneStateController controller) : base(controller)
+    public SaveDataState(SceneController controller) : base(controller)
     {
         this.StateName = "SaveDataState";
     }

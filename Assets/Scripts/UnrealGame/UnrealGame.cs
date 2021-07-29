@@ -6,12 +6,12 @@ using Unreal.Character;
 using Unreal.Dialogue;
 using Unreal.BaseClass;
 
-
 /// <summary>
 /// 1.UI控制
 /// 2.整個系統控制
 /// 3.給與系統其他物件的東西
 /// </summary>
+
 
 namespace Unreal
 {
@@ -21,7 +21,7 @@ namespace Unreal
         private DialogueSystem m_DialogueSystem = null;
         private GameEventSystem m_GameEventSystem = null;
         private ProjectResources m_Resources = null;
-        private SceneStateController m_SceneController = null;
+        private SceneController m_SceneController = null;
 
         private GameObject m_DialogueUI = null;
         private GameObject m_SaveDataUI = null;
@@ -29,8 +29,20 @@ namespace Unreal
 
         private ConverationData m_ConverationData = null;
 
+        public void Awake() //遊戲被打開時要初始的東西
+        {
+            m_SceneController = new SceneController();
+            m_Resources = new ProjectResources();
 
-        public void GameStartInitinal()
+        }
+
+        public void GameStartInitinal() //最一開始要遊玩遊戲時要初始的東西
+        {
+           
+
+        }
+
+        public void GameContinueInitinal() //點繼續遊戲時要初始的東西
         {
 
         }
@@ -43,12 +55,6 @@ namespace Unreal
 
 
     }
+
 }
-
-
-
-
-
-
-
 

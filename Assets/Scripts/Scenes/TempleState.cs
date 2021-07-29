@@ -8,7 +8,7 @@ using UnityEngine;
 public class TempleState: ISceneState
 {
 
-    public TempleState(SceneStateController controller): base(controller)
+    public TempleState(SceneController controller): base(controller)
     {
         StateName = "TempleState";
     }

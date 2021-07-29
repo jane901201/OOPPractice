@@ -4,6 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
+        "Unreal",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework",
         "Unreal.Resources",

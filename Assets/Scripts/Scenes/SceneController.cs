@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneStateController
+public class SceneController
 {
     private ISceneState state;
     private bool runBegin = false;
 
-    public SceneStateController()
+    public SceneController()
     {
 
     }

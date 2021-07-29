@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MainMenuState : ISceneState
 {
-    public MainMenuState(SceneStateController controller): base(controller)
+    public MainMenuState(SceneController controller): base(controller)
     {
         this.StateName = "MainMenuState";
     }

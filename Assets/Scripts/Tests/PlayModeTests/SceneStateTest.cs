@@ -7,13 +7,13 @@ using UnityEngine.InputSystem;
 
 public class SceneStateTest
 {
-    SceneStateController controller;
+    SceneController controller;
     ISceneState state;
 
     [SetUp]
     public void SetUp()
     {
-        controller = new SceneStateController();
+        controller = new SceneController();
     }
 
 

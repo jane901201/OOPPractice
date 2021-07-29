@@ -12,9 +12,9 @@ public class ISceneState
         set { stateName = value; }
     }
 
-    protected SceneStateController controller = null;
+    protected SceneController controller = null;
 
-    public ISceneState(SceneStateController controller)
+    public ISceneState(SceneController controller)
     {
         this.controller = controller;
     }
