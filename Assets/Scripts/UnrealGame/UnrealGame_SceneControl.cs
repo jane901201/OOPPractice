@@ -6,27 +6,25 @@ namespace Unreal
 {
     public partial class UnrealGame
     {
-        private GameObject m_UI;
 
-        public void SetUI(string uiName)
+        public void SetMainMenuScene()
         {
-            m_UI = m_Resources.LoadUI(uiName);
+            m_SceneController.SetScene(new MainMenuScene(m_SceneController), "MainMenuScene");
         }
 
-        public GameObject GetUI()
+        public void SetTempleScene()
         {
-            return m_UI;
+            m_SceneController.SetScene(new TempleScene(m_SceneController), "TempleScene");
         }
 
-        public void SetScene(string sceneName)
+        public void SetSchoolScene()
         {
-            m_SceneController.SetState(new MainMenuState(m_SceneController), sceneName);
-
+            m_SceneController.SetScene(new SchoolScene(m_SceneController), "SchoolScene");
         }
 
         public void SceneUpdate()
         {
-            m_SceneController.StateUpdate();
+            m_SceneController.SceneUpdate();
         }
     }
 }

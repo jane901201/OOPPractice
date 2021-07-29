@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unreal.UI;
 using Unreal.Character;
 using Unreal.Dialogue;
 using Unreal.BaseClass;
@@ -23,9 +22,7 @@ namespace Unreal
         private ProjectResources m_Resources = null;
         private SceneController m_SceneController = null;
 
-        private GameObject m_DialogueUI = null;
-        private GameObject m_SaveDataUI = null;
-        private GameObject m_GamePauseUI = null;
+
 
         private ConverationData m_ConverationData = null;
 

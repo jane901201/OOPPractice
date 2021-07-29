@@ -15,7 +15,7 @@ namespace Unreal
 
         private void Start()
         {
-            m_UnrealGame.SetScene("MainMenuScene");
+            m_UnrealGame.SetMainMenuScene();
             m_UnrealGame.SetUI("MainMenuUI");
             m_UnrealGame.SceneUpdate();
           

@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneController
 {
-    private ISceneState state;
+    private IScene state;
     private bool runBegin = false;
 
     public SceneController()
     {
 
     }
-    public void SetState(ISceneState state, string loadSceneName)
+    public void SetScene(IScene state, string loadSceneName)
     {
         runBegin = false;
 
@@ -35,7 +35,7 @@ public class SceneController
         SceneManager.LoadScene(loadSceneName);
     }
 
-    public void StateUpdate()
+    public void SceneUpdate()
     {
 
         //這裡還要一個確認function是否有在載入
@@ -53,7 +53,7 @@ public class SceneController
     
     }
 
-    public ISceneState GetCurrectState()
+    public IScene GetCurrectState()
     {
         return state;
     }

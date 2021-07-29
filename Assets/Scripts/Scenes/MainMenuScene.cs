@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class MainMenuState : ISceneState
+public class MainMenuScene : IScene
 {
-    public MainMenuState(SceneController controller): base(controller)
+    public MainMenuScene(SceneController controller): base(controller)
     {
-        this.StateName = "MainMenuState";
+        this.SceneName = "MainMenuState";
     }
 
     public override void StateBegin()
@@ -26,12 +26,12 @@ public class MainMenuState : ISceneState
 
     private void OnStartGameBtnClick(Button button)
     {
-        controller.SetState(new SchoolState(controller), "SchoolScene");
+        controller.SetScene(new SchoolScene(controller), "SchoolScene");
     }
 
     private void OnSaveDataBtnClick(Button button)
     {
-        controller.SetState(new SaveDataState(controller), "SaveDataScene");
+        //TODO:ª½±µ©I¥sSaveDataªºUI
     }
 
     private void OnLeaveGameBtnClick(Button button)

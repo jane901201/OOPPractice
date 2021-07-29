@@ -392,10 +392,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971006643}
     m_Modifications:
-    - target: {fileID: 1531735674699789824, guid: 996b6792234f598488f3568911479e03, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 83c3b84976abd5b46b6887468623069d, type: 3}
     - target: {fileID: 1531735675482470904, guid: 996b6792234f598488f3568911479e03, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -484,32 +480,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1531735675482470908, guid: 996b6792234f598488f3568911479e03, type: 3}
-      propertyPath: m_Name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1531735675482470908, guid: 996b6792234f598488f3568911479e03, type: 3}
-      propertyPath: m_NameText
-      value: 
-      objectReference: {fileID: 1531735676096495218}
-    - target: {fileID: 1531735676068780362, guid: 996b6792234f598488f3568911479e03, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1531735676068780362, guid: 996b6792234f598488f3568911479e03, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 996b6792234f598488f3568911479e03, type: 3}
---- !u!114 &1531735676096495218 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1531735676085992645, guid: 996b6792234f598488f3568911479e03, type: 3}
-  m_PrefabInstance: {fileID: 1531735676096495217}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

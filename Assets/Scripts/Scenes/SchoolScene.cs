@@ -2,15 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * ¹CÀ¸¦x¼qªº³õ´º
- */
-public class TempleState: ISceneState
+public class SchoolScene : IScene
 {
-
-    public TempleState(SceneController controller): base(controller)
-    {
-        StateName = "TempleState";
+    public SchoolScene(SceneController controller) : base(controller) {
+        this.SceneName = "SchoolState";
     }
 
     public override void StateBegin()
@@ -27,4 +22,5 @@ public class TempleState: ISceneState
     {
 
     }
+
 }

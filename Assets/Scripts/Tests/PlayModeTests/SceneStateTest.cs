@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class SceneStateTest
 {
     SceneController controller;
-    ISceneState state;
+    IScene state;
 
     [SetUp]
     public void SetUp()
@@ -23,10 +23,10 @@ public class SceneStateTest
     {
 
         //Arrange        
-        state = new MainMenuState(controller);
+        state = new MainMenuScene(controller);
 
         //Act
-        controller.SetState(state, "MainMenuScene");
+        controller.SetScene(state, "MainMenuScene");
 
         //Assert
         Assert.AreEqual(controller.GetCurrectState().ToString() , "MainMenuScene");
@@ -36,23 +36,11 @@ public class SceneStateTest
     }
 
     [UnityTest]
-    public IEnumerator SwitchToSaveDataState()
-    {
-        state = new SaveDataState(controller);
-
-        controller.SetState(state, "SaveDataScene");
-
-        Assert.AreEqual(controller.GetCurrectState().ToString(), "SaveDataScene");
-
-        yield return null;
-    }
-
-    [UnityTest]
     public IEnumerator SwitchToSchoolState()
     {
-        state = new SchoolState(controller);
+        state = new SchoolScene(controller);
 
-        controller.SetState(state, "SchoolScene");
+        controller.SetScene(state, "SchoolScene");
 
         Assert.AreEqual(controller.GetCurrectState().ToString(), "SchoolScene");
 
