@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class LevelLoading : MonoBehaviour
 {
-    public GameObject loadingScreen;
-    public Slider slider;
-    public Text progressText;
+    [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private Slider slider;
+    [SerializeField] private Text progressText;
 
     public void LoadLevel(int sceneIndex)
     {

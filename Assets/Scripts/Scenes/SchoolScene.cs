@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SchoolScene : IScene
 {
-    public SchoolScene(SceneController controller) : base(controller) {
-        this.SceneName = "SchoolState";
+    public SchoolScene(SceneController controller) : base(controller)
+    {
+        this.SceneName = "SchoolScene";
     }
 
 }

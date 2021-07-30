@@ -10,6 +10,6 @@ public class TempleScene: IScene
 
     public TempleScene(SceneController controller): base(controller)
     {
-        SceneName = "TempleState";
+        SceneName = "TempleScene";
     }
 }

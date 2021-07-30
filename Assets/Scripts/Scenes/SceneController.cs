@@ -7,43 +7,45 @@ using UnityEngine.SceneManagement;
 public class SceneController
 {
     private IScene m_Scene;
-    private bool runBegin = false;
+    private bool m_RunBegin = false;
+    AsyncOperation operation;
+
 
     public SceneController()
     {
 
     }
-    public void SetScene(IScene scene, string loadSceneName)
+
+    //TODO:要測試SetLoadingScene是不是真的能用，正確來說，用UnitTest測試
+    public IEnumerator SetLoadingScene(IScene scene)
     {
-        runBegin = false;
+        m_RunBegin = false;
+        String loadingSceneName = scene.ToString();
 
-        LoadScene(loadSceneName);
-
-        if(scene != null)
+        if (loadingSceneName == null || loadingSceneName.Length == 0)
+            yield return null;
+        operation = SceneManager.LoadSceneAsync(loadingSceneName);
+        while (!operation.isDone)
         {
-            scene.SceneEnd();
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            Debug.Log(progress);
+            yield return null;
         }
-
-        this.m_Scene = scene;
-
+        
+        if (m_Scene != null) //確認m_Scene是否還有東西，有的話就釋放資源
+        {
+            m_Scene.SceneEnd();
+        }
+        m_Scene = scene;
     }
 
-    private void LoadScene(string loadSceneName)
+   
+     public void SceneUpdate()
     {
-        if (loadSceneName == null || loadSceneName.Length == 0)
-            return;
-        SceneManager.LoadScene(loadSceneName);
-    }
-
-    public void SceneUpdate()
-    {
-
-        //這裡還要一個確認function是否有在載入
-
-        if(m_Scene != null && runBegin == false)
+        if (m_Scene != null && m_RunBegin == false)
         {
             m_Scene.SceneBegin();
-            runBegin = true;
+            m_RunBegin = true;
         }
 
         if(m_Scene != null)
@@ -57,5 +59,4 @@ public class SceneController
     {
         return m_Scene;
     }
-
 }

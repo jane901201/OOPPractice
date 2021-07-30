@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 public class IScene
 {
-    private string m_SceneName = "ISceneState";
+    private string m_SceneName = "IScene";
 
     private Action m_SceneBegin;
     private Action m_SceneUpdate;
     private Action m_SceneEnd;
 
-    public string SceneName
+    protected string SceneName
     {
         get { return m_SceneName; }
         set { m_SceneName = value; }

@@ -11,6 +11,7 @@ namespace Unreal
         private GameObject m_DialogueUI = null;
         private GameObject m_SaveDataUI = null;
         private GameObject m_GamePauseUI = null;
+        private GameObject m_LoadingScreenUI = null;
 
 
         public void SetMainMenuUI()
@@ -53,6 +54,15 @@ namespace Unreal
         {
             return m_GamePauseUI;
         }   
+        public void SetLoadingScreenUI()
+        {
+            m_UI = m_Resources.LoadUI("LoadingUI");
+        }
+
+        public GameObject GetLoadingScreenUI()
+        {
+            return m_LoadingScreenUI;
+        }
         public void SetUI(string uiName)
         {
             m_UI = m_Resources.LoadUI(uiName);

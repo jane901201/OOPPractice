@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.InputSystem;
 
-public class SceneStateTest
+public class SceneControllerTest
 {
     SceneController controller;
-    IScene state;
+    IScene scene;
 
     [SetUp]
     public void SetUp()
@@ -23,10 +23,11 @@ public class SceneStateTest
     {
 
         //Arrange        
-        state = new MainMenuScene(controller);
+        scene = new MainMenuScene(controller);
 
         //Act
-        controller.SetScene(state, "MainMenuScene");
+        
+        controller.SetLoadingScene(scene);
 
         //Assert
         Assert.AreEqual(controller.GetCurrectScene().ToString() , "MainMenuScene");
@@ -38,13 +39,13 @@ public class SceneStateTest
     [UnityTest]
     public IEnumerator SwitchToSchoolState()
     {
-        state = new SchoolScene(controller);
+        scene = new SchoolScene(controller);
 
-        controller.SetScene(state, "SchoolScene");
+        controller.SetLoadingScene(scene);
 
         Assert.AreEqual(controller.GetCurrectScene().ToString(), "SchoolScene");
 
         yield return null;
-    }
+    }    
 
 }

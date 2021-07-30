@@ -6,12 +6,12 @@
         "Unity.InputSystem.TestFramework",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scenes",
         "Unreal.Resources",
         "Unreal.Dialogue",
         "Unreal.BaseClass",
         "Unreal.Inventory",
-        "Unreal.Chatacter"
+        "Unreal.Chatacter",
+        "Unreal.Scenes"
     ],
     "includePlatforms": [
         "Editor"

@@ -12,7 +12,7 @@ public class UnrealGameTest : MonoBehaviour
     public void SetUp()
     {
         m_UnrealGame = new UnrealGame();
-        m_UnrealGame.Awake();
+        m_UnrealGame.UnrealAwake();
     }
 
 
@@ -44,5 +44,13 @@ public class UnrealGameTest : MonoBehaviour
         m_UnrealGame.SetDialogueUI();
         Assert.AreEqual("DialogueUI (UnityEngine.GameObject)", m_UnrealGame.GetDialogueUI().ToString());
     }
+
+    [Test]
+    public void SetUI_LoadingScreenUI()
+    {
+        m_UnrealGame.SetLoadingScreenUI();
+        Assert.AreEqual("LoadingUI (UnityEngine.GameObject)", m_UnrealGame.GetLoadingScreenUI().ToString());
+    }
+
 
 }
