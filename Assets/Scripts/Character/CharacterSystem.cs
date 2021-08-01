@@ -7,15 +7,10 @@ namespace Unreal.Character
 {
     public class CharacterSystem : IGameSystem
     {
-        public override void Initinalize()
-        {
-            base.Initinalize();
 
-        }
-
-        public override void SetinitializeDeleagte(InitializeDeleagte initialize)
+        public override void RegisterGameEvent(Register initialize)
         {
-            base.SetinitializeDeleagte(initialize);
+            base.RegisterGameEvent(initialize);
         }
 
     }

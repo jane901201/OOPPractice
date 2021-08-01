@@ -9,5 +9,15 @@ namespace Unreal
         {
             
         }
+
+        public void SetSentence()
+        {
+
+        }
+
+        public void SetChoice()
+        {
+            //寫個迴圈，指定好Button的東西
+        }
     }
 }

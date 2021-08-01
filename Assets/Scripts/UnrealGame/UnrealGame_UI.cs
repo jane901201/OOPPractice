@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Unreal.UI;
 
 namespace Unreal
 {
+    /// <summary>
+    /// 設置UI的路徑
+    /// 設置UI的功能?
+    /// </summary>
     public partial class UnrealGame
     {
         private GameObject m_UI = null;
@@ -14,7 +19,7 @@ namespace Unreal
         private GameObject m_LoadingScreenUI = null;
 
 
-        public void SetMainMenuUI()
+        public void LoadMainMenuUI()
         {
             m_MainMenuUI = m_Resources.LoadUI("MainMenuUI"); 
         }
@@ -24,9 +29,19 @@ namespace Unreal
             return m_MainMenuUI;
         }
 
-        public void SetDialogueUI()
+        public void LoadDialogueUI()
         {
             m_DialogueUI = m_Resources.LoadUI("DialogueUI"); 
+        }
+
+        public GameObject SetDialogeUI()
+        {
+            LoadDialogueUI();
+            GameObject tmpDialogueUI = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity);
+
+            
+
+            return tmpDialogueUI;
         }
 
         public GameObject GetDialogueUI()
@@ -34,7 +49,7 @@ namespace Unreal
             return m_DialogueUI;
         }
 
-        public void SetSaveDatatUI()
+        public void LoadSaveDataUI()
         {
             m_SaveDataUI = m_Resources.LoadUI("SaveDataUI");
         }
@@ -45,7 +60,7 @@ namespace Unreal
         }
 
         
-        public void SetGamePauseUI()
+        public void LoadGamePauseUI()
         {
             m_GamePauseUI = m_Resources.LoadUI("GamePauseUI"); 
         }
@@ -54,7 +69,7 @@ namespace Unreal
         {
             return m_GamePauseUI;
         }   
-        public void SetLoadingScreenUI()
+        public void LoadLoadingUI()
         {
             m_UI = m_Resources.LoadUI("LoadingUI");
         }

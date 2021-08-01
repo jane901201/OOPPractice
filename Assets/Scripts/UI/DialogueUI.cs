@@ -12,57 +12,116 @@ namespace Unreal.UI
     [AddComponentMenu("UnrealUI/DialogueUI")]
     public class DialogueUI : LocalizedMonoBehaviour
     {
-        [SerializeField] private GameObject m_SentencePanel;
-        [SerializeField] private Text m_NameText;
-        [SerializeField] private Text m_Sentence;
-        [SerializeField] private Image m_Avatar;
+        [SerializeField] private GameObject sentencePanel; 
+        [SerializeField] private Text m_NameText; //TODO:name會跟Object.name衝突，要取其他名字
+        [SerializeField] private Text sentence;
+        [SerializeField] private Image avatar;
+        [SerializeField] private Button continueButton;
 
-        [SerializeField] private GameObject m_ChoicePanel;
-        [SerializeField] private Button m_ButtonA;
-        [SerializeField] private Button m_ButtonB;
-        [SerializeField] private Button m_ButtonC;
-        [SerializeField] private Button m_ButtonD;
+        [SerializeField] private GameObject choicePanel;
+        [SerializeField] private Button buttonA;
+        [SerializeField] private Button buttonB;
+        [SerializeField] private Button buttonC;
+        [SerializeField] private Button buttonD;
+
 
 
         #region Sentence
         public void ShowSentence()
         {
-            m_SentencePanel.SetActive(true);
+            sentencePanel.SetActive(true);
         }
 
         public void HideSentence()
         {
-            m_SentencePanel.SetActive(false);
+            sentencePanel.SetActive(false);
         }
 
         public void SetNameText(string name)
         {
-            m_NameText.text = name;
+            this.m_NameText.text = name;
         }
-
 
         public void SetSentenceText(string sentence)
         {
-            m_Sentence.text = sentence;
+            this.sentence.text = sentence;
         }
 
         public void SetAvatar(Image avater)
         {
-            m_Avatar = avater;
+            this.avatar = avater;
         }
+
+        public Button ContinueButton { get => continueButton; set => continueButton = value; }
+      
 
         #endregion
 
         #region Choice
-        public void ShowChoice()
+        public void ShowChoices()
         {
-            m_ChoicePanel.SetActive(true);
+            choicePanel.SetActive(true);
         }
 
-        public void HideChoice()
+        public void HideChoices()
         {
-            m_ChoicePanel.SetActive(false);
+            choicePanel.SetActive(false);
         }
+
+        public void ShowChoicePanel()
+        {
+            choicePanel.SetActive(true);
+        }
+
+        public void HideChoicePanel()
+        {
+            choicePanel.SetActive(false);
+        }
+
+        public void ShowButtonA()
+        {
+            buttonA.gameObject.SetActive(true);
+        }
+
+        public void HideButtonA()
+        {
+            buttonA.gameObject.SetActive(false);
+        }
+
+        public void ShowButtonB()
+        {
+            buttonB.gameObject.SetActive(true);
+        }
+
+        public void HideButtonB()
+        {
+            buttonB.gameObject.SetActive(false);
+        }
+
+        public void ShowButtonC()
+        {
+            buttonC.gameObject.SetActive(true);
+        }
+
+        public void HideButtonC()
+        {
+            buttonC.gameObject.SetActive(false);
+        }
+
+        public void ShowButtonD()
+        {
+            buttonD.gameObject.SetActive(true);
+        }
+
+        public void HideButtonD()
+        {
+            buttonD.gameObject.SetActive(false);
+        }
+
+        public Button ButtonA { get => buttonA; set => buttonA = value; }
+        public Button ButtonB { get => buttonB; set => buttonB = value; }
+        public Button ButtonC { get => buttonC; set => buttonC = value; }
+        public Button ButtonD { get => buttonD; set => buttonD = value; }
 
         #endregion
 

@@ -1,35 +1,36 @@
 using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Events;
-using Unreal.BaseClass;
 using UnityEngine.UI;
-using Ink.Runtime;
+using Unreal.BaseClass;
 
 namespace Unreal.Dialogue
 {
     public class DialogueSystem : IGameSystem
     {
         public TextAsset inkAsset;
-        public Story m_TestStory;
-        public LocalizedObject m_StoryLocal;
+        public LocalizedObject storyLocal;
         private Story story;
-        private ConverationData m_ConverationData;
+        private Action setButton;
+        private Action setName;
+        private Action setSentence;
+
+        public Action ActionButton { get => setButton; set => setButton = value; } //TODO:之後要改ActionName跟以下兩個的名字
+        public Action ActionName { get => setName; set => setName = value; }
+        public Action ActionSentence { get => setSentence; set => setSentence = value; }
 
         public DialogueSystem()
         {
 
         }
 
-       
-
-        private void Awake()
+        public void Initialize()
         {
-            m_StoryLocal.SetReference("InkText", "1");
-            inkAsset = m_StoryLocal.LoadAsset() as TextAsset;
-            m_TestStory = new Story(inkAsset.text);
+            inkAsset = storyLocal.LoadAsset() as TextAsset;
+            story = new Story(inkAsset.text);
         }
 
 
@@ -38,38 +39,17 @@ namespace Unreal.Dialogue
             while (story.canContinue)
             {
                 string sentence = story.Continue();
-
                 sentence.Trim();
+                CreateContentView(sentence);
             }
 
-            if (story.currentChoices.Count > 0)
+            if (story.currentChoices.Count > 0) //如果有選項，就會停在這裡
             {
                 for (int i = 0; i < story.currentChoices.Count; i++)
                 {
                     Choice choice = story.currentChoices[i];
-                    Button temBtn = null;
-                    /*switch (i)
-                    {
-                        case 0:
-                            temBtn = m_DialogueUI.ButtonA;
-                            break;
-                        case 1:
-                            temBtn = m_DialogueUI.ButtonB;
-                            break;
-                        case 2:
-                            temBtn = m_DialogueUI.ButtonC;
-                            break;
-                        case 3:
-                            temBtn = m_DialogueUI.ButtonD;
-                            break;
-                        default:
-                            Debug.Log("story.currentChoices.Count Error");
-                            break;
-                    }*/
-                    // Tell the button what to do when we press it
-                    temBtn.onClick.AddListener(delegate {
-                        OnClickChoiceButton(choice);
-                    });
+
+                    ActionButton();//TODO:呼叫DialogueUI的Button做文字設定
                 }
             }
             else
@@ -78,27 +58,30 @@ namespace Unreal.Dialogue
             }
         }
 
+        private void CreateContentView(string sentence)
+        {
+            ActionSentence(); //TODO:設定ActionSentence()的行動
+        }
+
         public void SetName(string sentence)
         {
-            //TODO:把讀取名子的方式寫出來
+            //TODO:把讀取名字的方式寫出來，還有要去掉名字的部分，字串裡只剩下句子
             if (sentence.Contains(":"))
             {
                 if (sentence.Contains("Player:"))
                 {
-
+                    ActionName();//TODO:讀取DialogueUI的m_Name，將名字改成Localization的設定
+                }
+                else
+                {
+                    ActionName();//TODO:讀取DialogueUI的m_Name，將名字改成冒號前的字
                 }
             }
-            else
-            {
-
-            }
-
-
         }
 
-        public void ShowButton()
+        public void SetStoryLocal(LocalizedObject storyLocal)
         {
-
+            this.storyLocal = storyLocal;
         }
 
         void OnClickChoiceButton(Choice choice)

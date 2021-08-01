@@ -28,11 +28,12 @@ public class SceneController
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            //TODO:把Loading的UI跟progress結合...在我除理掉LoadingUI的Bug後
             Debug.Log(progress);
             yield return null;
         }
         
-        if (m_Scene != null) //確認m_Scene是否還有東西，有的話就釋放資源
+        if (m_Scene != null)
         {
             m_Scene.SceneEnd();
         }

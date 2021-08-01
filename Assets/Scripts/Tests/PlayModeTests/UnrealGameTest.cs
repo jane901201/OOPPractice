@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using Unreal;
 
-public class UnrealGameTest : MonoBehaviour
+public class UnrealGameTest
 {
     UnrealGame m_UnrealGame;
 
@@ -20,35 +20,35 @@ public class UnrealGameTest : MonoBehaviour
     [Test]
     public void SetUI_MainMenuUI()
     {
-        m_UnrealGame.SetMainMenuUI();
+        m_UnrealGame.LoadMainMenuUI();
         Assert.AreEqual("MainMenuUI (UnityEngine.GameObject)", m_UnrealGame.GetMainMenuUI().ToString());
     }
 
     [Test]
     public void SetUI_SaveDataUI()
     {
-        m_UnrealGame.SetSaveDatatUI();
+        m_UnrealGame.LoadSaveDataUI();
         Assert.AreEqual("SaveDataUI (UnityEngine.GameObject)", m_UnrealGame.GetSaveDataUI().ToString());
     }
 
     [Test]
     public void SetUI_GamePauseUI()
     {
-        m_UnrealGame.SetGamePauseUI();
+        m_UnrealGame.LoadGamePauseUI();
         Assert.AreEqual("GamePauseUI (UnityEngine.GameObject)", m_UnrealGame.GetGamePauseUI().ToString());
     }
 
     [Test]
     public void SetUI_DialogueUI()
     {
-        m_UnrealGame.SetDialogueUI();
+        m_UnrealGame.LoadDialogueUI();
         Assert.AreEqual("DialogueUI (UnityEngine.GameObject)", m_UnrealGame.GetDialogueUI().ToString());
     }
 
     [Test]
     public void SetUI_LoadingScreenUI()
     {
-        m_UnrealGame.SetLoadingScreenUI();
+        m_UnrealGame.LoadLoadingUI();
         Assert.AreEqual("LoadingUI (UnityEngine.GameObject)", m_UnrealGame.GetLoadingScreenUI().ToString());
     }
 

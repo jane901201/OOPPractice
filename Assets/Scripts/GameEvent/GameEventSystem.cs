@@ -22,7 +22,7 @@ public class GameEventSystem : IGameSystem
         
     }
 
-    public override void Release()
+    public void GameEventRelease()
     {
         m_GameEvents.Clear();
     }

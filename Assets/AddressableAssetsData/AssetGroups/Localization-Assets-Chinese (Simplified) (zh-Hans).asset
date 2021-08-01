@@ -33,6 +33,13 @@ MonoBehaviour:
     - Locale-zh-TW
     - Locale-en
     - Locale-ja
+  - m_GUID: 774fdf03d0b23c74f96a8e005c6413e6
+    m_Address: When Spring Coming_Day1
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    - Locale-zh-TW
+    - Locale-en
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 67e366ad19bd7c04caca723f72817947, type: 2}
   m_SchemaSet:

@@ -11,7 +11,8 @@
         "Unreal.BaseClass",
         "Unreal.Inventory",
         "Unreal.Chatacter",
-        "Unreal.Scenes"
+        "Unreal.Scenes",
+        "Unity.Localization"
     ],
     "includePlatforms": [
         "Editor"

@@ -41,6 +41,14 @@ MonoBehaviour:
     m_Address: Assets/Localization/Tables/Cheaper1/Chapter1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: eeb53b4a86b0750458041a9cae6846de
+    m_Address: Assets/Resources/Converation/TestStory/Test Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 3c8679c7ff569fa4a9f042333d6a1dce
+    m_Address: Assets/Localization/Tables/Test/Test Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 67e366ad19bd7c04caca723f72817947, type: 2}
   m_SchemaSet:

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Unreal.UI
 {
     [AddComponentMenu("UnrealUI/GamePauseUI")]
-    public class GamePauseUI : IUserInterface
+    public class GamePauseUI : UserInterface
     {
    
     }

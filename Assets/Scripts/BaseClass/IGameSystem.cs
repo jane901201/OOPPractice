@@ -5,30 +5,17 @@ using UnityEngine;
 
 namespace Unreal.BaseClass
 {
-    public abstract class IGameSystem
+    public abstract class IGameSystem //TODO:把IGameSystem改比較好的名字，改GameSystem會出事
     {
 
-        public delegate void InitializeDeleagte();
+        public delegate void Register();
+        private Register InitializeFunc;
 
-        private InitializeDeleagte InitializeFunc;
-       
-        public virtual void Initinalize()
-        {
-            
-        }
+        public Action initialize;
+        public Action release;
+        public Action gsUpdate;
 
-        protected virtual void Update()
-        {
-        
-        }
-
-
-        public virtual void Release()
-        {
-
-        }
-
-        public virtual void SetinitializeDeleagte(InitializeDeleagte initialize)
+        public virtual void RegisterGameEvent(Register initialize)
         {
             this.InitializeFunc += initialize;
         }

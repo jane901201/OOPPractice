@@ -17,13 +17,15 @@ namespace Unreal
         public void SetMainMenuScene()
         {
             MainMenuScene mainMenuScene = new MainMenuScene(m_SceneController);
-            SetMainMenuUI();
-            //TODO:Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
+            LoadMainMenuUI();
             mainMenuScene.SceneBegin = delegate ()
             {
                 m_RootUI = UITool.FindUIGameObject("Canvas");
                 GameObject tmpMainMenuUI = Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
                 tmpMainMenuUI.transform.SetParent(m_RootUI.transform);
+
+                #region MainMenuUISet
+                tmpMainMenuUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
                 tmpMainMenuUI.GetComponent<MainMenuUI>().BeginBtn.onClick.AddListener(
                     () => SetSchoolScene()
                 );
@@ -31,7 +33,7 @@ namespace Unreal
                 tmpMainMenuUI.GetComponent<MainMenuUI>().ContinureBtn.onClick.AddListener(
                         delegate()
                         {
-                            SetSaveDatatUI();
+                            LoadSaveDataUI();
                             Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
                         }
                 
@@ -39,6 +41,8 @@ namespace Unreal
                 tmpMainMenuUI.GetComponent<MainMenuUI>().LeaveBtn.onClick.AddListener(
                     () => Application.Quit()
                     );
+                #endregion
+               
                 m_RootUI = UITool.FindUIGameObject("Canvas");
                 tmpMainMenuUI.transform.SetParent(m_RootUI.transform);
                 
@@ -54,18 +58,54 @@ namespace Unreal
             {
 
             };
+
+
             StartCoroutine(m_SceneController.SetLoadingScene(mainMenuScene));
         }
 
         public void SetTempleScene()
         {
-            StartCoroutine(m_SceneController.SetLoadingScene(new TempleScene(m_SceneController)));
+            TempleScene tmpTempleScene = new TempleScene(m_SceneController);
+            tmpTempleScene.SceneBegin = delegate
+            {
+
+            };
+
+            tmpTempleScene.SceneUpdate = delegate
+            {
+
+            };
+
+            tmpTempleScene.SceneEnd = delegate
+            {
+
+            };
+
+
+            StartCoroutine(m_SceneController.SetLoadingScene(tmpTempleScene));
             
         }
 
         public void SetSchoolScene()
         {
-            StartCoroutine(m_SceneController.SetLoadingScene(new SchoolScene(m_SceneController)));
+            SchoolScene tmpSchoolScene = new SchoolScene(m_SceneController);
+
+            tmpSchoolScene.SceneBegin = delegate
+            {
+
+            };
+
+            tmpSchoolScene.SceneUpdate = delegate
+            {
+
+            };
+
+            tmpSchoolScene.SceneEnd = delegate
+            {
+
+            };
+
+            StartCoroutine(m_SceneController.SetLoadingScene(tmpSchoolScene));
             
         }
 

@@ -7,8 +7,8 @@ namespace Unreal
     {
         public void CharacterSystemGameEvent()
         {
-            m_CharacterSystem.SetinitializeDeleagte(() => { RegisterGameEvent(ENUM_GameEvent.EnemyKilled); });
-            m_CharacterSystem.SetinitializeDeleagte(() => { RegisterGameEvent(ENUM_GameEvent.PlayerKilled); });
+            m_CharacterSystem.RegisterGameEvent(() => { RegisterGameEvent(ENUM_GameEvent.EnemyKilled); });
+            m_CharacterSystem.RegisterGameEvent(() => { RegisterGameEvent(ENUM_GameEvent.PlayerKilled); });
         }
 
         public void RegisterGameEvent(ENUM_GameEvent emGameEvent)
