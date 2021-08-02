@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-TW
-  - m_GUID: c5723350947f1d347ae0e2b5e055515c
-    m_Address: UI Text_zh-TW
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-zh-TW
   - m_GUID: bce5f8ceeb0618749bc139f928976d14
     m_Address: Name_zh-TW
     m_ReadOnly: 1

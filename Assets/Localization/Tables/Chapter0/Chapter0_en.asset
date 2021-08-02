@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: UI Text_zh-TW
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: Chapter0_en
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: zh-TW
-  m_SharedData: {fileID: 11400000, guid: 2298c18e7c1b4e84fba54c9052f6152d, type: 2}
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f05efe08025699e4db4e83c1b867e2ca, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 245914468352
-    m_Localized: "\u4F60\u597D"
+  - m_Id: 13948485632
+    m_Localized: 774fdf03d0b23c74f96a8e005c6413e6
     m_Metadata:
       m_Items: []
   references:

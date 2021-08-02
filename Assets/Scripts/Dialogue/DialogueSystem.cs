@@ -11,8 +11,8 @@ namespace Unreal.Dialogue
 {
     public class DialogueSystem : IGameSystem
     {
-        public TextAsset inkAsset;
-        public LocalizedObject storyLocal;
+        private TextAsset inkAsset;
+        private LocalizedObject storyLocal;
         private Story story;
         private Action setButton;
         private Action setName;
@@ -31,8 +31,13 @@ namespace Unreal.Dialogue
         {
             inkAsset = storyLocal.LoadAsset() as TextAsset;
             story = new Story(inkAsset.text);
+            
         }
 
+        public void SetButton(Button button)
+        {
+
+        }
 
         public void RefreshView()
         {
@@ -84,11 +89,14 @@ namespace Unreal.Dialogue
             this.storyLocal = storyLocal;
         }
 
-        void OnClickChoiceButton(Choice choice)
+        private void OnClickChoiceButton(Choice choice)
         {
             story.ChooseChoiceIndex(choice.index);
             RefreshView();
         }
+
+
+
 
     }
 

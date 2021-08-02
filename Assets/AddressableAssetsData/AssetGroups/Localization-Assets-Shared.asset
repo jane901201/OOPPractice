@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 346e5f7ce19069f4093aa87f1c54d0fe
   m_SerializeEntries:
-  - m_GUID: 2298c18e7c1b4e84fba54c9052f6152d
-    m_Address: Assets/Localization/Tables/UI Text Shared Data.asset
+  - m_GUID: f05efe08025699e4db4e83c1b867e2ca
+    m_Address: Assets/Localization/Tables/Chapter0/Chapter0 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
   - m_GUID: 4e7e822bbf0795c4f95a8a5a4e1b435c
@@ -39,10 +39,6 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 78ad30e4acf36574db7148a6a0e556fd
     m_Address: Assets/Localization/Tables/Cheaper1/Chapter1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: eeb53b4a86b0750458041a9cae6846de
-    m_Address: Assets/Resources/Converation/TestStory/Test Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
   - m_GUID: 3c8679c7ff569fa4a9f042333d6a1dce

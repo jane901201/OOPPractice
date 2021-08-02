@@ -4,6 +4,8 @@ using UnityEngine;
 using Unreal.UI;
 using UnityEngine.UI;
 using Unreal.BaseClass;
+using Unreal.Dialogue;
+using UnityEngine.Localization;
 
 /// <summary>
 /// 呼叫Loading介面
@@ -66,14 +68,53 @@ namespace Unreal
         public void SetTempleScene()
         {
             TempleScene tmpTempleScene = new TempleScene(m_SceneController);
-            tmpTempleScene.SceneBegin = delegate
-            {
+            GameObject tmpDialogueUIObj = null;
+            DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
+            m_DialogueSystem = new DialogueSystem();
+            LocalizedObject tmpStoryLocal = new LocalizedObject();
+            ConverationData tmpCovnerationData = new ConverationData();
+            int table = 0;
+            int reference = 0;
+            string[][] converation = tmpCovnerationData.GetConveration();
+            string currectChapter = "Chapter" + table.ToString();
+            string currectConveration = converation[table][reference];
 
+            tmpStoryLocal.SetReference(currectChapter, currectConveration);
+
+            tmpTempleScene.SceneBegin = delegate()
+            {
+                tmpDialogueUIObj = GetDialogueUI();
+
+                tmpDialogueUI.ShowSentencePanel();
+                tmpDialogueUI.HideChoicePanel();
+
+                m_DialogueSystem.SetStoryLocal(tmpStoryLocal);
+                m_DialogueSystem.Initialize();
+
+                m_DialogueSystem.ActionButton = delegate ()
+                {
+                    //TODO:之後要思考怎麼設計Button的設定
+                    tmpDialogueUI.ButtonA.onClick.AddListener(() => SetChoice());
+                    tmpDialogueUI.ButtonB.onClick.AddListener(() => SetChoice());
+                    tmpDialogueUI.ButtonC.onClick.AddListener(() => SetChoice());
+                    tmpDialogueUI.ButtonD.onClick.AddListener(() => SetChoice());
+                };
+
+                m_DialogueSystem.ActionName = delegate ()
+                {
+                    tmpDialogueUI.SetNameText(GetName());
+                };
+
+                m_DialogueSystem.ActionSentence = delegate ()
+                {
+                    tmpDialogueUI.SetSentenceText(GetSentence());
+                };
             };
 
             tmpTempleScene.SceneUpdate = delegate
             {
-
+                tmpDialogueUI.UIUpdate();
+                m_DialogueSystem.gsUpdate();
             };
 
             tmpTempleScene.SceneEnd = delegate
@@ -112,6 +153,28 @@ namespace Unreal
         public void SceneUpdate()
         {
             m_SceneController.SceneUpdate();
+        }
+
+        public void SetButton(int i, DialogueUI dialogueUI, DialogueSystem dialogueSystem)
+        {
+            switch(i) {
+                case 0:
+
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    Debug.Log("Something error happen in DialogueUI's button");
+                    break;
+            }
+                
         }
     }
 }

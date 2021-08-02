@@ -39,13 +39,13 @@ namespace Unreal
             LoadDialogueUI();
             GameObject tmpDialogueUI = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity);
 
-            
-
             return tmpDialogueUI;
         }
 
         public GameObject GetDialogueUI()
         {
+            GameObject tmpDialogueUI = SetDialogeUI();
+
             return m_DialogueUI;
         }
 

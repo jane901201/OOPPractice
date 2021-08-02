@@ -10,7 +10,7 @@ using Unreal.Dialogue;
 namespace Unreal.UI
 {
     [AddComponentMenu("UnrealUI/DialogueUI")]
-    public class DialogueUI : LocalizedMonoBehaviour
+    public class DialogueUI : UserInterface
     {
         [SerializeField] private GameObject sentencePanel; 
         [SerializeField] private Text m_NameText; //TODO:name會跟Object.name衝突，要取其他名字
@@ -27,12 +27,12 @@ namespace Unreal.UI
 
 
         #region Sentence
-        public void ShowSentence()
+        public void ShowSentencePanel()
         {
             sentencePanel.SetActive(true);
         }
 
-        public void HideSentence()
+        public void HideSentencePanel()
         {
             sentencePanel.SetActive(false);
         }
