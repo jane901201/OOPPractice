@@ -5,46 +5,62 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.Localization;
 using Unreal.Dialogue;
+/// <summary>
+/// 原本想測試SetReference，但不支援，只好直接在視窗測試
+/// </summary>
 public class DialogueSystemTest
 {
-    private DialogueSystem dialogueSystem;
-    private LocalizedObject testStory;
+    private DialogueSystem m_DialogueSystem;
+    private LocalizedTextAsset m_LocalizedTextAsset;
+    private LocalizedSprite m_localizedSprite;
+    private LocalizedTextAsset testStory;
+    private LocalizedString localizedString;
+    private TextAsset textAsset;
 
 
     [SetUp]
     public void SetUp()
     {
-        dialogueSystem = new DialogueSystem();
+        m_DialogueSystem = new DialogueSystem();
+        testStory = new LocalizedTextAsset();
+        m_LocalizedTextAsset = new LocalizedTextAsset();
+        m_localizedSprite = new LocalizedSprite();
         testStory.SetReference("Test", "Test");
-        dialogueSystem.SetStoryLocal(testStory);
-        dialogueSystem.Initialize();
-    }
-
-
-    [Test]
-    public void SetName_NormalNPC()
-    {
-
+        m_LocalizedTextAsset.SetReference("Test", "Test");
+        m_localizedSprite.SetReference("Avater", "sister");
+        Debug.Log(testStory.ToString());
+        m_DialogueSystem.SetStoryLocal(testStory);
+        //m_DialogueSystem.Initialize();
     }
 
     [Test]
-    public void SetName_Player()
+    public void SetString()
     {
+        localizedString = new LocalizedString();
 
+        localizedString.SetReference("Name", "Default");
+
+        string expected = "邱瑞可";
+        string actual = localizedString.GetLocalizedString();
+
+        Assert.AreEqual(expected, actual);
     }
 
     [Test]
-    public void CreateContentView()
+    public void SetTextAsset()
     {
-
+        Debug.Log(m_LocalizedTextAsset);
+        Debug.Log(m_LocalizedTextAsset.LoadAsset());
+        textAsset = m_LocalizedTextAsset.LoadAsset();
+        Assert.NotNull(textAsset);
     }
 
     [Test]
-    public void RefreshView()
+    public void SetSprite()
     {
-
+        Debug.Log(m_localizedSprite);
+        Debug.Log(m_localizedSprite.LoadAsset());
+        Assert.NotNull(m_localizedSprite.LoadAsset());
     }
-
-
 
 }

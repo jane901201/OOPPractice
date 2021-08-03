@@ -22,9 +22,5 @@ MonoBehaviour:
     m_Localized: '{playerName}'
     m_Metadata:
       m_Items: []
-  - m_Id: 133544869888
-    m_Localized: "\u30B7\u30B9\u30BF\u30FC"
-    m_Metadata:
-      m_Items: []
   references:
     version: 1

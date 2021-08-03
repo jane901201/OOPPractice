@@ -6,96 +6,139 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 using Unreal.BaseClass;
+using System.Linq;
+
 
 namespace Unreal.Dialogue
 {
+
     public class DialogueSystem : IGameSystem
     {
-        private TextAsset inkAsset;
-        private LocalizedObject storyLocal;
-        private Story story;
-        private Action setButton;
-        private Action setName;
-        private Action setSentence;
+        private TextAsset m_InkAsset = null;
+        private LocalizedTextAsset m_StoryLocal = null;
+        private LocalizedString m_CharacterNameLocal;
+        private Story m_Story;
+        public delegate void SetName(string name);
+        public SetName m_SetName;
+        public delegate void SetSentence(string sentence);
+        public SetSentence m_SetSentence;
+        public delegate void SetChoiceBtn(Action OnClickChoiceBtn , int i);
+        public SetChoiceBtn m_SetChoiceBtn;
+        public delegate bool SetContinueBtn();
+        public SetContinueBtn m_SetContinueBtn;
+        private Text m_Sentence;
 
-        public Action ActionButton { get => setButton; set => setButton = value; } //TODO:之後要改ActionName跟以下兩個的名字
-        public Action ActionName { get => setName; set => setName = value; }
-        public Action ActionSentence { get => setSentence; set => setSentence = value; }
-
-        public DialogueSystem()
-        {
-
-        }
+        private string m_TmpName;
+        private string m_TmpSentence;
+        private bool m_StoryEnd = false;
 
         public void Initialize()
         {
-            inkAsset = storyLocal.LoadAsset() as TextAsset;
-            story = new Story(inkAsset.text);
-            
+            m_InkAsset = m_StoryLocal.LoadAsset();
+            m_Story = new Story(m_InkAsset.text);
+            m_StoryEnd = false;
+            m_CharacterNameLocal = new LocalizedString();
+            m_TmpName = "";
+            m_TmpSentence = "";
         }
 
-        public void SetButton(Button button)
-        {
-
-        }
 
         public void RefreshView()
         {
-            while (story.canContinue)
+            
+            while (m_Story.canContinue)
             {
-                string sentence = story.Continue();
+                string sentence = m_Story.Continue();
                 sentence.Trim();
                 CreateContentView(sentence);
             }
 
-            if (story.currentChoices.Count > 0) //如果有選項，就會停在這裡
+            if (m_Story.currentChoices.Count > 0) //如果有選項，就會停在這裡
             {
-                for (int i = 0; i < story.currentChoices.Count; i++)
+                for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
                 {
-                    Choice choice = story.currentChoices[i];
-
-                    ActionButton();//TODO:呼叫DialogueUI的Button做文字設定
+                    Choice choice = m_Story.currentChoices[buttonNum];
+                    m_SetChoiceBtn(() => OnClickChoiceButton(choice), buttonNum);
                 }
             }
             else
             {
-                //TODO:當文本讀取完畢，呼叫主程式消除對話跟恢復行動
+                StoryEnd();
             }
         }
 
         private void CreateContentView(string sentence)
         {
-            ActionSentence(); //TODO:設定ActionSentence()的行動
+            bool pressButton = false;
+            SplitSentence(sentence);            
+
+            while(!pressButton)
+            {
+                pressButton = m_SetContinueBtn();
+
+            }
+
+            
         }
 
-        public void SetName(string sentence)
+        public void SplitSentence(string sentence)
         {
             //TODO:把讀取名字的方式寫出來，還有要去掉名字的部分，字串裡只剩下句子
             if (sentence.Contains(":"))
             {
-                if (sentence.Contains("Player:"))
+                
+                string[] data = sentence.Split(':'); //TODO:全形跟半行的問題
+                m_TmpName = data[0];
+                m_TmpSentence = data[1];
+                if (m_TmpName.Equals("Player"))
                 {
-                    ActionName();//TODO:讀取DialogueUI的m_Name，將名字改成Localization的設定
+                    m_CharacterNameLocal.SetReference("Name", "Default"); //TODO:之後研究名字輸入
+                    m_SetName(m_CharacterNameLocal.GetLocalizedString());
+                    //TODO:讀取DialogueUI的m_Name，將名字改成Localization的設定
                 }
                 else
                 {
-                    ActionName();//TODO:讀取DialogueUI的m_Name，將名字改成冒號前的字
+                    m_SetName(m_TmpName); //TODO:讀取DialogueUI的m_Name，將名字改成冒號前的字
                 }
+
+                m_SetSentence(m_TmpSentence);
+
             }
+            else
+            {
+                m_TmpName = "";
+                m_TmpSentence = sentence;
+                m_SetName(m_TmpName);
+                m_SetSentence(m_TmpSentence);
+            }
+
+            
+
         }
 
-        public void SetStoryLocal(LocalizedObject storyLocal)
+        public void SetStoryLocal(LocalizedTextAsset storyLocal)
         {
-            this.storyLocal = storyLocal;
+            this.m_StoryLocal = storyLocal;
         }
 
         private void OnClickChoiceButton(Choice choice)
         {
-            story.ChooseChoiceIndex(choice.index);
+            m_Story.ChooseChoiceIndex(choice.index);
             RefreshView();
         }
 
+        private void StoryEnd()
+        {
+            m_StoryEnd = true;
+            //TODO:當文本讀取完畢，呼叫主程式消除對話跟恢復行動
+            //當對話結束時，移除DialogueUI
 
+        }
+
+        public bool IsStoryEnd()
+        {
+            return m_StoryEnd;
+        }
 
 
     }

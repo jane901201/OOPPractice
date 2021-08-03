@@ -34,7 +34,7 @@ namespace Unreal
             m_DialogueUI = m_Resources.LoadUI("DialogueUI"); 
         }
 
-        public GameObject SetDialogeUI()
+        public GameObject InstantiateDialogeUI() //之後要改
         {
             LoadDialogueUI();
             GameObject tmpDialogueUI = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity);
@@ -44,7 +44,6 @@ namespace Unreal
 
         public GameObject GetDialogueUI()
         {
-            GameObject tmpDialogueUI = SetDialogeUI();
 
             return m_DialogueUI;
         }

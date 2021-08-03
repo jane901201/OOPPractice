@@ -8,13 +8,11 @@ public abstract class UserInterface : MonoBehaviour
 
     private Action initialize;
     private Action uiUpdate;
-    private Action release;
 
     private bool active = true;
 
     public Action Initialize { get => initialize; set => initialize = value; }
     public Action UIUpdate { get => uiUpdate; set => uiUpdate = value; }
-    public Action Release { get => release; set => release = value; }
 
     public bool IsVisible()
     {
@@ -33,5 +31,9 @@ public abstract class UserInterface : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public virtual void Release()
+    {
+        Destroy(gameObject);
+    }
 
 }

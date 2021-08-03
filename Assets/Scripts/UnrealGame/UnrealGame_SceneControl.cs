@@ -29,7 +29,7 @@ namespace Unreal
                 #region MainMenuUISet
                 tmpMainMenuUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
                 tmpMainMenuUI.GetComponent<MainMenuUI>().BeginBtn.onClick.AddListener(
-                    () => SetSchoolScene()
+                    () => SetTempleScene() //測試用
                 );
 
                 tmpMainMenuUI.GetComponent<MainMenuUI>().ContinureBtn.onClick.AddListener(
@@ -68,14 +68,16 @@ namespace Unreal
         public void SetTempleScene()
         {
             TempleScene tmpTempleScene = new TempleScene(m_SceneController);
-            GameObject tmpDialogueUIObj = null;
+            GameObject tmpDialogueUIObj = InstantiateDialogeUI();
             DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
             m_DialogueSystem = new DialogueSystem();
-            LocalizedObject tmpStoryLocal = new LocalizedObject();
+            LocalizedTextAsset tmpStoryLocal = new LocalizedTextAsset();
             ConverationData tmpCovnerationData = new ConverationData();
+            tmpCovnerationData.Initinal();
             int table = 0;
             int reference = 0;
             string[][] converation = tmpCovnerationData.GetConveration();
+            Debug.Log(converation);
             string currectChapter = "Chapter" + table.ToString();
             string currectConveration = converation[table][reference];
 
@@ -91,24 +93,47 @@ namespace Unreal
                 m_DialogueSystem.SetStoryLocal(tmpStoryLocal);
                 m_DialogueSystem.Initialize();
 
-                m_DialogueSystem.ActionButton = delegate ()
+                m_DialogueSystem.m_SetChoiceBtn = delegate(Action OnClickChoiceBtn , int i)
                 {
-                    //TODO:之後要思考怎麼設計Button的設定
-                    tmpDialogueUI.ButtonA.onClick.AddListener(() => SetChoice());
-                    tmpDialogueUI.ButtonB.onClick.AddListener(() => SetChoice());
-                    tmpDialogueUI.ButtonC.onClick.AddListener(() => SetChoice());
-                    tmpDialogueUI.ButtonD.onClick.AddListener(() => SetChoice());
+                    switch (i)
+                    {
+                        case 0:
+                            tmpDialogueUI.ButtonA.onClick.AddListener(() => OnClickChoiceBtn());
+                            break;
+                        case 1:
+                            tmpDialogueUI.ButtonB.onClick.AddListener(() => OnClickChoiceBtn());
+                            break;
+                        case 2:
+                            tmpDialogueUI.ButtonC.onClick.AddListener(() => OnClickChoiceBtn());
+                            break;
+                        case 3:
+                            tmpDialogueUI.ButtonD.onClick.AddListener(() => OnClickChoiceBtn());
+                            break;
+                        default:
+                            Debug.Log("Something error happen in DialogueUI's button");
+                            break;
+                    }
                 };
 
-                m_DialogueSystem.ActionName = delegate ()
+                m_DialogueSystem.m_SetName = delegate (string name)
                 {
-                    tmpDialogueUI.SetNameText(GetName());
+                    tmpDialogueUI.SetNameText(name);
                 };
 
-                m_DialogueSystem.ActionSentence = delegate ()
+                m_DialogueSystem.m_SetSentence = delegate (string sentence)
                 {
-                    tmpDialogueUI.SetSentenceText(GetSentence());
+                    tmpDialogueUI.SetSentenceText(sentence);
                 };
+                m_DialogueSystem.m_SetContinueBtn = delegate ()
+                {
+                    bool tmpIsClick = false;
+                    tmpDialogueUI.ContinueButton.onClick.AddListener(delegate
+                    {
+                        tmpIsClick = isClick();
+                    });
+                    return tmpIsClick;
+                };
+
             };
 
             tmpTempleScene.SceneUpdate = delegate
@@ -155,26 +180,9 @@ namespace Unreal
             m_SceneController.SceneUpdate();
         }
 
-        public void SetButton(int i, DialogueUI dialogueUI, DialogueSystem dialogueSystem)
+        public bool isClick()
         {
-            switch(i) {
-                case 0:
-
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                default:
-                    Debug.Log("Something error happen in DialogueUI's button");
-                    break;
-            }
-                
+            return true;
         }
     }
 }
