@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 5721300468467691284}
   - component: {fileID: 5721300468467691286}
   - component: {fileID: 5721300468467691285}
-  - component: {fileID: 5721300468520992604}
   m_Layer: 5
   m_Name: LoadingUI
   m_TagString: Untagged
@@ -157,21 +156,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5721300468520992604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721300468467691283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce5e5accd9062b14d849f68c5de3f9c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 5721300468467691283}
-  slider: {fileID: 5721300469182742298}
-  progressText: {fileID: 5721300468100720169}
 --- !u!1 &5721300469182742296
 GameObject:
   m_ObjectHideFlags: 0

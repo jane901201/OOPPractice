@@ -20,7 +20,7 @@ namespace Unreal
         private DialogueSystem m_DialogueSystem = null;
         private GameEventSystem m_GameEventSystem = null;
         private ProjectResources m_Resources = null;
-        private SceneController m_SceneController = null;
+        private static SceneController m_SceneController = null;
 
 
 

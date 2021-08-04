@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Unreal.BaseClass;
 
 namespace Unreal
 {
@@ -14,9 +15,9 @@ namespace Unreal
 
         private void Start()
         {
-            SetMainMenuScene();
-            
-          
+           
+            SetMainMenuScene(); //TODO:看來這裡的視窗就有點問題了......
+            //SetTempleScene();          
         }
 
         private void Update()

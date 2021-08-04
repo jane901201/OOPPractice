@@ -44,7 +44,6 @@ namespace Unreal
 
         public GameObject GetDialogueUI()
         {
-
             return m_DialogueUI;
         }
 
@@ -70,7 +69,7 @@ namespace Unreal
         }   
         public void LoadLoadingUI()
         {
-            m_UI = m_Resources.LoadUI("LoadingUI");
+            m_LoadingScreenUI = m_Resources.LoadUI("LoadingUI");
         }
 
         public GameObject GetLoadingScreenUI()
@@ -86,5 +85,8 @@ namespace Unreal
         {
             return m_UI;
         }
+
+
+
     }
 }

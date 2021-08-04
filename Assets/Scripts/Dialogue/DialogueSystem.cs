@@ -1,12 +1,9 @@
 using Ink.Runtime;
-using System.Collections;
-using System.Collections.Generic;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.UI;
 using Unreal.BaseClass;
-using System.Linq;
 
 
 namespace Unreal.Dialogue
@@ -18,18 +15,19 @@ namespace Unreal.Dialogue
         private LocalizedTextAsset m_StoryLocal = null;
         private LocalizedString m_CharacterNameLocal;
         private Story m_Story;
+
+
         public delegate void SetName(string name);
         public SetName m_SetName;
         public delegate void SetSentence(string sentence);
         public SetSentence m_SetSentence;
-        public delegate void SetChoiceBtn(Action OnClickChoiceBtn , int i);
+        public delegate void SetChoiceBtn(Action OnClickChoiceBtn , int i, Choice choice);
         public SetChoiceBtn m_SetChoiceBtn;
-        public delegate bool SetContinueBtn();
-        public SetContinueBtn m_SetContinueBtn;
-        private Text m_Sentence;
+
 
         private string m_TmpName;
         private string m_TmpSentence;
+        private bool m_IsOnClick = false;
         private bool m_StoryEnd = false;
 
         public void Initialize()
@@ -40,45 +38,35 @@ namespace Unreal.Dialogue
             m_CharacterNameLocal = new LocalizedString();
             m_TmpName = "";
             m_TmpSentence = "";
+            RefreshView();
         }
 
 
         public void RefreshView()
         {
             
-            while (m_Story.canContinue)
+            if(m_Story.canContinue)
             {
                 string sentence = m_Story.Continue();
+                Debug.Log(sentence);
                 sentence.Trim();
-                CreateContentView(sentence);
+                SplitSentence(sentence);
             }
-
-            if (m_Story.currentChoices.Count > 0) //如果有選項，就會停在這裡
+            else if (m_Story.currentChoices.Count > 0) //如果有選項，就會停在這裡
             {
                 for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
                 {
                     Choice choice = m_Story.currentChoices[buttonNum];
-                    m_SetChoiceBtn(() => OnClickChoiceButton(choice), buttonNum);
+                    m_SetChoiceBtn(() => OnClickChoiceButton(choice), buttonNum, choice);
                 }
+                //TODO:SetChoicePanel
             }
-            else
+           
+            if(!m_Story.canContinue && m_Story.currentChoices.Count <= 0)
             {
                 StoryEnd();
             }
-        }
 
-        private void CreateContentView(string sentence)
-        {
-            bool pressButton = false;
-            SplitSentence(sentence);            
-
-            while(!pressButton)
-            {
-                pressButton = m_SetContinueBtn();
-
-            }
-
-            
         }
 
         public void SplitSentence(string sentence)
@@ -111,9 +99,6 @@ namespace Unreal.Dialogue
                 m_SetName(m_TmpName);
                 m_SetSentence(m_TmpSentence);
             }
-
-            
-
         }
 
         public void SetStoryLocal(LocalizedTextAsset storyLocal)
@@ -140,7 +125,10 @@ namespace Unreal.Dialogue
             return m_StoryEnd;
         }
 
-
+        public bool IsOnClick()
+        {
+            return m_IsOnClick;
+        }
     }
 
 }
