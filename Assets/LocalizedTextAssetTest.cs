@@ -42,7 +42,7 @@ public class LocalizedTextAssetTest : MonoBehaviour
     {
         string sentence = "Player:fjieofjoief";
     
-        m_DialogueSystem.SplitSentence(sentence);
+        m_DialogueSystem.SplitSentenceAndSetSentenceandName(sentence);
 
        
 

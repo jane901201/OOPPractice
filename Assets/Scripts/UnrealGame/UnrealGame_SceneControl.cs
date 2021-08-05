@@ -17,44 +17,30 @@ namespace Unreal
 {
     public partial class UnrealGame
     {
-        private GameObject m_RootUI = null;
         public void SetMainMenuScene()
         {
             MainMenuScene mainMenuScene = new MainMenuScene(m_SceneController);
             LoadMainMenuUI();
+            MainMenuUI tmpainMenuUI = new MainMenuUI(); //TODO:修整這裡的程式碼
+
             mainMenuScene.SceneBegin = delegate ()
             {
-                m_RootUI = UITool.FindUIGameObject("Canvas");
-                GameObject tmpMainMenuUI = Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
-                tmpMainMenuUI.transform.SetParent(m_RootUI.transform);
+                GameObject tmpMainMenuUIObj = Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
+                tmpMainMenuUIObj.transform.SetParent(GetCanvasTransform());
 
                 #region MainMenuUISet
-                RectTransform tmpRt = tmpMainMenuUI.GetComponent<RectTransform>();
+                RectTransform tmpRt = tmpMainMenuUIObj.GetComponent<RectTransform>();
                 tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
-                tmpMainMenuUI.GetComponent<MainMenuUI>().BeginBtn.onClick.AddListener(
-                    () => SetTempleScene() //TODO:測試用，之後要改
-                );
 
-                tmpMainMenuUI.GetComponent<MainMenuUI>().ContinureBtn.onClick.AddListener(
-                        delegate()
-                        {
-                            LoadSaveDataUI();
-                            GameObject tmpSaveDataUI =  Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
-                            tmpSaveDataUI.transform.SetParent(m_RootUI.transform);
-                            RectTransform tmpRt = tmpSaveDataUI.GetComponent<RectTransform>();
-                            tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
-                        }
-                
-                    );
-                tmpMainMenuUI.GetComponent<MainMenuUI>().LeaveBtn.onClick.AddListener(
-                    () => Application.Quit()
-                    );
+
+
+          
                 #endregion
             };
 
-            mainMenuScene.SceneUpdate = delegate
+            mainMenuScene.SceneUpdate = delegate ()
             {
-                
+
             };
 
             mainMenuScene.SceneEnd = delegate
@@ -84,13 +70,11 @@ namespace Unreal
 
             tmpTempleScene.SceneBegin = delegate()
             {
-                m_RootUI = UITool.FindUIGameObject("Canvas");
 
                 GameObject tmpDialogueUIObj = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity); ;
-                tmpDialogueUIObj.transform.SetParent(m_RootUI.transform);
+                tmpDialogueUIObj.transform.SetParent(GetCanvasTransform());
                 RectTransform tmpRt = tmpDialogueUIObj.GetComponent<RectTransform>();
                 tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
-                //tmpDialogueUIObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
                 DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
                 tmpDialogueUI.ShowSentencePanel();
                 tmpDialogueUI.HideChoicePanel();
@@ -116,7 +100,7 @@ namespace Unreal
                             tmpDialogueUI.ShowChoicePanel();
                             break;
                         default:
-                            Debug.Log("Something error happen in DialogueUI's button");
+                            Debug.Log("Something error happen in DialogueUI's button"); //TODO:要變成例外丟出
                             break;
                     }
                 };
@@ -279,9 +263,11 @@ namespace Unreal
             return true;
         }
 
-        public bool isClick()
+        public Transform GetCanvasTransform()
         {
-            return true;
+            GameObject m_RootUI = UITool.FindUIGameObject("Canvas");
+
+            return m_RootUI.transform;
         }
     }
 }

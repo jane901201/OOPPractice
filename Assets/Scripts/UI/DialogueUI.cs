@@ -25,7 +25,33 @@ namespace Unreal.UI
         [SerializeField] private Button m_ButtonC;
         [SerializeField] private Button m_ButtonD;
 
+        public void Initinal() //TODO:暫時不繼承，等寫出來在繼承
+        {
 
+        }
+
+        public void UIUpdate()
+        {
+
+        }
+
+        public override void Release()
+        {
+            //TODO:List的移除
+            base.Release();
+        }
+
+        public void ShowChoicesAndHideSentences()
+        {
+            ShowChoicePanel();
+            HideSentencePanel();
+        }
+
+        public void ShowSentencesAndHideChoices()
+        {
+            ShowSentencePanel();
+            HideChoicePanel();
+        }
 
         #region Sentence
         public void ShowSentencePanel()
@@ -79,6 +105,14 @@ namespace Unreal.UI
             m_ChoicePanel.SetActive(false);
         }
 
+        public void SetAllurBtnHiding()
+        {
+            HideButtonA();
+            HideButtonB();
+            HideButtonC();
+            HideButtonD();
+        }
+
         public void ShowButtonA()
         {
             m_ButtonA.gameObject.SetActive(true);
@@ -119,17 +153,44 @@ namespace Unreal.UI
             m_ButtonD.gameObject.SetActive(false);
         }
 
+        public void 
+
         public Button ButtonA { get => m_ButtonA; set => m_ButtonA = value; }
         public Button ButtonB { get => m_ButtonB; set => m_ButtonB = value; }
         public Button ButtonC { get => m_ButtonC; set => m_ButtonC = value; }
         public Button ButtonD { get => m_ButtonD; set => m_ButtonD = value; }
 
+        public void SetAllBtnState(int btnNum, Action OnClickChoiceBtn, Text btnText)
+        {
+            switch (btnNum) //TODO:未來研究抽象工廠的寫法
+            {
+                case 0:
+                    m_ButtonA.onClick.AddListener(() => OnClickChoiceBtn());
+                    ShowButtonA();
+                    break;
+                case 1:
+                    m_ButtonB.onClick.AddListener(() => OnClickChoiceBtn());
+                    ShowButtonB();
+                    break;
+                case 2:
+                    m_ButtonC.onClick.AddListener(() => OnClickChoiceBtn());
+                    ShowButtonC();
+                    break;
+                case 3:
+                    m_ButtonD.onClick.AddListener(() => OnClickChoiceBtn());
+                    ShowButtonD();
+                    break;
+                default:
+                    Debug.Log("Something error happen in DialogueUI's button"); //TODO:要變成例外丟出
+                    break;
+            }
+        }
+
+
+
         #endregion
 
-        public override void Release()
-        {
-            base.Release();
-        }
+      
 
 
     }

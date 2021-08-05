@@ -21,7 +21,7 @@ namespace Unreal.Dialogue
         public SetName m_SetName;
         public delegate void SetSentence(string sentence);
         public SetSentence m_SetSentence;
-        public delegate void SetChoiceBtn(Action OnClickChoiceBtn , int i, Choice choice);
+        public delegate void SetChoiceBtn(Action OnClickChoiceBtn, int i, Choice choice);
         public SetChoiceBtn m_SetChoiceBtn;
 
 
@@ -50,13 +50,14 @@ namespace Unreal.Dialogue
                 string sentence = m_Story.Continue();
                 Debug.Log(sentence);
                 sentence.Trim();
-                SplitSentence(sentence);
+                SplitSentenceAndSetSentenceandName(sentence);
             }
             else if (m_Story.currentChoices.Count > 0) //如果有選項，就會停在這裡
             {
                 for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
                 {
                     Choice choice = m_Story.currentChoices[buttonNum];
+                    string text = choice.text.Trim();
                     m_SetChoiceBtn(() => OnClickChoiceButton(choice), buttonNum, choice);
                 }
                 //TODO:SetChoicePanel
@@ -69,7 +70,7 @@ namespace Unreal.Dialogue
 
         }
 
-        public void SplitSentence(string sentence)
+        public void SplitSentenceAndSetSentenceandName(string sentence)
         {
             //TODO:把讀取名字的方式寫出來，還有要去掉名字的部分，字串裡只剩下句子
             if (sentence.Contains(":"))
@@ -100,6 +101,7 @@ namespace Unreal.Dialogue
                 m_SetSentence(m_TmpSentence);
             }
         }
+
 
         public void SetStoryLocal(LocalizedTextAsset storyLocal)
         {
