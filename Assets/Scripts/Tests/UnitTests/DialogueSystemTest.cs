@@ -29,7 +29,6 @@ public class DialogueSystemTest
         m_LocalizedTextAsset.SetReference("Test", "Test");
         m_localizedSprite.SetReference("Avater", "sister");
         Debug.Log(testStory.ToString());
-        m_DialogueSystem.SetStoryLocal(testStory);
         //m_DialogueSystem.Initialize();
     }
 

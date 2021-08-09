@@ -19,8 +19,7 @@ public class LocalizedTextAssetTest : MonoBehaviour
     private void Awake()
     {
         m_DialogueSystem = new DialogueSystem();
-       
-        m_DialogueSystem.SetStoryLocal(localizedTextAsset);
+        //TODO:如果需要這裡，那到時需要加SetStoryTextAsset
         m_DialogueSystem.Initialize();
     }
 

@@ -18,5 +18,8 @@ public abstract class IResources
     public abstract TextAsset LoadSaveDataXML(string SaveData);
 
     public abstract string[] LoadConveration(int chapter, int converation);
+
+    public abstract TextAsset LoadConverationTextAssetInk(int chapter, int converation);
+    
    
 }

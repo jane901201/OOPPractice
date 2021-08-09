@@ -22,45 +22,59 @@ namespace Unreal
         public void SetMainMenuScene()
         {
             MainMenuScene mainMenuScene = new MainMenuScene(m_SceneController);
-            LoadMainMenuUI();
-            MainMenuUI tmpMainMenuUI = new MainMenuUI(); //TODO:修整這裡的程式碼
+            
 
             mainMenuScene.SceneBegin = delegate ()
             {
-                GameObject tmpMainMenuUIObj = Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
-                tmpMainMenuUIObj.transform.SetParent(GetCanvasTransform());
+                GameObject tmpMainMenuUIObj = SetObjIntoGame(InstantiateMainMenuUI());
+                MainMenuUI tmpMainMenuUI = tmpMainMenuUIObj.GetComponent<MainMenuUI>();
 
                 #region MainMenuUISet
-                RectTransform tmpRt = tmpMainMenuUIObj.GetComponent<RectTransform>();
-                tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
-                tmpMainMenuUIObj.GetComponent<MainMenuUI>().BeginBtn.onClick.AddListener(
+                tmpMainMenuUI.BeginBtn.onClick.AddListener(
                     () => SetTempleScene() //TODO:測試用，之後要改
                 );
 
-                tmpMainMenuUIObj.GetComponent<MainMenuUI>().ContinureBtn.onClick.AddListener(
+                tmpMainMenuUI.ContinureBtn.onClick.AddListener(
                         delegate ()
                         {
-                            LoadSaveDataUI();
-                            GameObject tmpSaveDataUI = Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
-                            tmpSaveDataUI.transform.SetParent(GetCanvasTransform());
-                            RectTransform tmpRt = tmpSaveDataUI.GetComponent<RectTransform>();
-                            tmpRt.offsetMax = tmpRt.offsetMin = Vector2.zero;
+                            GameObject tmpSaveDataObj = SetObjIntoGame(InstantiateSaveDataUI());
                         }
 
                     );
-                tmpMainMenuUIObj.GetComponent<MainMenuUI>().LeaveBtn.onClick.AddListener(
+                tmpMainMenuUI.LeaveBtn.onClick.AddListener(
                     () => Application.Quit()
                     );
 
 
+                mainMenuScene.SceneUpdate = delegate ()
+                {
+                    tmpMainMenuUI.BeginBtn.onClick.AddListener(delegate()
+                    {
+                        if(IsPressTime(4f))
+                        {
+                            SetTempleScene();//TODO:測試用，之後要改
+                        }
+                        
+                    }
+                    );
+
+                    tmpMainMenuUI.ContinureBtn.onClick.AddListener(
+                            delegate ()
+                            {
+                                GameObject tmpSaveDataObj = SetObjIntoGame(InstantiateSaveDataUI());
+                            }
+
+                        );
+                    tmpMainMenuUI.LeaveBtn.onClick.AddListener(
+                        () => Application.Quit()
+                        );
+
+                };
 
                 #endregion
             };
 
-            mainMenuScene.SceneUpdate = delegate ()
-            {
-
-            };
+          
 
             mainMenuScene.SceneEnd = delegate
             {
@@ -76,38 +90,21 @@ namespace Unreal
             TempleScene tmpTempleScene = new TempleScene(m_SceneController);
             LoadDialogueUI();
             m_DialogueSystem = new DialogueSystem();
-            LocalizedTextAsset tmpStoryLocal = new LocalizedTextAsset();
-            ConverationData tmpCovnerationData = new ConverationData();
 
-
-            string[] TestChapterString = m_Resources.LoadConveration(0, 0);
-            TextAsset testTextAsset = m_Resources.LoadStoryTable(TestChapterString[0], TestChapterString[1]);
-
-
-            tmpCovnerationData.Initinal();
             int table = 0;
             int reference = 0;
-            string[][] converation = tmpCovnerationData.GetConveration();
-            string currectChapter = "Chapter" + table.ToString();
-            string currectConveration = converation[table][reference];
 
-            tmpStoryLocal.SetReference(currectChapter, currectConveration);
 
-            tmpTempleScene.SceneBegin = delegate()
+            tmpTempleScene.SceneBegin = delegate ()
             {
-
-                //TODO:Localization資料讀取要做在ProjectResources裡
-                GameObject tmpDialogueUIObj = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity); ;
-                tmpDialogueUIObj.transform.SetParent(GetCanvasTransform());
-                RectTransform tmpRt = tmpDialogueUIObj.GetComponent<RectTransform>();
-                tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
+                GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateDialogeUI());
                 DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
                 tmpDialogueUI.ShowSentencePanel();
                 tmpDialogueUI.HideChoicePanel();
 
-                m_DialogueSystem.SetStoryLocal(tmpStoryLocal);
+                m_DialogueSystem.SetStoryTextAsset(m_Resources.LoadConverationTextAssetInk(table, reference));
 
-                m_DialogueSystem.m_SetChoiceBtn = delegate(int btnNum, Action OnClickChoiceBtn, string choiceText)
+                m_DialogueSystem.m_SetChoiceBtn = delegate (int btnNum, Action OnClickChoiceBtn, string choiceText)
                 {
 
                 };
@@ -131,27 +128,25 @@ namespace Unreal
                 {
 
                     m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState);
-
                     m_DialogueSystem.m_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
-
                     m_DialogueSystem.m_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
+                    //TODO:m_DialogueSystem.m_SetAvater = new DialogueSystem.SetAvatar(tmpDialogueUI.SetAvatar);
 
-                    //m_DialogueSystem.m_SetChoicePanel = new DialogueSystem.SetChoicePanel(tmpDialogueUI.SetAvatar);
 
                     tmpDialogueUI.ContinueButton.onClick.AddListener(delegate
                     {
-                        if(IsPressTime(1f))
+                        if (IsPressTime(1f))
                         {
                             m_DialogueSystem.RefreshView();
                         }
                     });
 
-                    if(m_DialogueSystem.IsStoryEnd())
+                    if (m_DialogueSystem.IsStoryEnd())
                     {
                         tmpDialogueUI.Release();
                     }
                 };
-                    
+
                 m_DialogueSystem.Initialize();
 
             };
@@ -172,7 +167,7 @@ namespace Unreal
         public void SetSchoolScene()
         {
             SchoolScene tmpSchoolScene = new SchoolScene(m_SceneController);
-            
+
 
             tmpSchoolScene.SceneBegin = delegate
             {
@@ -189,7 +184,7 @@ namespace Unreal
 
             };
 
-            StartCoroutine(m_SceneController.SetLoadingScene(tmpSchoolScene));            
+            StartCoroutine(m_SceneController.SetLoadingScene(tmpSchoolScene));
         }
 
         public void SceneUpdate()
@@ -200,8 +195,8 @@ namespace Unreal
         public bool IsPressTime(float waitTime)
         {
             float time = 0;
-            
-            while(waitTime >= time)
+
+            while (waitTime >= time)
             {
                 time += Time.deltaTime;
                 return false;
@@ -210,11 +205,5 @@ namespace Unreal
             return true;
         }
 
-        public Transform GetCanvasTransform()
-        {
-            GameObject m_RootUI = UITool.FindUIGameObject("Canvas");
-
-            return m_RootUI.transform;
-        }
     }
 }

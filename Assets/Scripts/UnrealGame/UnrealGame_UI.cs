@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using Unreal.UI;
+using Unreal.BaseClass;
 
 namespace Unreal
 {
@@ -30,9 +31,22 @@ namespace Unreal
             return m_MainMenuUI;
         }
 
+        public GameObject InstantiateMainMenuUI()
+        {
+            LoadMainMenuUI();
+            GameObject tmpMainMenuUI = Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
+
+            return tmpMainMenuUI;
+        }
+
         public void LoadDialogueUI()
         {
             m_DialogueUI = m_Resources.LoadUI("DialogueUI"); 
+        }
+
+        public GameObject GetDialogueUI()
+        {
+            return m_DialogueUI;
         }
 
         public GameObject InstantiateDialogeUI() //之後要改
@@ -43,10 +57,7 @@ namespace Unreal
             return tmpDialogueUI;
         }
 
-        public GameObject GetDialogueUI()
-        {
-            return m_DialogueUI;
-        }
+      
 
         public void LoadSaveDataUI()
         {
@@ -58,7 +69,15 @@ namespace Unreal
             return m_SaveDataUI;
         }
 
-        
+        public GameObject InstantiateSaveDataUI() //之後要改
+        {
+            LoadSaveDataUI();
+            GameObject tmpUI = Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
+
+            return tmpUI;
+        }
+
+
         public void LoadGamePauseUI()
         {
             m_GamePauseUI = m_Resources.LoadUI("GamePauseUI"); 
@@ -77,17 +96,36 @@ namespace Unreal
         {
             return m_LoadingScreenUI;
         }
-        public void SetUI(string uiName)
+
+        private Transform GetCanvasTransform()
         {
-            m_UI = m_Resources.LoadUI(uiName);
+            GameObject m_RootUI = UITool.FindUIGameObject("Canvas");
+
+            return m_RootUI.transform;
         }
 
-        public GameObject GetUI()
+        private GameObject SetObjRectTransformToNormal(GameObject tmpObj)
         {
-            return m_UI;
+            RectTransform tmpRt = tmpObj.GetComponent<RectTransform>();
+            tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
+
+            return tmpObj;
         }
 
+        private GameObject SetObjToCanvas(GameObject tmpObj)
+        {
+            tmpObj.transform.SetParent(GetCanvasTransform());
 
+            return tmpObj;
+        }
 
+        private GameObject SetObjIntoGame(GameObject instantiateObj)//TODO:之後要想好一點的名字，功能為一系列物件創造在遊戲裡的過程
+        {
+            //TODO:之後可能要有switch的工廠
+            instantiateObj = SetObjToCanvas(instantiateObj);
+            instantiateObj = SetObjRectTransformToNormal(instantiateObj);
+
+            return instantiateObj;
+        }
     }
 }

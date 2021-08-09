@@ -23,7 +23,6 @@ namespace Unreal.Dialogue
         public SetChoicePanel m_SetChoicePanel;
 
         private TextAsset m_InkAsset = null;
-        private LocalizedTextAsset m_StoryLocal = null;
         private LocalizedString m_CharacterNameLocal;
         private Story m_Story;
 
@@ -35,7 +34,6 @@ namespace Unreal.Dialogue
 
         public void Initialize()
         {
-            m_InkAsset = m_StoryLocal.LoadAsset();
             m_Story = new Story(m_InkAsset.text);
             m_StoryEnd = false;
             m_CharacterNameLocal = new LocalizedString();
@@ -65,7 +63,6 @@ namespace Unreal.Dialogue
                     m_SetChoiceBtn(buttonNum, () => OnClickChoiceButton(choice), choiceText);
                 }
                 m_SetChoicePanel();
-                //TODO:SetChoicePanel
             }
            
             if(!m_Story.canContinue && m_Story.currentChoices.Count <= 0)
@@ -77,7 +74,6 @@ namespace Unreal.Dialogue
 
         public void SplitSentenceAndSetSentenceandName(string sentence)
         {
-            //TODO:把讀取名字的方式寫出來，還有要去掉名字的部分，字串裡只剩下句子
             if (sentence.Contains(":"))
             {
                 
@@ -107,9 +103,9 @@ namespace Unreal.Dialogue
         }
 
 
-        public void SetStoryLocal(LocalizedTextAsset storyLocal)
+        public void SetStoryTextAsset(TextAsset storyTextAsset)
         {
-            this.m_StoryLocal = storyLocal;
+            m_InkAsset = storyTextAsset;
         }
 
         private void OnClickChoiceButton(Choice choice)
@@ -122,7 +118,6 @@ namespace Unreal.Dialogue
         {
             m_StoryEnd = true;
             //TODO:當文本讀取完畢，呼叫主程式消除對話跟恢復行動
-            //當對話結束時，移除DialogueUI
 
         }
 

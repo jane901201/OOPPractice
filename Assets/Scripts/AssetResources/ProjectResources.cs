@@ -130,4 +130,12 @@ public class ProjectResources : IResources
         return tmpConveration;
 
     }
+
+    public override TextAsset LoadConverationTextAssetInk(int chapter, int converation)
+    {
+        string[] TestChapterString = LoadConveration(chapter, converation);
+        TextAsset testTextAsset = LoadStoryTable(TestChapterString[0], TestChapterString[1]);
+
+        return testTextAsset;
+    }
 }
