@@ -70,4 +70,18 @@ public class AssetResourcesTest : IPrebuildSetup
         Assert.NotNull(UI);
     }
 
+    [Test]
+    public void GetStoryTable() //TODO:GetStory為一定失敗的測試，要等Unity更新後才有可能成功
+    {
+        TextAsset textAsset = resources.LoadStoryTable("Test", "Test");
+        Assert.NotNull(textAsset);
+    }
+
+    [Test]
+    public void GetSaveDataXML()
+    {
+        TextAsset textAsset = resources.LoadSaveDataXML("XML/character");
+        Assert.NotNull(textAsset);
+    }
+
 }

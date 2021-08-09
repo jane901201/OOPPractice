@@ -13,6 +13,10 @@ public abstract class IResources
 
     public abstract GameObject LoadUI(string UIName);
 
-    public abstract TextAsset LoadStoryExcel(string Table, string Entry);
+    public abstract TextAsset LoadStoryTable(string Table, string Entry);
+
+    public abstract TextAsset LoadSaveDataXML(string SaveData);
+
+    public abstract string[] LoadConveration(int chapter, int converation);
    
 }

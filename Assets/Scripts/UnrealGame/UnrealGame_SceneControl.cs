@@ -78,6 +78,12 @@ namespace Unreal
             m_DialogueSystem = new DialogueSystem();
             LocalizedTextAsset tmpStoryLocal = new LocalizedTextAsset();
             ConverationData tmpCovnerationData = new ConverationData();
+
+
+            string[] TestChapterString = m_Resources.LoadConveration(0, 0);
+            TextAsset testTextAsset = m_Resources.LoadStoryTable(TestChapterString[0], TestChapterString[1]);
+
+
             tmpCovnerationData.Initinal();
             int table = 0;
             int reference = 0;

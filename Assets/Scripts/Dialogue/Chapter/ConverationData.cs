@@ -9,6 +9,11 @@ namespace Unreal.Dialogue
         private int currectChapter;
         private string converationName;
 
+        public ConverationData()
+        {
+            Initinal();
+        }
+
         public int CurrectChapter { get => currectChapter; set => currectChapter = value; }
         public string ConverationName { get => converationName; set => converationName = value; }
 

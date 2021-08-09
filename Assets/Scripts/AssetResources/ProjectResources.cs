@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using Unreal.Dialogue;
 
 /*
  * 獲得物件
@@ -94,6 +96,38 @@ public class ProjectResources : IResources
         return res;
     }
 
+    public override TextAsset LoadStoryTable(string Table, string Entry)
+    {
+        LocalizedTextAsset localizedTextAsset = new LocalizedTextAsset();
+        localizedTextAsset.SetReference(Table, Entry);
+        TextAsset res = localizedTextAsset.LoadAsset();
+        if (res == null)
+            return null;
+        return res;
+    }
 
-   
+    public override TextAsset LoadSaveDataXML(string SaveDataName)
+    {
+        TextAsset res = Resources.Load<TextAsset>(SaveDataPath + SaveDataName);
+        if (res == null)
+            return null;
+        return res;
+    }
+
+    public override string[] LoadConveration(int chapter, int converation)
+    {
+        ConverationData converationData = new ConverationData();
+
+        string[][] converationDataFile = converationData.GetConveration();
+        string currectChapter = "Chapter" + chapter.ToString();
+        string currectConveration = converationDataFile[chapter][converation];
+
+        string[] tmpConveration = new string[2];
+
+        tmpConveration[0] = currectChapter;
+        tmpConveration[1] = currectConveration;
+
+        return tmpConveration;
+
+    }
 }
