@@ -9,7 +9,8 @@
         "Unity.InputSystem.TestFramework",
         "Unreal.Resources",
         "Unreal.UI",
-        "Unreal.Scenes"
+        "Unreal.Scenes",
+        "Unreal.BaseClass"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

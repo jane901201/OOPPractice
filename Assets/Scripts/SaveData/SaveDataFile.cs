@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
- * 儲存角色資料
- * 關卡資訊
- * 對話進度
- * 遊玩時間
- */
-public class SaveData
+/// <summary>
+///  儲存角色資料
+///  關卡資訊
+///  對話進度
+///  遊玩時間
+///  產生複數資料的類別
+/// </summary>
+public class SaveDataFile
 {
     private int hp; //生命條
     private int mp; //魔力條
@@ -22,7 +23,7 @@ public class SaveData
     //private Item item; //背包
 
     private int conversation; //對話進度
-    private string scenes; //目前視窗跟裡面的資料
+    private string scenesName; //目前視窗
 
     public int Hp { get => hp; set => hp = value; }
     public int Mp { get => mp; set => mp = value; }
@@ -33,13 +34,13 @@ public class SaveData
     public int AtkSpd { get => atkSpd; set => atkSpd = value; }
     public int Res { get => res; set => res = value; }
     public int Conversation { get => conversation; set => conversation = value; }
-    public string Scenes { get => scenes; set => scenes = value; }
+    public string Scenes { get => scenesName; set => scenesName = value; }
 
-    public SaveData GetSaveData()
+    public SaveDataFile GetSaveData()
     {
         return this;
     }
-    public void SetSaveData(CharacterOriginator characterOriginator, ItemOriginator itemOriginator, SceneOriginator sceneOriginator)
+    public void SetSaveData()
     {
         //各種資料處理
     }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UserInterface : MonoBehaviour
+public abstract class IUserInterface : MonoBehaviour
 {
 
     private Action initialize;

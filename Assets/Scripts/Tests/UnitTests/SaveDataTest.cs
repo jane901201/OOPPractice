@@ -8,8 +8,20 @@ public class SaveDataTest
 {
     
     [Test]
-    public void saveDataTestSimplePasses()
+    public void CreateSaveData()
     {
         
+    }
+
+    [Test]
+    public void LoadSaveData()
+    {
+
+    }
+
+    [Test]
+    public void SetSaveDataManager_SceneName()
+    {
+
     }
 }

@@ -11,18 +11,21 @@ namespace Unreal.Dialogue
 
     public class DialogueSystem : IGameSystem
     {
-        private TextAsset m_InkAsset = null;
-        private LocalizedTextAsset m_StoryLocal = null;
-        private LocalizedString m_CharacterNameLocal;
-        private Story m_Story;
-
-
         public delegate void SetName(string name);
         public SetName m_SetName;
         public delegate void SetSentence(string sentence);
         public SetSentence m_SetSentence;
-        public delegate void SetChoiceBtn(Action OnClickChoiceBtn, int i, Choice choice);
+        public delegate void SetAvatar();
+        public SetAvatar m_SetAvater;
+        public delegate void SetChoiceBtn(int btnNum, Action OnClickChoiceBtn, string choiceText);
         public SetChoiceBtn m_SetChoiceBtn;
+        public delegate void SetChoicePanel();
+        public SetChoicePanel m_SetChoicePanel;
+
+        private TextAsset m_InkAsset = null;
+        private LocalizedTextAsset m_StoryLocal = null;
+        private LocalizedString m_CharacterNameLocal;
+        private Story m_Story;
 
 
         private string m_TmpName;
@@ -48,18 +51,20 @@ namespace Unreal.Dialogue
             if(m_Story.canContinue)
             {
                 string sentence = m_Story.Continue();
-                Debug.Log(sentence);
                 sentence.Trim();
                 SplitSentenceAndSetSentenceandName(sentence);
             }
-            else if (m_Story.currentChoices.Count > 0) //如果有選項，就會停在這裡
+            else if (m_Story.currentChoices.Count > 0) //TODO:能不能讓UI的設定跟DialogueSystem不要那麼緊合?
             {
+
+
                 for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
                 {
                     Choice choice = m_Story.currentChoices[buttonNum];
-                    string text = choice.text.Trim();
-                    m_SetChoiceBtn(() => OnClickChoiceButton(choice), buttonNum, choice);
+                    string choiceText = choice.text.Trim();
+                    m_SetChoiceBtn(buttonNum, () => OnClickChoiceButton(choice), choiceText);
                 }
+                m_SetChoicePanel();
                 //TODO:SetChoicePanel
             }
            
@@ -83,11 +88,10 @@ namespace Unreal.Dialogue
                 {
                     m_CharacterNameLocal.SetReference("Name", "Default"); //TODO:之後研究名字輸入
                     m_SetName(m_CharacterNameLocal.GetLocalizedString());
-                    //TODO:讀取DialogueUI的m_Name，將名字改成Localization的設定
                 }
                 else
                 {
-                    m_SetName(m_TmpName); //TODO:讀取DialogueUI的m_Name，將名字改成冒號前的字
+                    m_SetName(m_TmpName);
                 }
 
                 m_SetSentence(m_TmpSentence);

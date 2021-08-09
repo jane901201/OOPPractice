@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Caretaker
 {
-    Dictionary<int, SaveData> saveDatas = new Dictionary<int, SaveData>();
+    Dictionary<int, SaveDataFile> saveDatas = new Dictionary<int, SaveDataFile>();
 
-    public void AddSaveData(int number, SaveData theSaveData)
+    public void AddSaveData(int number, SaveDataFile theSaveData)
     {
         if(saveDatas.ContainsKey(number) == false)
         {
@@ -18,7 +18,7 @@ public class Caretaker
         }
     }
 
-    public SaveData GetSaveData(int number)
+    public SaveDataFile GetSaveData(int number)
     {
         if(saveDatas.ContainsKey(number) == false)
         {

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unreal.BaseClass;
 
-public class SceneController
+public class SceneController : IGameSystem
 {
     private static IScene m_Scene;
     private bool m_RunBegin = false;
@@ -52,8 +53,19 @@ public class SceneController
     
     }
 
-    public IScene GetCurrectScene()
+    public string GetCurrectSceneName()
     {
-        return m_Scene;
+        return m_Scene.ToString();
     }
+
+    public override void SaveData()
+    {
+        base.SaveData();
+    }
+
+    public override void LoadData()
+    {
+        base.LoadData();
+    }
+
 }

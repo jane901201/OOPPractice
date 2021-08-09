@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Unreal.UI
 {
     [AddComponentMenu("UnrealUI/LoadingUI")]
-    public class LoadingUI : UserInterface
+    public class LoadingUI : IUserInterface
     {
         [SerializeField] private GameObject loadingScreen;
         [SerializeField] private Slider slider;

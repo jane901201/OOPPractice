@@ -4,6 +4,7 @@ using UnityEngine;
 using Unreal.Character;
 using Unreal.Dialogue;
 using Unreal.BaseClass;
+using Unreal.SaveData;
 
 /// <summary>
 /// 1.UI控制
@@ -21,15 +22,16 @@ namespace Unreal
         private GameEventSystem m_GameEventSystem = null;
         private ProjectResources m_Resources = null;
         private static SceneController m_SceneController = null;
-
+        private static SaveDataManager m_SaveDataManager = null;
 
 
         private ConverationData m_ConverationData = null;
 
-        public void UnrealAwake() //遊戲被打開時要初始的東西
+        public void UnrealAwake()
         {
             m_SceneController = new SceneController();
             m_Resources = new ProjectResources();
+            m_SaveDataManager = new SaveDataManager();
 
         }
 

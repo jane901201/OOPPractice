@@ -12,7 +12,9 @@ using Ink.Runtime;
 /// <summary>
 /// 呼叫Loading介面
 /// 除理視窗需要的設定
+/// TODO:這裡的東西最終會搬到Factory跟Builder的架構裡
 /// </summary>
+
 namespace Unreal
 {
     public partial class UnrealGame
@@ -21,7 +23,7 @@ namespace Unreal
         {
             MainMenuScene mainMenuScene = new MainMenuScene(m_SceneController);
             LoadMainMenuUI();
-            MainMenuUI tmpainMenuUI = new MainMenuUI(); //TODO:修整這裡的程式碼
+            MainMenuUI tmpMainMenuUI = new MainMenuUI(); //TODO:修整這裡的程式碼
 
             mainMenuScene.SceneBegin = delegate ()
             {
@@ -31,10 +33,27 @@ namespace Unreal
                 #region MainMenuUISet
                 RectTransform tmpRt = tmpMainMenuUIObj.GetComponent<RectTransform>();
                 tmpRt.offsetMin = tmpRt.offsetMax = Vector2.zero;
+                tmpMainMenuUIObj.GetComponent<MainMenuUI>().BeginBtn.onClick.AddListener(
+                    () => SetTempleScene() //TODO:測試用，之後要改
+                );
+
+                tmpMainMenuUIObj.GetComponent<MainMenuUI>().ContinureBtn.onClick.AddListener(
+                        delegate ()
+                        {
+                            LoadSaveDataUI();
+                            GameObject tmpSaveDataUI = Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
+                            tmpSaveDataUI.transform.SetParent(GetCanvasTransform());
+                            RectTransform tmpRt = tmpSaveDataUI.GetComponent<RectTransform>();
+                            tmpRt.offsetMax = tmpRt.offsetMin = Vector2.zero;
+                        }
+
+                    );
+                tmpMainMenuUIObj.GetComponent<MainMenuUI>().LeaveBtn.onClick.AddListener(
+                    () => Application.Quit()
+                    );
 
 
 
-          
                 #endregion
             };
 
@@ -71,6 +90,7 @@ namespace Unreal
             tmpTempleScene.SceneBegin = delegate()
             {
 
+                //TODO:Localization資料讀取要做在ProjectResources裡
                 GameObject tmpDialogueUIObj = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity); ;
                 tmpDialogueUIObj.transform.SetParent(GetCanvasTransform());
                 RectTransform tmpRt = tmpDialogueUIObj.GetComponent<RectTransform>();
@@ -81,117 +101,37 @@ namespace Unreal
 
                 m_DialogueSystem.SetStoryLocal(tmpStoryLocal);
 
-                m_DialogueSystem.m_SetChoiceBtn = delegate(Action OnClickChoiceBtn , int i, Choice choice)
+                m_DialogueSystem.m_SetChoiceBtn = delegate(int btnNum, Action OnClickChoiceBtn, string choiceText)
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            tmpDialogueUI.ButtonA.onClick.AddListener(() => OnClickChoiceBtn());
-                            break;
-                        case 1:
-                            tmpDialogueUI.ButtonB.onClick.AddListener(() => OnClickChoiceBtn());
-                            break;
-                        case 2:
-                            tmpDialogueUI.ButtonC.onClick.AddListener(() => OnClickChoiceBtn());
-                            break;
-                        case 3:
-                            tmpDialogueUI.ButtonD.onClick.AddListener(() => OnClickChoiceBtn());
-                            tmpDialogueUI.HideSentencePanel();
-                            tmpDialogueUI.ShowChoicePanel();
-                            break;
-                        default:
-                            Debug.Log("Something error happen in DialogueUI's button"); //TODO:要變成例外丟出
-                            break;
-                    }
+
                 };
 
-                m_DialogueSystem.m_SetName = delegate (string name)
+                m_DialogueSystem.m_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
+
+                m_DialogueSystem.m_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
+
+                m_DialogueSystem.m_SetChoicePanel = delegate ()
                 {
-                    tmpDialogueUI.SetNameText(name);
+
                 };
 
-                m_DialogueSystem.m_SetSentence = delegate (string sentence)
-                {
-                    tmpDialogueUI.SetSentenceText(sentence);
-                };
-              
                 tmpDialogueUI.ContinueButton.onClick.AddListener(delegate
                 {
                     m_DialogueSystem.RefreshView();
                 });
 
-                
-
 
                 m_DialogueSystem.gsUpdate = delegate ()
                 {
-                    m_DialogueSystem.m_SetChoiceBtn = delegate (Action OnClickChoiceBtn, int i, Choice choice)
-                    {
-                        tmpDialogueUI.HideSentencePanel();
-                        tmpDialogueUI.ShowChoicePanel();
 
-                        switch (i)
-                        {
-                            case 0:
-                                tmpDialogueUI.ButtonA.GetComponentInChildren<Text>().text = choice.text.Trim();
-                                tmpDialogueUI.ButtonA.onClick.AddListener(
-                                    delegate()
-                                    {
-                                        OnClickChoiceBtn();
-                                        tmpDialogueUI.HideChoicePanel();
-                                        tmpDialogueUI.ShowSentencePanel();
-                                    }
-                                    );
-                                break;
-                            case 1:
-                                tmpDialogueUI.ButtonB.GetComponentInChildren<Text>().text = choice.text.Trim();
-                                tmpDialogueUI.ButtonB.onClick.AddListener(
-                                     delegate ()
-                                     {
-                                         OnClickChoiceBtn();
-                                         tmpDialogueUI.HideChoicePanel();
-                                         tmpDialogueUI.ShowSentencePanel();
-                                     }
-                                    );
-                                break;
-                            case 2:
-                                tmpDialogueUI.ButtonC.GetComponentInChildren<Text>().text = choice.text.Trim();
-                                tmpDialogueUI.ButtonC.onClick.AddListener(
-                                     delegate ()
-                                     {
-                                         OnClickChoiceBtn();
-                                         tmpDialogueUI.HideChoicePanel();
-                                         tmpDialogueUI.ShowSentencePanel();
-                                     }
-                                    );
-                                break;
-                            case 3:
-                                tmpDialogueUI.ButtonD.GetComponentInChildren<Text>().text = choice.text.Trim();
-                                tmpDialogueUI.ButtonD.onClick.AddListener(
-                                     delegate ()
-                                     {
-                                         OnClickChoiceBtn();
-                                         tmpDialogueUI.HideChoicePanel();
-                                         tmpDialogueUI.ShowSentencePanel();
-                                     }
-                                    );
-                                break;
-                            default:
-                                Debug.Log("Something error happen in DialogueUI's button");
-                                break;
-                        }
-                    };
+                    m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState);
 
-                    m_DialogueSystem.m_SetName = delegate (string name)
-                    {
-                        tmpDialogueUI.SetNameText(name);
-                    };
+                    m_DialogueSystem.m_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
 
-                    m_DialogueSystem.m_SetSentence = delegate (string sentence)
-                    {
-                        tmpDialogueUI.SetSentenceText(sentence);
-                    };
-                   
+                    m_DialogueSystem.m_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
+
+                    //m_DialogueSystem.m_SetChoicePanel = new DialogueSystem.SetChoicePanel(tmpDialogueUI.SetAvatar);
+
                     tmpDialogueUI.ContinueButton.onClick.AddListener(delegate
                     {
                         if(IsPressTime(1f))
@@ -226,6 +166,7 @@ namespace Unreal
         public void SetSchoolScene()
         {
             SchoolScene tmpSchoolScene = new SchoolScene(m_SceneController);
+            
 
             tmpSchoolScene.SceneBegin = delegate
             {

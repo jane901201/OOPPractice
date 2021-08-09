@@ -12,5 +12,7 @@ public abstract class IResources
     public abstract Sprite LoadSprite(string SpriteName);
 
     public abstract GameObject LoadUI(string UIName);
+
+    public abstract TextAsset LoadStoryExcel(string Table, string Entry);
    
 }

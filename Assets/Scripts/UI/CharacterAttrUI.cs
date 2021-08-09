@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Unreal.UI
 {
     [AddComponentMenu("UnrealUI/CharacterAttrUI")]
-    public class CharacterAttrUI : UserInterface
+    public class CharacterAttrUI : IUserInterface
     {
     
     }

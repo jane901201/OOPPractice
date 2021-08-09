@@ -8,14 +8,15 @@ using UnityEngine;
 public class ProjectResources : IResources
 {
 
-    public const string PlayerPath = "Characters/Player/";
-    public const string EnemyPath = "Characters/Enemy/";
-    public const string CharacterAvatarTestPath = "CharacterAvatar/CharacterAvatarTest";
-    public const string UIPath = "UI/";
-    public const string WeaponPath = "Weapons/";
-    public const string EffectPath = "Effects/";
-    public const string AudioPath = "Audios/";
-    public const string SpritePath = "Sprites/";
+    private const string PlayerPath = "Characters/Player/";
+    private const string EnemyPath = "Characters/Enemy/";
+    private const string CharacterAvatarTestPath = "CharacterAvatar/CharacterAvatarTest";
+    private const string UIPath = "UI/";
+    private const string WeaponPath = "Weapons/";
+    private const string EffectPath = "Effects/";
+    private const string AudioPath = "Audios/";
+    private const string SpritePath = "Sprites/";
+    private const string SaveDataPath = "SaveData/";
 
     public override AudioClip LoadAudioClip(string AudioClipName)
     {
@@ -92,6 +93,7 @@ public class ProjectResources : IResources
         }
         return res;
     }
+
 
    
 }

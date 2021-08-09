@@ -29,8 +29,8 @@ public class SceneControllerTest
         
         controller.SetLoadingScene(scene);
 
-        //Assert
-        Assert.AreEqual(controller.GetCurrectScene().ToString() , "MainMenuScene");
+        //TODO:之後要改掉這裡的測試
+        Assert.AreEqual(controller.GetCurrectSceneName() , "MainMenuScene");
         //Assert.AreEqual("MainMenuScene", "MainMenuScene");
 
         yield return null;
@@ -43,7 +43,8 @@ public class SceneControllerTest
 
         controller.SetLoadingScene(scene);
 
-        Assert.AreEqual(controller.GetCurrectScene().ToString(), "SchoolScene");
+        //TODO:之後要改掉這裡的測試
+        Assert.AreEqual(controller.GetCurrectSceneName(), "SchoolScene");
 
         yield return null;
     }    

@@ -11,7 +11,7 @@ using System;
 namespace Unreal.UI
 {
     [AddComponentMenu("UnrealUI/DialogueUI")]
-    public class DialogueUI : UserInterface
+    public class DialogueUI : IUserInterface
     {
         [SerializeField] private GameObject m_SentencePanel; 
         [SerializeField] private Text m_CharacterName;
@@ -78,6 +78,8 @@ namespace Unreal.UI
         {
             this.m_Avatar = avater;
         }
+
+
 
         public Button ContinueButton { get => m_ContinueButton; set => m_ContinueButton = value; }
       
@@ -153,31 +155,36 @@ namespace Unreal.UI
             m_ButtonD.gameObject.SetActive(false);
         }
 
-        public void 
-
-        public Button ButtonA { get => m_ButtonA; set => m_ButtonA = value; }
-        public Button ButtonB { get => m_ButtonB; set => m_ButtonB = value; }
-        public Button ButtonC { get => m_ButtonC; set => m_ButtonC = value; }
-        public Button ButtonD { get => m_ButtonD; set => m_ButtonD = value; }
-
-        public void SetAllBtnState(int btnNum, Action OnClickChoiceBtn, Text btnText)
+        public void SetBtnAddListener(Action OnClickChoiceBtn)
         {
+            OnClickChoiceBtn();
+            ShowSentencesAndHideChoices();
+        }
+
+        public void SetAllBtnState(int btnNum, Action OnClickChoiceBtn, string btnText)
+        {
+            ShowChoicesAndHideSentences();
+
             switch (btnNum) //TODO:未來研究抽象工廠的寫法
             {
                 case 0:
-                    m_ButtonA.onClick.AddListener(() => OnClickChoiceBtn());
+                    m_ButtonA.GetComponentInChildren<Text>().text = btnText;
+                    m_ButtonA.onClick.AddListener(() => SetBtnAddListener(OnClickChoiceBtn));
                     ShowButtonA();
                     break;
                 case 1:
-                    m_ButtonB.onClick.AddListener(() => OnClickChoiceBtn());
+                    m_ButtonB.GetComponentInChildren<Text>().text = btnText;
+                    m_ButtonB.onClick.AddListener(() => SetBtnAddListener(OnClickChoiceBtn));
                     ShowButtonB();
                     break;
                 case 2:
-                    m_ButtonC.onClick.AddListener(() => OnClickChoiceBtn());
+                    m_ButtonC.GetComponentInChildren<Text>().text = btnText;
+                    m_ButtonC.onClick.AddListener(() => SetBtnAddListener(OnClickChoiceBtn));
                     ShowButtonC();
                     break;
                 case 3:
-                    m_ButtonD.onClick.AddListener(() => OnClickChoiceBtn());
+                    m_ButtonD.GetComponentInChildren<Text>().text = btnText;
+                    m_ButtonD.onClick.AddListener(() => SetBtnAddListener(OnClickChoiceBtn));
                     ShowButtonD();
                     break;
                 default:
@@ -189,9 +196,6 @@ namespace Unreal.UI
 
 
         #endregion
-
-      
-
 
     }
 }

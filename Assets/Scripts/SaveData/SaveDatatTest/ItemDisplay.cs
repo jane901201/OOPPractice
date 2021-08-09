@@ -19,7 +19,7 @@ public class ItemDisplay : MonoBehaviour
         }
 
 
-        foreach(ItemEntry item in XMLManager.ins.itemDB.list)
+        foreach(ItemEntry item in XMLManagerSaveDataTest.ins.itemDB.list)
         {
             ItemBlock newBlock = Instantiate(blockPrefab) as ItemBlock;
             newBlock.transform.SetParent(transform, false);
