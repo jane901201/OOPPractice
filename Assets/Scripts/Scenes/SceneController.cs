@@ -9,48 +9,54 @@ public class SceneController : IGameSystem
 {
     private static IScene m_Scene;
     private bool m_RunBegin = false;
+    List<AsyncOperation> m_ScenesToLoad = new List<AsyncOperation>();
     AsyncOperation operation;
 
     //TODO:要測試SetLoadingScene是不是真的能用，正確來說，用UnitTest測試
-    //TODO:知道為什麼m_Scene的值不會改變的原因
     public IEnumerator SetLoadingScene(IScene scene)
     {
         m_RunBegin = false;
-        String loadingSceneName = scene.ToString();
+        string loadingSceneName = scene.ToString();
 
         if (loadingSceneName == null || loadingSceneName.Length == 0)
             yield return null;
-        operation = SceneManager.LoadSceneAsync(loadingSceneName);
-        while (!operation.isDone)
+
+
+        operation = SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Single);
+        
+
+        while (operation.progress < 0.89)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            //TODO:把Loading的UI跟progress結合...在我除理掉LoadingUI的Bug後
-            //Debug.Log(progress);
-            yield return null;
+            //TODO:把Loading的UI跟progress結合...在我除理掉LoadingUI的Bug後            
         }
-        
+
+
         if (m_Scene != null)
         {
             m_Scene.SceneEnd();
         }
         m_Scene = scene;
+
+
+        yield return null;
     }
 
    
      public void SceneUpdate()
     {
-        if (m_Scene != null && m_RunBegin == false)
+        if (m_Scene != null && m_RunBegin == false && operation.isDone)
         {
             
             m_Scene.SceneBegin();
             m_RunBegin = true;
         }
 
-        if(m_Scene != null)
+        if (m_Scene != null)
         {
             m_Scene.SceneUpdate();
         }
-    
+
     }
 
     public string GetCurrectSceneName()

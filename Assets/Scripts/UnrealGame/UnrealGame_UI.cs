@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Unreal.UI;
 using Unreal.BaseClass;
+using UnityEngine.SceneManagement;
 
 namespace Unreal
 {
@@ -117,6 +118,16 @@ namespace Unreal
             tmpObj.transform.SetParent(GetCanvasTransform());
 
             return tmpObj;
+        }
+
+        private GameObject SetObjIntoGame(GameObject instantiateObj, IScene scene)//TODO:之後要想好一點的名字，功能為一系列物件創造在遊戲裡的過程
+        {
+            //TODO:之後可能要有switch的工廠
+            SceneManager.MoveGameObjectToScene(instantiateObj, SceneManager.GetSceneByName(scene.ToString()));
+            instantiateObj = SetObjToCanvas(instantiateObj);
+            instantiateObj = SetObjRectTransformToNormal(instantiateObj);
+
+            return instantiateObj;
         }
 
         private GameObject SetObjIntoGame(GameObject instantiateObj)//TODO:之後要想好一點的名字，功能為一系列物件創造在遊戲裡的過程

@@ -11,7 +11,25 @@ namespace Unreal
             m_SaveDataManager.SetSceneName(name);
         }
 
+        public void LoadSaveData()
+        {
+
+        }
+
+        public void SaveSaveData()
+        {
+
+        }
+
+        public void LoadSaveDataFileInXML()
+        {
+            m_Resources.LoadSaveDataFileDataBaseXML
+        }
 
 
+        public void SaveSaveDataInXML()
+        {
+
+        }
     }
 }

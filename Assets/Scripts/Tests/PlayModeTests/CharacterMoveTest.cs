@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TestTools;
+using Unreal.AssetResources;
 
 public class CharacterMoveTest : InputTestFixture
 {

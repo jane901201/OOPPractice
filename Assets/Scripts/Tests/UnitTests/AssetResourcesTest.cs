@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Unreal.AssetResources;
 
 public class AssetResourcesTest : IPrebuildSetup
 {
@@ -80,7 +81,7 @@ public class AssetResourcesTest : IPrebuildSetup
     [Test]
     public void GetSaveDataXML()
     {
-        TextAsset textAsset = resources.LoadSaveDataXML("XML/character");
+        TextAsset textAsset = resources.LoadXML("XML/character");
         Assert.NotNull(textAsset);
     }
 

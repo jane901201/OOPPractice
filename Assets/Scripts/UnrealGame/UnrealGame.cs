@@ -16,7 +16,7 @@ namespace Unreal
         private void Start()
         {
            
-            SetMainMenuScene(); //TODO:看來這裡的視窗就有點問題了......
+            SetMainMenuScene();
             //SetTempleScene();          
         }
 

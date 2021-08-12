@@ -74,7 +74,7 @@ namespace Unreal.Dialogue
 
         public void SplitSentenceAndSetSentenceandName(string sentence)
         {
-            if (sentence.Contains(":"))
+            if (sentence.Contains(":") || sentence.Contains("："))
             {
                 
                 string[] data = sentence.Split(':'); //TODO:全形跟半行的問題

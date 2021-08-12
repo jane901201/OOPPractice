@@ -44,37 +44,13 @@ namespace Unreal
                 tmpMainMenuUI.LeaveBtn.onClick.AddListener(
                     () => Application.Quit()
                     );
-
-
-                mainMenuScene.SceneUpdate = delegate ()
-                {
-                    tmpMainMenuUI.BeginBtn.onClick.AddListener(delegate()
-                    {
-                        if(IsPressTime(4f))
-                        {
-                            SetTempleScene();//TODO:測試用，之後要改
-                        }
-                        
-                    }
-                    );
-
-                    tmpMainMenuUI.ContinureBtn.onClick.AddListener(
-                            delegate ()
-                            {
-                                GameObject tmpSaveDataObj = SetObjIntoGame(InstantiateSaveDataUI());
-                            }
-
-                        );
-                    tmpMainMenuUI.LeaveBtn.onClick.AddListener(
-                        () => Application.Quit()
-                        );
-
-                };
-
                 #endregion
             };
 
-          
+            mainMenuScene.SceneUpdate = delegate
+            {
+
+            };
 
             mainMenuScene.SceneEnd = delegate
             {
@@ -88,7 +64,6 @@ namespace Unreal
         public void SetTempleScene()
         {
             TempleScene tmpTempleScene = new TempleScene(m_SceneController);
-            LoadDialogueUI();
             m_DialogueSystem = new DialogueSystem();
 
             int table = 0;
@@ -97,7 +72,7 @@ namespace Unreal
 
             tmpTempleScene.SceneBegin = delegate ()
             {
-                GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateDialogeUI());
+                GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateDialogeUI()); 
                 DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
                 tmpDialogueUI.ShowSentencePanel();
                 tmpDialogueUI.HideChoicePanel();
