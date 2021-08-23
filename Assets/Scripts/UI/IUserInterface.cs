@@ -6,13 +6,22 @@ using UnityEngine;
 public abstract class IUserInterface : MonoBehaviour
 {
 
-    private Action initialize;
-    private Action uiUpdate;
-
     private bool active = true;
 
-    public Action Initialize { get => initialize; set => initialize = value; }
-    public Action UIUpdate { get => uiUpdate; set => uiUpdate = value; }
+    public virtual void Initialize(Action initialize)
+    {
+        initialize();
+    }
+
+    public virtual void UIUpdate(Action update)
+    {
+        update();
+    }
+
+    public virtual void Release(Action release)
+    {
+        release();
+    }
 
     public bool IsVisible()
     {
@@ -33,7 +42,7 @@ public abstract class IUserInterface : MonoBehaviour
 
     public virtual void Release()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); //TODO:直接消除會有BUG，要用List
     }
 
 }

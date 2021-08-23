@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 /// <summary>
 /// 資料的增減處理
 /// </summary>
@@ -49,6 +47,17 @@ namespace Unreal.AssetResources
                 return m_SaveDatas[number];
             }
         }
+
+        public SaveDataFileDataBase GetSaveDataFileDataBase()
+        {
+            return m_SaveDataFileDataBase;
+        }
+
+        public Dictionary<int ,SaveDataFile> GetSaveDatas()
+        {
+            return m_SaveDatas;
+        }
+
     }
 
 }

@@ -42,6 +42,7 @@ namespace Unreal
 
                     );
                 tmpMainMenuUI.LeaveBtn.onClick.AddListener(
+                    //TODO:SaveDataFiletoXML
                     () => Application.Quit()
                     );
                 #endregion
@@ -102,7 +103,7 @@ namespace Unreal
                 m_DialogueSystem.gsUpdate = delegate ()
                 {
 
-                    m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState);
+                    m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState); //TODO:要設定在Initinal才比較好
                     m_DialogueSystem.m_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
                     m_DialogueSystem.m_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
                     //TODO:m_DialogueSystem.m_SetAvater = new DialogueSystem.SetAvatar(tmpDialogueUI.SetAvatar);

@@ -1,20 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Unreal.BaseClass;
 /// <summary>
 /// 獲得目前資料的資訊(從ProjectResoruces獲取)
 /// 呼叫ProjectResources將資料設定為XML檔
+/// 建設Caretaker
 /// </summary>
 
 namespace Unreal.AssetResources
 {
-    public class SaveDataManager
+    public class SaveDataManager : IGameSystem
     {
+        private Caretaker m_Caretaker = null;
         private Role m_Role = null;
         private Story m_Story = null;
         private string m_SceneName = null;
-      
+
+        public override void Initialize()
+        {
+            m_Caretaker = new Caretaker();
+        }
+
+
+
+        public void LoadSaveData(int num)
+        {
+            SaveDataFile tmpSaveDataFile = m_Caretaker.GetSaveData(num);
+        }
+
+        public void SaveSaveDataToCaretaker(int num, SaveDataFile saveDataFile)
+        {
+            m_Caretaker.AddSaveData(num, saveDataFile);
+        }
 
         public SaveDataFile CreateSaveData()
         {
@@ -22,11 +40,6 @@ namespace Unreal.AssetResources
             //TODO:SetSaveData資料的處理
             newSaveData.SetSaveData();
             return newSaveData;
-        }
-
-        public void SetSaveData(SaveDataFile data)
-        {
-            //TODO:將各種存檔資料傳給Originator
         }
 
         public void SetRole(Role role)
@@ -43,6 +56,18 @@ namespace Unreal.AssetResources
         {
             m_SceneName = sceneName;
         }
+
+        public Role GetRole()
+        {
+            return m_Role;
+        }
+
+        public Story GetStory()
+        {
+            return m_Story;
+        }
+
+
     }
 
 }

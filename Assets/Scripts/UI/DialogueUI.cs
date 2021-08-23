@@ -35,7 +35,7 @@ namespace Unreal.UI
 
         }
 
-        public override void Release()
+        public override void Release() //TODO:之後要刪掉
         {
             //TODO:List的移除
             base.Release();

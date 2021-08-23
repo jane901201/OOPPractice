@@ -23,7 +23,7 @@ namespace Unreal
         private ProjectResources m_Resources = null;
         private static SceneController m_SceneController = null;
         private static SaveDataManager m_SaveDataManager = null;
-
+        private static Caretaker m_Caretaker = null;
 
         private ConverationData m_ConverationData = null;
 
@@ -32,6 +32,7 @@ namespace Unreal
             m_SceneController = new SceneController();
             m_Resources = new ProjectResources();
             m_SaveDataManager = new SaveDataManager();
+            //TODO:XMLÅª¨ú
 
         }
 
@@ -48,7 +49,6 @@ namespace Unreal
 
         public void Initinal()
         {
-            m_Resources = new ProjectResources();
             m_CharacterSystem = new CharacterSystem();
         }
 

@@ -15,11 +15,30 @@ namespace Unreal.BaseClass
         public delegate void Register();
         private Register InitializeFunc;
 
-        public Action initialize;
         public Action release;
         public Action gsUpdate;
 
-        public virtual void RegisterGameEvent(Register initialize)
+        public virtual void Initialize() //TODO:之後要刪掉
+        {
+
+        }
+
+        public virtual void Initialize(Action initialize) //TODO:跟IUserInterface有重複function，之後要改
+        {
+
+        }
+
+        public virtual void Update(Action update)
+        {
+
+        }
+
+        public virtual void Release(Action release)
+        {
+
+        }
+
+        public virtual void RegisterGameEvent(Register initialize) //TODO:之後要刪掉
         {
             this.InitializeFunc += initialize;
         }
