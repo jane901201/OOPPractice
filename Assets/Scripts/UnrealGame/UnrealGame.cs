@@ -15,13 +15,12 @@ namespace Unreal
 
         private void Start()
         {
-           
-            SetMainMenuScene();
-            //SetTempleScene();          
+            UnrealStart();       
         }
 
         private void Update()
         {
+            UnrealUpdate();
             SceneUpdate();
         }
     }

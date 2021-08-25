@@ -9,8 +9,17 @@ public class SceneController : IGameSystem
 {
     private static IScene m_Scene;
     private bool m_RunBegin = false;
+    private float m_Progress;
+    private Action m_GetLoadingUI;
     List<AsyncOperation> m_ScenesToLoad = new List<AsyncOperation>();
     AsyncOperation operation;
+
+
+    public override void Initialize()
+    {
+        base.Initialize();
+    }
+
 
     //TODO:要測試SetLoadingScene是不是真的能用，正確來說，用UnitTest測試
     public IEnumerator SetLoadingScene(IScene scene)
@@ -23,11 +32,11 @@ public class SceneController : IGameSystem
 
 
         operation = SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Single);
-        
+        //TODO:m_GetLoadingUI();
 
         while (operation.progress < 0.89)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+             m_Progress = Mathf.Clamp01(operation.progress / 0.9f);
             //TODO:把Loading的UI跟progress結合...在我除理掉LoadingUI的Bug後            
         }
 
@@ -50,6 +59,7 @@ public class SceneController : IGameSystem
             
             m_Scene.SceneBegin();
             m_RunBegin = true;
+            //TODO:有需要移除LoadingUI嗎?
         }
 
         if (m_Scene != null)
@@ -64,7 +74,17 @@ public class SceneController : IGameSystem
         return m_Scene.ToString();
     }
 
-    public override void SaveData()
+    public void SetLoadingUI(Action getLoadingUI)
+    {
+        m_GetLoadingUI = getLoadingUI;
+    }
+
+    public float GetCurrectProgress()
+    {
+        return m_Progress;
+    }
+
+    public override void SaveData() //TODO:可能要再看看SaveData的控制要不要放在SceneController，正確來說是不要啦，或要弄成Observer模式才對
     {
         base.SaveData();
     }

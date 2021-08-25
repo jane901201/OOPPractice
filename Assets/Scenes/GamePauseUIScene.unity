@@ -504,6 +504,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 870568450378095154, guid: 1e62d12f3e790d84cae7a5de160a5376, type: 3}
+      propertyPath: m_Text
+      value: "\u8A2D\u5B9A\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 870568450550570917, guid: 1e62d12f3e790d84cae7a5de160a5376, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

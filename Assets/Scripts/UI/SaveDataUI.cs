@@ -10,17 +10,32 @@ namespace Unreal.UI
     [AddComponentMenu("UnrealUI/SaveDataUI")]
     public class SaveDataUI : IUserInterface
     {
+        private GameObject tmpSaveDataBtnObj;
+
+        private Action m_GetLoadingUI;
+
+        private List<Button> m_SaveDataBtn;
+        private List<Text> m_SaveDataNumText;
+        private List<Text> m_ChapterText;
+        private List<Text> m_TimeTexts;
+        private List<Text> m_DifficultlyLevelTexts;
+
         Dictionary<Button, int> SaveDataNum = new Dictionary<Button, int>();
-        Action tmpAction;//TODO:僅用來測試
         private int m_ChooseNum = 0;
 
-        private void Start() //TODO:僅用來測試
+        public override void Initialize()
         {
-            SetAllSaveDataState(tmpAction);
+            m_DelegateInitialize();
         }
 
-        public void SetAllSaveDataState(Action SaveDataFile)
+        public void SetLoadingUI(Action loadingUI)
         {
+            m_GetLoadingUI = loadingUI;
+        }
+
+        public void SetAllSaveDataState(Action<int> LoadSaveDataFile)
+        {
+            //Text tmpText = m_TimeTexts[0];
             int dataNum = 11;
             for(int i = 0; i < dataNum; i++)
             {
@@ -36,12 +51,15 @@ namespace Unreal.UI
                         {
                             m_ChooseNum = SaveDataNum[tmpSaveDataBtn];
                             Debug.Log(m_ChooseNum);
-                            //TODO:SaveDataFile();
+                            LoadSaveDataFile(m_ChooseNum);
+                            m_GetLoadingUI();
                         }
                     }
                     );
 
-                List<GameObject> tmpSaveDataBtnChild = new List<GameObject>();
+                SetSaveDataBtnChild();
+
+               List<GameObject> tmpSaveDataBtnChild = new List<GameObject>();
 
                 /*TODO:之後要想比較好的方法...
                  * 順序
@@ -61,8 +79,13 @@ namespace Unreal.UI
                 Text tmpSaveDataNumText = tmpSaveDataBtnChild[0].GetComponent<Text>();
                 tmpSaveDataNumText.text = "存檔 " + i;
 
-
             }
+        }
+
+        private void SetSaveDataBtnChild()
+        {
+               
+
         }
     }
 }

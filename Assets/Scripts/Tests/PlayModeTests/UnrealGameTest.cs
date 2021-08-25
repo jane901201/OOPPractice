@@ -11,7 +11,7 @@ public class UnrealGameTest
     [SetUp]
     public void SetUp()
     {
-        m_UnrealGame = new UnrealGame();
+        m_UnrealGame = new UnrealGame(); //TODO:到時要研究一下Monobehavoir的測試辦法了
         m_UnrealGame.UnrealAwake();
     }
 

@@ -5,6 +5,7 @@ using Unreal.Character;
 using Unreal.Dialogue;
 using Unreal.BaseClass;
 using Unreal.AssetResources;
+using Unreal.UI;
 
 /// <summary>
 /// 1.UI控制
@@ -19,30 +20,38 @@ namespace Unreal
     {
         private CharacterSystem m_CharacterSystem = null;
         private DialogueSystem m_DialogueSystem = null;
-        private GameEventSystem m_GameEventSystem = null;
+        //TODO:private GameEventSystem m_GameEventSystem = null;
         private ProjectResources m_Resources = null;
         private static SceneController m_SceneController = null;
         private static SaveDataManager m_SaveDataManager = null;
-        private static Caretaker m_Caretaker = null;
-
-        private ConverationData m_ConverationData = null;
 
         public void UnrealAwake()
         {
             m_SceneController = new SceneController();
             m_Resources = new ProjectResources();
             m_SaveDataManager = new SaveDataManager();
-            //TODO:XML讀取
+            
+        }
+
+        public void UnrealStart()
+        {
+            SetSaveDataManagerDelegateInitialize();
+            SetMainMenuScene();
+            m_SaveDataManager.Initialize();
+        }
+
+        public void UnrealUpdate()
+        {
 
         }
 
-        public void GameStartInitinal() //最一開始要遊玩遊戲時要初始的東西
+        public void GameStart() //最一開始要遊玩遊戲時要初始的東西
         {
            
 
         }
 
-        public void GameContinueInitinal() //點繼續遊戲時要初始的東西
+        public void GameContinue() //點繼續遊戲時要初始的東西
         {
 
         }

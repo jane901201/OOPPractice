@@ -25,17 +25,17 @@ namespace Unreal.UI
         [SerializeField] private Button m_ButtonC;
         [SerializeField] private Button m_ButtonD;
 
-        public void Initinal() //TODO:暫時不繼承，等寫出來在繼承
+        public override void Initialize()
         {
-
+            base.Initialize();
         }
 
-        public void UIUpdate()
+        public override void UIUpdate()
         {
-
+            base.UIUpdate();
         }
 
-        public override void Release() //TODO:之後要刪掉
+        public override void Release()
         {
             //TODO:List的移除
             base.Release();
@@ -155,7 +155,7 @@ namespace Unreal.UI
             m_ButtonD.gameObject.SetActive(false);
         }
 
-        public void SetBtnAddListener(Action OnClickChoiceBtn)
+        public void SetBtnAddListener(Action OnClickChoiceBtn) //TODO:Delegate要設定的東西，之後要調整
         {
             OnClickChoiceBtn();
             ShowSentencesAndHideChoices();

@@ -27,6 +27,27 @@ namespace Unreal.AssetResources
         {
             //各種資料處理
         }
+
+        public void SetRole(Role role)
+        {
+            m_Role = role;
+        }
+
+
+        public Role GetRole()
+        {
+            return m_Role;
+        }
+
+        public void SetStory(Story story)
+        {
+            m_Story = story;
+        }
+
+        public Story GetStory()
+        {
+            return m_Story;
+        }
     }
 }
 

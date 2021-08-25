@@ -7,6 +7,8 @@ namespace Unreal.BaseClass
 {
     /// <summary>
     /// 遊戲系統主要會繼承的類別
+    /// TODO:未來可能有些東西會跟IGameSystem一起提出來
+    /// 一般會以Initialize等等類別做初始，有需要其他類別的話就用Delegate
     /// </summary>
 
     public abstract class IGameSystem //TODO:把IGameSystem改比較好的名字，改GameSystem會出事
@@ -15,25 +17,21 @@ namespace Unreal.BaseClass
         public delegate void Register();
         private Register InitializeFunc;
 
-        public Action release;
-        public Action gsUpdate;
+        public Action m_DelegateInitialize;
+        public Action m_DelegateGameSystemUpdate;
+        public Action m_DegegateRelease;
 
-        public virtual void Initialize() //TODO:之後要刪掉
+        public virtual void Initialize()
         {
 
         }
 
-        public virtual void Initialize(Action initialize) //TODO:跟IUserInterface有重複function，之後要改
+        public virtual void Update()
         {
 
         }
 
-        public virtual void Update(Action update)
-        {
-
-        }
-
-        public virtual void Release(Action release)
+        public virtual void Release()
         {
 
         }

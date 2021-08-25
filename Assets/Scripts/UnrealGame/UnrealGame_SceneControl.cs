@@ -38,6 +38,8 @@ namespace Unreal
                         delegate ()
                         {
                             GameObject tmpSaveDataObj = SetObjIntoGame(InstantiateSaveDataUI());
+                            SaveDataUI tmpSaveDataUI = SetSaveDataUIDelegateInitialize(tmpSaveDataObj);
+                            tmpSaveDataUI.Initialize();
                         }
 
                     );
@@ -100,7 +102,7 @@ namespace Unreal
                 });
 
 
-                m_DialogueSystem.gsUpdate = delegate ()
+                m_DialogueSystem.m_DelegateGameSystemUpdate = delegate ()
                 {
 
                     m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState); //TODO:要設定在Initinal才比較好
@@ -129,7 +131,7 @@ namespace Unreal
 
             tmpTempleScene.SceneUpdate = delegate
             {
-                m_DialogueSystem.gsUpdate();
+                m_DialogueSystem.m_DelegateGameSystemUpdate();
             };
 
             tmpTempleScene.SceneEnd = delegate

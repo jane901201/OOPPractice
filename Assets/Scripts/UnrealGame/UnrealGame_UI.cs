@@ -11,25 +11,28 @@ namespace Unreal
     /// 設置UI的路徑
     /// 設置UI的功能?
     /// TODO:可能之後這裡會獨立出來，專門產生Instantiate物件
+    /// TODO:UI跟UIInterfaceFactory的分工之後要認真想
     /// </summary>
     public partial class UnrealGame
     {
-        private GameObject m_UI = null;
-        private GameObject m_MainMenuUI = null;
-        private GameObject m_DialogueUI = null;
-        private GameObject m_SaveDataUI = null;
-        private GameObject m_GamePauseUI = null;
-        private GameObject m_LoadingScreenUI = null;
+        private GameObject m_MainMenuUIObj = null;
+        private GameObject m_DialogueUIObj = null;
+        private GameObject m_SaveDataUIObj = null;
+        private GameObject m_GamePauseUIObj = null;
+        private GameObject m_LoadingScreenUIObj = null;
+        private GameObject m_DataCheckInfoUIObj = null;
+
+        private SaveDataUI m_SaveDataUI = null;
 
 
         public void LoadMainMenuUI()
         {
-            m_MainMenuUI = m_Resources.LoadUI("MainMenuUI"); 
+            m_MainMenuUIObj = m_Resources.LoadUI("MainMenuUI"); 
         }
 
         public GameObject GetMainMenuUI()
         {
-            return m_MainMenuUI;
+            return m_MainMenuUIObj;
         }
 
         public GameObject InstantiateMainMenuUI()
@@ -42,12 +45,12 @@ namespace Unreal
 
         public void LoadDialogueUI()
         {
-            m_DialogueUI = m_Resources.LoadUI("DialogueUI"); 
+            m_DialogueUIObj = m_Resources.LoadUI("DialogueUI"); 
         }
 
         public GameObject GetDialogueUI()
         {
-            return m_DialogueUI;
+            return m_DialogueUIObj;
         }
 
         public GameObject InstantiateDialogeUI() //之後要改
@@ -62,12 +65,12 @@ namespace Unreal
 
         public void LoadSaveDataUI()
         {
-            m_SaveDataUI = m_Resources.LoadUI("SaveDataUI");
+            m_SaveDataUIObj = m_Resources.LoadUI("SaveDataUI");
         }
 
         public GameObject GetSaveDataUI()
         {
-            return m_SaveDataUI;
+            return m_SaveDataUIObj;
         }
 
         public GameObject InstantiateSaveDataUI() //之後要改
@@ -81,21 +84,62 @@ namespace Unreal
 
         public void LoadGamePauseUI()
         {
-            m_GamePauseUI = m_Resources.LoadUI("GamePauseUI"); 
+            m_GamePauseUIObj = m_Resources.LoadUI("GamePauseUI"); 
         }
 
         public GameObject GetGamePauseUI()
         {
-            return m_GamePauseUI;
+            return m_GamePauseUIObj;
         }   
         public void LoadLoadingUI()
         {
-            m_LoadingScreenUI = m_Resources.LoadUI("LoadingUI");
+            m_LoadingScreenUIObj = m_Resources.LoadUI("LoadingUI");
         }
 
-        public GameObject GetLoadingScreenUI()
+        public GameObject GetLoadingScreenUI() //TODO:名子晚點改
         {
-            return m_LoadingScreenUI;
+            return m_LoadingScreenUIObj;
+        }
+
+        public GameObject InstantiateLoadingUI()
+        {
+            LoadLoadingUI();
+            GameObject tmpUI = Instantiate(GetLoadingScreenUI(), Vector3.zero, Quaternion.identity);
+
+            return tmpUI;
+        }
+
+        private void CreateLoadingUI() //TODO:測試一下這樣能不能成功創造物件
+        {
+            GameObject tmpLoadingUIObj = SetObjIntoGame(InstantiateLoadingUI());
+            DataCheckInfoUI tmpLoadingUI = tmpLoadingUIObj.GetComponent<DataCheckInfoUI>();
+            tmpLoadingUI.Initialize();
+        }
+
+        public void LoadDataCheckInfoUI()
+        {
+            m_DataCheckInfoUIObj = m_Resources.LoadUI("DataCheckInfoUI");
+        }
+
+        public GameObject GetDataCheckInfoUI()
+        {
+            return m_DataCheckInfoUIObj;
+        }
+
+        public GameObject InstantiateDataCheckInfoUI() //TODO:之後要改
+        {
+            LoadDataCheckInfoUI();
+            GameObject tmpUI = Instantiate(GetDataCheckInfoUI(), Vector3.zero, Quaternion.identity);
+
+            return tmpUI;
+        }
+
+        private void CreateDataCheckInfoUI() //TODO:測試一下這樣能不能成功創造物件
+        {
+            GameObject tmpDataCheckInfoUIObj = SetObjIntoGame(InstantiateDataCheckInfoUI());
+            DataCheckInfoUI tmpDataCheckInfoUI = tmpDataCheckInfoUIObj.GetComponent<DataCheckInfoUI>();
+            tmpDataCheckInfoUI.Initialize();
+
         }
 
         private Transform GetCanvasTransform()

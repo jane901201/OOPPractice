@@ -12,6 +12,7 @@ namespace Unreal.AssetResources
 {
     public class SaveDataManager : IGameSystem
     {
+        private IResources m_Resources = null;
         private Caretaker m_Caretaker = null;
         private Role m_Role = null;
         private Story m_Story = null;
@@ -20,6 +21,9 @@ namespace Unreal.AssetResources
         public override void Initialize()
         {
             m_Caretaker = new Caretaker();
+            m_DelegateInitialize();
+            LoadSaveDataFileInXML();
+
         }
 
 
@@ -27,11 +31,25 @@ namespace Unreal.AssetResources
         public void LoadSaveData(int num)
         {
             SaveDataFile tmpSaveDataFile = m_Caretaker.GetSaveData(num);
+            Debug.Log(tmpSaveDataFile);
+
+            //TODO:將檔案回復之類的
         }
 
         public void SaveSaveDataToCaretaker(int num, SaveDataFile saveDataFile)
         {
             m_Caretaker.AddSaveData(num, saveDataFile);
+        }
+
+        public void LoadSaveDataFileInXML()
+        {
+            m_Caretaker.SetResource(m_Resources);
+            m_Caretaker.SetSaveData();
+        }
+
+        public SaveDataFileDataBase GetSaveDataFileDataBase()
+        {
+            return m_Caretaker.GetSaveDataFileDataBase();
         }
 
         public SaveDataFile CreateSaveData()
@@ -40,6 +58,11 @@ namespace Unreal.AssetResources
             //TODO:SetSaveData資料的處理
             newSaveData.SetSaveData();
             return newSaveData;
+        }
+
+        public void SetResources(IResources resources)
+        {
+            m_Resources = resources;
         }
 
         public void SetRole(Role role)

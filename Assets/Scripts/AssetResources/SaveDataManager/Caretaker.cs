@@ -7,8 +7,8 @@ namespace Unreal.AssetResources
     public class Caretaker
     {
 
-        private IResources m_Resources;
-        private SaveDataFileDataBase m_SaveDataFileDataBase;
+        private IResources m_Resources = null;
+        private SaveDataFileDataBase m_SaveDataFileDataBase = null;
 
         private Dictionary<int, SaveDataFile> m_SaveDatas = new Dictionary<int, SaveDataFile>();
 

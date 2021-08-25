@@ -3,24 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI類別的繼承
+/// TODO:未來可能有些東西會跟IGameSystem一起提出來
+/// 一般會以Initialize等等類別做初始，有需要其他類別的話就用Delegate
+/// </summary>
 public abstract class IUserInterface : MonoBehaviour
 {
 
+    public Action m_DelegateInitialize;
+    public Action m_DelegateUpdate;
+    public Action m_DegegateRelease;
+
     private bool active = true;
 
-    public virtual void Initialize(Action initialize)
+    public virtual void Initialize()
     {
-        initialize();
+
     }
 
-    public virtual void UIUpdate(Action update)
+    public virtual void UIUpdate()
     {
-        update();
+
     }
 
-    public virtual void Release(Action release)
+    public virtual void Release()
     {
-        release();
+        Destroy(gameObject); //TODO:直接消除會有BUG，要用List
     }
 
     public bool IsVisible()
@@ -40,9 +49,6 @@ public abstract class IUserInterface : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public virtual void Release()
-    {
-        Destroy(gameObject); //TODO:直接消除會有BUG，要用List
-    }
+ 
 
 }
