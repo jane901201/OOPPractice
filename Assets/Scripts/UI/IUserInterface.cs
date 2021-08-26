@@ -7,6 +7,7 @@ using UnityEngine;
 /// UI類別的繼承
 /// TODO:未來可能有些東西會跟IGameSystem一起提出來
 /// 一般會以Initialize等等類別做初始，有需要其他類別的話就用Delegate
+/// TODO:未來Initialize要強制override
 /// </summary>
 public abstract class IUserInterface : MonoBehaviour
 {

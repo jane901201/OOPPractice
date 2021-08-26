@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,9 @@ namespace Unreal.AssetResources
         private Story m_Story = null;
         private string m_SceneName = null;
 
+        private Action m_GetSaveDataIsNotFoundAlert;
+        private Action m_GetWantToLoadDavaAlert;
+
         public override void Initialize()
         {
             m_Caretaker = new Caretaker();
@@ -28,12 +32,21 @@ namespace Unreal.AssetResources
 
 
 
+
         public void LoadSaveData(int num)
         {
             SaveDataFile tmpSaveDataFile = m_Caretaker.GetSaveData(num);
+            if(tmpSaveDataFile != null)
+            {            
+                //TODO:將檔案回復之類的
+            }
+            else
+            {
+                //TODO:先呼叫確認UI，告訴玩家此沒檔案
+            }
+
             Debug.Log(tmpSaveDataFile);
 
-            //TODO:將檔案回復之類的
         }
 
         public void SaveSaveDataToCaretaker(int num, SaveDataFile saveDataFile)

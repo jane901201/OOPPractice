@@ -29,6 +29,22 @@ namespace Unreal.UI
             m_DataChekcInfoUIObj.SetActive(false);
         }
 
+        public void ShowSaveDataIsNotFoundAlert()
+        {
+            m_AlertText.text = "還沒有存檔";
+        }
+
+        public void ShowWantToLoadDavaAlert()
+        {
+            m_AlertText.text = "是否要讀取這個檔案?";
+        }
+
+        public bool IsCheck()
+        {
+            Debug.Log(m_IsAnswer);
+            return m_IsAnswer;
+        } 
+
         private void SetYesBtn()
         {
             m_YesButton.onClick.AddListener(() => m_IsAnswer = true);
@@ -39,11 +55,8 @@ namespace Unreal.UI
             m_NoButton.onClick.AddListener(() => m_IsAnswer = false);
         }
 
-        public bool IsCheck()
-        {
-            Debug.Log(m_IsAnswer);
-            return m_IsAnswer;
-        } 
+      
+
 
 
     }

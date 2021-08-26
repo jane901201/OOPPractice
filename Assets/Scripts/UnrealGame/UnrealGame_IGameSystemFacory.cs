@@ -25,11 +25,23 @@ namespace Unreal
             }
         }
 
+        public void UpdateGameSystem() //TODO:未來為主要的Update
+        {
+            if(m_GameSystems.Count > 0)
+            {
+                for(int i = 0; i < m_GameSystems.Count; i++)
+                {
+                    m_GameSystems[i].Update();
+                }
+            }
+        }
+
         public void SetSaveDataManagerDelegateInitialize()
         {
             m_SaveDataManager.m_DelegateInitialize = delegate ()
             {
                 m_SaveDataManager.SetResources(m_Resources);
+
             };
         }
 

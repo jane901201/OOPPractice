@@ -12,9 +12,7 @@ namespace Unreal.UI
         [SerializeField] private Slider slider;
         [SerializeField] private Text progressText;
 
-        public GameObject LoadingScreen { get => loadingScreen; set => loadingScreen = value; }
-        public Slider Slider { get => slider; set => slider = value; }
-        public Text ProgressText { get => progressText; set => progressText = value; }
+
     }
 }
 

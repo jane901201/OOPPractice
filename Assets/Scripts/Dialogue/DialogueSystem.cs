@@ -32,7 +32,7 @@ namespace Unreal.Dialogue
         private bool m_IsOnClick = false;
         private bool m_StoryEnd = false;
 
-        public void Initialize()
+        public override void Initialize()
         {
             m_Story = new Story(m_InkAsset.text);
             m_StoryEnd = false;
@@ -52,10 +52,10 @@ namespace Unreal.Dialogue
                 sentence.Trim();
                 SplitSentenceAndSetSentenceandName(sentence);
             }
-            else if (m_Story.currentChoices.Count > 0) //TODO:能不能讓UI的設定跟DialogueSystem不要那麼緊合?
+            else if (m_Story.currentChoices.Count > 0)
             {
 
-
+                //TODO:產生出比較不會出事情的Btn系統
                 for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
                 {
                     Choice choice = m_Story.currentChoices[buttonNum];

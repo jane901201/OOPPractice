@@ -12,6 +12,7 @@ namespace Unreal
     /// 設置UI的功能?
     /// TODO:可能之後這裡會獨立出來，專門產生Instantiate物件
     /// TODO:UI跟UIInterfaceFactory的分工之後要認真想
+    /// TODO:重複的程式碼是真的多到爆炸了，要好好研究Factory的做法了
     /// </summary>
     public partial class UnrealGame
     {
@@ -21,9 +22,11 @@ namespace Unreal
         private GameObject m_GamePauseUIObj = null;
         private GameObject m_LoadingScreenUIObj = null;
         private GameObject m_DataCheckInfoUIObj = null;
+        private GameObject m_FightUIObj = null;
 
         private SaveDataUI m_SaveDataUI = null;
-
+        private GamePauseUI m_GamePauseUI = null;
+        private FightUI m_FightUI = null;
 
         public void LoadMainMenuUI()
         {
@@ -41,6 +44,15 @@ namespace Unreal
             GameObject tmpMainMenuUI = Instantiate(GetMainMenuUI(), Vector3.zero, Quaternion.identity);
 
             return tmpMainMenuUI;
+        }
+
+        private void CreateMainMenuUI()
+        {
+            GameObject tmpMainMenuUIObj = SetObjIntoGame(InstantiateMainMenuUI());
+            MainMenuUI tmpMainMenuUI = tmpMainMenuUIObj.GetComponent<MainMenuUI>();
+            tmpMainMenuUI.Initialize();
+            AddUI(tmpMainMenuUI);
+
         }
 
         public void LoadDialogueUI()
@@ -73,14 +85,27 @@ namespace Unreal
             return m_SaveDataUIObj;
         }
 
-        public GameObject InstantiateSaveDataUI() //之後要改
+        public GameObject InstantiateSaveDataUI()
         {
             LoadSaveDataUI();
-            GameObject tmpUI = Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
+            GameObject tmpSaveDataUI = Instantiate(GetSaveDataUI(), Vector3.zero, Quaternion.identity);
 
-            return tmpUI;
+            return tmpSaveDataUI;
         }
 
+        private void CreateSaveDataUI()
+        {
+            GameObject tmpSaveDataUIObj = SetObjIntoGame(InstantiateSaveDataUI());
+            m_SaveDataUI = tmpSaveDataUIObj.GetComponent<SaveDataUI>();
+            AddUI(m_SaveDataUI);
+        }
+
+
+        private void CreateAndInitinalSaveDataUI()
+        {
+            CreateSaveDataUI();
+            SetSaveDataUIDelegateInitialize();
+        }
 
         public void LoadGamePauseUI()
         {
@@ -90,7 +115,29 @@ namespace Unreal
         public GameObject GetGamePauseUI()
         {
             return m_GamePauseUIObj;
-        }   
+        }
+
+        public GameObject InstantiateGamePauseUI()
+        {
+            LoadGamePauseUI();
+            GameObject tmpGamePauseUI = Instantiate(GetGamePauseUI(), Vector3.zero, Quaternion.identity);
+
+            return tmpGamePauseUI;
+        }
+
+        private void CreateGamePauseUI() //TODO:Create負責的事情是否太多?
+        {
+            GameObject tmpGamePauseUIObj = SetObjIntoGame(InstantiateGamePauseUI());
+            m_GamePauseUI = tmpGamePauseUIObj.GetComponent<GamePauseUI>();
+            AddUI(m_GamePauseUI);
+        }
+
+        private void CreateAndInitinalGamePauseUI() //TODO:要想更好的辦法處理Create和Initinal
+        {
+            CreateGamePauseUI();
+            SetGamePauseUIDelegateInitialize();
+        }
+
         public void LoadLoadingUI()
         {
             m_LoadingScreenUIObj = m_Resources.LoadUI("LoadingUI");
@@ -114,6 +161,7 @@ namespace Unreal
             GameObject tmpLoadingUIObj = SetObjIntoGame(InstantiateLoadingUI());
             DataCheckInfoUI tmpLoadingUI = tmpLoadingUIObj.GetComponent<DataCheckInfoUI>();
             tmpLoadingUI.Initialize();
+            AddUI(tmpLoadingUI);
         }
 
         public void LoadDataCheckInfoUI()
@@ -134,12 +182,44 @@ namespace Unreal
             return tmpUI;
         }
 
-        private void CreateDataCheckInfoUI() //TODO:測試一下這樣能不能成功創造物件
+        private void CreateDataCheckInfoUI()
         {
             GameObject tmpDataCheckInfoUIObj = SetObjIntoGame(InstantiateDataCheckInfoUI());
             DataCheckInfoUI tmpDataCheckInfoUI = tmpDataCheckInfoUIObj.GetComponent<DataCheckInfoUI>();
             tmpDataCheckInfoUI.Initialize();
+            AddUI(tmpDataCheckInfoUI);
 
+        }
+
+        public void LoadFightUI()
+        {
+            m_FightUIObj = m_Resources.LoadUI("FightUI");
+        }
+
+        public GameObject GetFightUI() //TODO:名子晚點改
+        {
+            return m_FightUIObj;
+        }
+
+        public GameObject InstantiateFightUI()
+        {
+            LoadFightUI();
+            GameObject tmpUI = Instantiate(GetFightUI(), Vector3.zero, Quaternion.identity);
+
+            return tmpUI;
+        }
+
+        private void CreateFightUI()
+        {
+            GameObject tmpFightUIObj = SetObjIntoGame(InstantiateFightUI());
+            m_FightUI = tmpFightUIObj.GetComponent<FightUI>();
+            AddUI(m_FightUI);
+        }
+
+        private void CreateAndInitinalFightUI()
+        {
+            CreateFightUI();
+            SetFightUIDelegateInitialize();
         }
 
         private Transform GetCanvasTransform()
