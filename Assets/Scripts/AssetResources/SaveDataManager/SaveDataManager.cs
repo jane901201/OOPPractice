@@ -17,10 +17,13 @@ namespace Unreal.AssetResources
         private Caretaker m_Caretaker = null;
         private Role m_Role = null;
         private Story m_Story = null;
-        private string m_SceneName = null;
+        private Scene m_Scene = null;
 
+        private Action m_ShowDataCheckInfoUI;
+        private Action m_HideDataCheckInfoUI;
         private Action m_GetSaveDataIsNotFoundAlert;
         private Action m_GetWantToLoadDavaAlert;
+        private Func<bool> m_GetIsCheck;
 
         public override void Initialize()
         {
@@ -29,24 +32,67 @@ namespace Unreal.AssetResources
             LoadSaveDataFileInXML();
 
         }
+        
+        public override void Update()
+        {
+            //TODO:如果達成條件，就建造場景
+        }
 
 
 
+        public void SetSaveDataIsNotFoundAlert(Action alert)
+        {
+            m_GetSaveDataIsNotFoundAlert = alert;
+        }
+
+        public void SetWantToLoadDavaAlert(Action alert)
+        {
+            m_GetWantToLoadDavaAlert = alert;
+        }
+
+        public void SetShowDataCheckInfoUI(Action action)
+        {
+            m_ShowDataCheckInfoUI = action;
+        }
+
+        public void SetHideDataCheckInfoUI(Action action)
+        {
+            m_HideDataCheckInfoUI = action;
+        }
+
+        public void SetIsCheck(Func<bool> func)
+        {
+            m_GetIsCheck = func;
+        }
 
         public void LoadSaveData(int num)
         {
-            SaveDataFile tmpSaveDataFile = m_Caretaker.GetSaveData(num);
-            if(tmpSaveDataFile != null)
-            {            
+            m_ShowDataCheckInfoUI();
+            if(m_Caretaker.GetSaveData(num) != null)
+            {
                 //TODO:將檔案回復之類的
+                SaveDataFile tmpSaveDataFile = m_Caretaker.GetSaveData(num);
+                m_GetWantToLoadDavaAlert();
             }
             else
             {
-                //TODO:先呼叫確認UI，告訴玩家此沒檔案
+                
+                m_GetSaveDataIsNotFoundAlert();
             }
+        }
 
-            Debug.Log(tmpSaveDataFile);
+        public void StartGame()
+        {
+            //TODO:設定最一開始遊戲時，每個物件的數據
+            m_Scene.SceneName = "";
+            m_Story.Chapter = 0;
+            m_Story.Conversation = 0;
+            //TODO:m_Role設定
+        }
 
+        public void Recover()
+        {
+            //TODO:回復之前的場景跟數據
         }
 
         public void SaveSaveDataToCaretaker(int num, SaveDataFile saveDataFile)
@@ -88,10 +134,11 @@ namespace Unreal.AssetResources
             m_Story = story;
         }
 
-        public void SetSceneName(string sceneName)
+        public void SetScene(Scene scene)
         {
-            m_SceneName = sceneName;
+            m_Scene = scene;
         }
+
 
         public Role GetRole()
         {
@@ -103,7 +150,10 @@ namespace Unreal.AssetResources
             return m_Story;
         }
 
-
+        public Scene GetScene()
+        {
+            return m_Scene;
+        }
     }
 
 }

@@ -17,6 +17,22 @@ namespace Unreal.UI
             
         }
 
+        public void StartGameBtn()
+        {
+
+        }
+
+        public void ContinueGameBtn()
+        {
+
+        }
+
+        public void LeaveGameBtn()
+        {
+
+        }
+
+
         public Button BeginBtn { get => m_BeginBtn; set => m_BeginBtn = value; }
         public Button ContinureBtn { get => m_ContinureBtn; set => m_ContinureBtn = value; }
         public Button LeaveBtn { get => m_LeaveBtn; set => m_LeaveBtn = value; }

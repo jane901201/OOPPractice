@@ -39,6 +39,9 @@ namespace Unreal
                         delegate ()
                         {
                             CreateAndInitinalSaveDataUI();
+                            CreateAndInitalizeDataCheckInfoUI();
+                            m_DataCheckInfoUI.HideDataCheckInfoUI();
+                            SetSaveDataManagerDelegateInitialize();
                         }
 
                     );
@@ -81,7 +84,7 @@ namespace Unreal
                 tmpDialogueUI.ShowSentencePanel();
                 tmpDialogueUI.HideChoicePanel();
 
-                m_DialogueSystem.SetStoryTextAsset(m_Resources.LoadConverationTextAssetInk(table, reference));
+                m_DialogueSystem.SetStoryTextAsset(m_Resources.LoadConverationTextAssetInk(table, reference)); //TODO:重點段落，設置存檔的點
 
                 m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState); //TODO:要設定在Initinal才比較好
                 m_DialogueSystem.m_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);

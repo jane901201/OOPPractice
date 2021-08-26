@@ -12,7 +12,6 @@ namespace Unreal
         public void SaveSceneName()
         {
             string name = m_SceneController.GetCurrectSceneName();
-            m_SaveDataManager.SetSceneName(name);
         }
 
         public void LoadSaveData(int num)

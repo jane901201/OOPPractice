@@ -13,6 +13,8 @@ namespace Unreal.UI
         private GameObject tmpSaveDataBtnObj;
 
         private Action m_GetLoadingUI;
+        private Action m_GetDataCheckInfoUI;
+        private Func<bool> m_GetIsCheck;
 
         private List<Button> m_SaveDataBtn;
         private List<Text> m_SaveDataNumText;
@@ -33,6 +35,13 @@ namespace Unreal.UI
             m_GetLoadingUI = loadingUI;
         }
 
+        public void SetDataCheckInfoUI(Action dataCheckInfoUI)
+        {
+            m_GetDataCheckInfoUI = dataCheckInfoUI;
+        }
+
+
+
         public void SetAllSaveDataState(Action<int> LoadSaveDataFile)
         {
             //Text tmpText = m_TimeTexts[0];
@@ -47,12 +56,12 @@ namespace Unreal.UI
                     delegate()
                     {
                         GameObject tmp = tmpSaveDataBtn.GetComponentInParent<Transform>().gameObject;
-                        if(SaveDataNum.ContainsKey(tmpSaveDataBtn))
+                        if(SaveDataNum.ContainsKey(tmpSaveDataBtn)) //除了要有Btn還要有檔案還要獲得確認
                         {
                             m_ChooseNum = SaveDataNum[tmpSaveDataBtn];
                             Debug.Log(m_ChooseNum);
                             LoadSaveDataFile(m_ChooseNum);
-                            m_GetLoadingUI();
+                            //m_GetLoadingUI();
                         }
                     }
                     );

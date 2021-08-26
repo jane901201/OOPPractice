@@ -151,6 +151,44 @@
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "793150a6-efbd-4f95-8fa1-b8ddd8211edf",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "5811bbdc-8c02-4ceb-bee7-d13a1ee2e42f",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "145bd46f-ecd5-4099-888b-90fa445e2949",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "77726e35-775e-4d46-b9a4-c4d6e4dbe8e7",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

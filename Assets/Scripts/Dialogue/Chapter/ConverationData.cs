@@ -9,7 +9,7 @@ namespace Unreal.Dialogue
         private int currectChapter;
         private string converationName;
 
-        public ConverationData()
+        public ConverationData() //TODO:之後要把Initinal拿出來
         {
             Initinal();
         }
@@ -23,7 +23,7 @@ namespace Unreal.Dialogue
             converation[0] = new string[]
             {
                 "Begin",
-                ""
+                "Accident"
             };
             converation[1] = new string[]
             {

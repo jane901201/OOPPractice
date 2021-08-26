@@ -41,8 +41,13 @@ namespace Unreal
             m_SaveDataManager.m_DelegateInitialize = delegate ()
             {
                 m_SaveDataManager.SetResources(m_Resources);
-
+                m_SaveDataManager.SetShowDataCheckInfoUI(m_DataCheckInfoUI.ShowDataCheckInfoUI);
+                m_SaveDataManager.SetHideDataCheckInfoUI(m_DataCheckInfoUI.HideDataCheckInfoUI);
+                //m_SaveDataManager.SetIsCheck(m_DataCheckInfoUI.IsCheck);
+                m_SaveDataManager.SetSaveDataIsNotFoundAlert(m_DataCheckInfoUI.ShowSaveDataIsNotFoundAlert);
+                m_SaveDataManager.SetWantToLoadDavaAlert(m_DataCheckInfoUI.ShowWantToLoadDavaAlert);
             };
+            m_SaveDataManager.Initialize();
         }
 
         public void SetSceneControllerDelegateInitialize()

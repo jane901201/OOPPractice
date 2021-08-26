@@ -35,9 +35,9 @@ namespace Unreal
 
         public void UnrealStart()
         {
-            SetSaveDataManagerDelegateInitialize();
+            //SetSaveDataManagerDelegateInitialize(); //TODO:因為在這裡的時候DataCheckInfoUI還不存在，所以DelegateInitialize()出事了
             SetMainMenuScene();
-            m_SaveDataManager.Initialize();
+
         }
 
         public void UnrealUpdate()

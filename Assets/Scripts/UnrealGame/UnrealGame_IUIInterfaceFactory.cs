@@ -36,25 +36,9 @@ namespace Unreal
             }
         }
 
-        public SaveDataUI SetSaveDataUIDelegateInitialize(GameObject saveDataUIObj)
+        public void SetMainMenuUIDelegateInitialize()
         {
-            /*TODO:之後要想比較好的方法...
-             * 順序
-             * SaveDataNumText
-             * ChapterText
-             * PartText
-             * PlayerNameText
-             * TimeText
-             * DifficultlyText
-             */
-            m_SaveDataUI = saveDataUIObj.GetComponent<SaveDataUI>();
-            m_SaveDataUI.m_DelegateInitialize = delegate ()
-            {
-                m_SaveDataUI.SetAllSaveDataState(LoadSaveData);
-                m_SaveDataUI.SetLoadingUI(CreateDataCheckInfoUI);
-            };
 
-            return m_SaveDataUI;
         }
 
         public void SetSaveDataUIDelegateInitialize()
@@ -62,7 +46,9 @@ namespace Unreal
             m_SaveDataUI.m_DelegateInitialize = delegate ()
             {
                 m_SaveDataUI.SetAllSaveDataState(LoadSaveData);
-                m_SaveDataUI.SetLoadingUI(CreateDataCheckInfoUI);
+                //TODO:m_SaveDataUI.SetLoadingUI(CreateLoadingUI);
+                //TODO:m_SaveDataUI.SetDataCheckInfoUI(CreateDataCheckInfoUI);
+
             };
             m_SaveDataUI.Initialize();
         }
@@ -83,6 +69,15 @@ namespace Unreal
                 m_GamePauseUI.SetSaveDataUI(CreateAndInitinalSaveDataUI);
             };
             m_GamePauseUI.Initialize();
+        }
+
+        public void SetDataCheckInfoUIDelegateInitialize()
+        {
+            m_DataCheckInfoUI.m_DelegateInitialize = delegate ()
+            {
+                
+            };
+            m_DataCheckInfoUI.Initialize();
         }
     }
 }

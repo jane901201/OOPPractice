@@ -16,6 +16,7 @@ namespace Unreal
     /// </summary>
     public partial class UnrealGame
     {
+        //TODO:要用掉所有UI的Field的Obj
         private GameObject m_MainMenuUIObj = null;
         private GameObject m_DialogueUIObj = null;
         private GameObject m_SaveDataUIObj = null;
@@ -24,9 +25,11 @@ namespace Unreal
         private GameObject m_DataCheckInfoUIObj = null;
         private GameObject m_FightUIObj = null;
 
+        private MainMenuUI m_MainMenuUI = null;
         private SaveDataUI m_SaveDataUI = null;
         private GamePauseUI m_GamePauseUI = null;
         private FightUI m_FightUI = null;
+        private DataCheckInfoUI m_DataCheckInfoUI = null;
 
         public void LoadMainMenuUI()
         {
@@ -174,7 +177,7 @@ namespace Unreal
             return m_DataCheckInfoUIObj;
         }
 
-        public GameObject InstantiateDataCheckInfoUI() //TODO:之後要改
+        public GameObject InstantiateDataCheckInfoUI()
         {
             LoadDataCheckInfoUI();
             GameObject tmpUI = Instantiate(GetDataCheckInfoUI(), Vector3.zero, Quaternion.identity);
@@ -185,10 +188,15 @@ namespace Unreal
         private void CreateDataCheckInfoUI()
         {
             GameObject tmpDataCheckInfoUIObj = SetObjIntoGame(InstantiateDataCheckInfoUI());
-            DataCheckInfoUI tmpDataCheckInfoUI = tmpDataCheckInfoUIObj.GetComponent<DataCheckInfoUI>();
-            tmpDataCheckInfoUI.Initialize();
-            AddUI(tmpDataCheckInfoUI);
+            m_DataCheckInfoUI = tmpDataCheckInfoUIObj.GetComponent<DataCheckInfoUI>();
+            AddUI(m_DataCheckInfoUI);
 
+        }
+
+        private void CreateAndInitalizeDataCheckInfoUI()
+        {
+            CreateDataCheckInfoUI();
+            
         }
 
         public void LoadFightUI()
