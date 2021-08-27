@@ -49,58 +49,16 @@ namespace Unreal
             TempleScene tmpTempleScene = new TempleScene(m_SceneController);
             m_DialogueSystem = new DialogueSystem();
 
-            int table = 0;
-            int reference = 0;
-
-
             tmpTempleScene.SceneBegin = delegate ()
             {
-                GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateDialogeUI());
-                DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
-                AddUI(tmpDialogueUI);
-                tmpDialogueUI.ShowSentencePanel();
-                tmpDialogueUI.HideChoicePanel();
-
-                m_DialogueSystem.SetStoryTextAsset(m_Resources.LoadConverationTextAssetInk(table, reference)); //TODO:重點段落，設置存檔的點
-
-                m_DialogueSystem.m_MustBeRemove_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState); //TODO:要設定在Initinal才比較好
-                m_DialogueSystem.m_MustBeRemove_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
-                m_DialogueSystem.m_MustBeRemove_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
-                //TODO:m_DialogueSystem.m_SetAvater = new DialogueSystem.SetAvatar(tmpDialogueUI.SetAvatar);
-
-                m_DialogueSystem.m_MustBeRemove_SetChoicePanel = delegate ()
-                {
-
-                };
-
-                tmpDialogueUI.ContinueButton.onClick.AddListener(delegate
-                {
-                    m_DialogueSystem.RefreshView();
-                });
-
-
-                m_DialogueSystem.m_DelegateGameSystemUpdate = delegate () //TODO:m_DelegateGameSystemUpdate會拋出意外NullReferenceException
-                {
-                    if(m_UIs.Contains(tmpDialogueUI)) //TODO:之後要改成陣列
-                    {
-                        if (m_DialogueSystem.IsStoryEnd()) //TODO:IsStoryEnd的判斷要做在m_DialogueSystem裡面
-                        {
-                            RemoveUI(tmpDialogueUI);
-                            tmpDialogueUI.Release();
-                            CreateAndInitinalFightUI();
-
-                        }
-                    }
-                   
-                };
-
-                m_DialogueSystem.Initialize();
-
+                CreateAndInitinalDialogueUI();
+                SetDialgoueSystemDelegateInitialize();
+                SetDialogueSystemDelegateUpdate();
             };
 
             tmpTempleScene.SceneUpdate = delegate
             {
-                m_DialogueSystem.m_DelegateGameSystemUpdate();
+                m_DialogueSystem.Update();
             };
 
             tmpTempleScene.SceneEnd = delegate

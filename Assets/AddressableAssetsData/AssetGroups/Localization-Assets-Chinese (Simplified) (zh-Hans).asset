@@ -40,6 +40,13 @@ MonoBehaviour:
     - Locale-zh-Hans
     - Locale-zh-TW
     - Locale-en
+  - m_GUID: 83c3b84976abd5b46b6887468623069d
+    m_Address: Mako Mankanshoku
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    - Locale-zh-TW
+    - Locale-en
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 67e366ad19bd7c04caca723f72817947, type: 2}
   m_SchemaSet:

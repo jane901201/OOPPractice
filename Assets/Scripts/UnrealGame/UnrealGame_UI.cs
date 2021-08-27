@@ -76,7 +76,7 @@ namespace Unreal
             return m_DialogueUIObj;
         }
 
-        public GameObject InstantiateDialogeUI() //TODO:之後要讓每個Instinate不依賴field variable
+        public GameObject InstantiateDialogueUI() //TODO:之後要讓每個Instinate不依賴field variable
         {
             LoadDialogueUI();
             GameObject tmpDialogueUI = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity);
@@ -86,9 +86,15 @@ namespace Unreal
 
         private void CreateDialgoueUI()
         {
-            GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateMainMenuUI());
+            GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateDialogueUI());
             m_DialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
             AddUI(m_DialogueUI);
+        }
+
+        private void CreateAndInitinalDialogueUI()
+        {
+            CreateDialgoueUI();
+            SetDialogueUIDelegatInitialize();
         }
 
         public void LoadSaveDataUI()

@@ -44,7 +44,6 @@ namespace Unreal
                 m_SaveDataManager.SetResources(m_Resources);
                 m_SaveDataManager.SetShowDataCheckInfoUI(m_DataCheckInfoUI.ShowDataCheckInfoUI);
                 m_SaveDataManager.SetHideDataCheckInfoUI(m_DataCheckInfoUI.HideDataCheckInfoUI);
-                //m_SaveDataManager.SetIsCheck(m_DataCheckInfoUI.IsCheck);
                 m_SaveDataManager.SetSaveDataIsNotFoundAlert(m_DataCheckInfoUI.ShowSaveDataIsNotFoundAlert);
                 m_SaveDataManager.SetWantToLoadDavaAlert(m_DataCheckInfoUI.ShowWantToLoadDavaAlert);
             };
@@ -62,11 +61,39 @@ namespace Unreal
 
         public void SetDialgoueSystemDelegateInitialize()
         {
+            if(m_DialogueSystem == null) //TODO:好吧，這裡的生成有點意外
+            {
+                m_DialogueSystem = new Dialogue.DialogueSystem();
+            }
             m_DialogueSystem.m_DelegateInitialize = delegate ()
             {
-
+                int table = 0;
+                int reference = 0;
+                m_DialogueSystem.GetName(m_DialogueUI.SetNameText);
+                m_DialogueSystem.GetSentence(m_DialogueUI.SetSentenceText);
+                m_DialogueSystem.GetAvatar(m_DialogueUI.SetAvatar);
+                m_DialogueSystem.GetChoicePanel(m_DialogueUI.SetAllBtnState);
+                m_DialogueSystem.SetStoryTextAsset(m_Resources.LoadConverationTextAssetInk(table, reference)); //TODO:重點段落，設置存檔的點
             };
             m_DialogueSystem.Initialize();
+        }
+
+        public void SetDialogueSystemDelegateUpdate()
+        {
+            m_DialogueSystem.m_DelegateGameSystemUpdate = delegate () //TODO:m_DelegateGameSystemUpdate會拋出意外NullReferenceException
+            {
+                if (m_UIs.Contains(m_DialogueUI)) //TODO:之後要改成陣列
+                {
+                    if (m_DialogueSystem.IsStoryEnd()) //TODO:IsStoryEnd的判斷要做在m_DialogueSystem裡面
+                    {
+                        RemoveUI(m_DialogueUI);
+                        m_DialogueUI.Release();
+                        CreateAndInitinalFightUI();
+
+                    }
+                }
+
+            };
         }
     }
 }

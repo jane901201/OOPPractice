@@ -6,59 +6,48 @@ using UnityEngine;
 using UnityEngine.Localization;
 using Unreal.BaseClass;
 
-
+/// <summary>
+/// TODO:DialogueSystem跟IResource的使用
+/// </summary>
 namespace Unreal.Dialogue
 {
 
     public class DialogueSystem : IGameSystem
     {
-        //TODO:消除掉這邊所有的delegate
-        public delegate void SetName(string name);
-        public SetName m_MustBeRemove_SetName;
-        public delegate void SetSentence(string sentence);
-        public SetSentence m_MustBeRemove_SetSentence;
-        public delegate void SetAvatar();
-        public SetAvatar m_MustBeRemove_SetAvater;
-        public delegate void SetChoiceBtn(int btnNum, Action OnClickChoiceBtn, string choiceText);
-        public SetChoiceBtn m_MustBeRemove_SetChoiceBtn;
-        public delegate void SetChoicePanel();
-        public SetChoicePanel m_MustBeRemove_SetChoicePanel;
 
         private TextAsset m_InkAsset = null;
         private LocalizedString m_CharacterNameLocal;
+        private LocalizedSprite m_AvatarLocal;
         private Ink.Runtime.Story m_Story; //TODO:以防萬一，我暫時先加一下Ink的Story的namespace，我怕災難出現
 
-        private Action<string> m_SetName;
-        private Action<string> m_SetSentence;
-        private Action m_SetAvatar;
-        private Func<Dictionary<int, Action>> m_SetChoiceActionBtns;
-        private Func<Dictionary<int, string>> m_SetBtnText;
+        private Action<string> m_SetName = null;
+        private Action<string> m_SetSentence = null;
+        private Action<Sprite> m_SetAvatar = null;
+        private Action m_SetChoicePanel = null;
 
-        private string m_TmpName;
-        private string m_TmpSentence;
-        //private bool m_IsOnClick = false;
+        private string m_TmpName = "";
+        private string m_TmpSentence = "";
         private bool m_StoryEnd = false;
-
-
+        private Dictionary<int, Action> m_ChoiceActionBtns = null;
+        private Dictionary<int, string> m_BtnTexts = null;
+        private Sprite m_Avatar = null;
         public override void Initialize()
         {
-            m_Story = new Story(m_InkAsset.text);
             m_StoryEnd = false;
             m_CharacterNameLocal = new LocalizedString();
+            m_AvatarLocal = new LocalizedSprite();
             m_TmpName = "";
             m_TmpSentence = "";
-            RefreshView();
-            //TODO:m_DelegateInitialize();
+            m_DelegateInitialize();
+            m_Story = new Ink.Runtime.Story(m_InkAsset.text);
+            StoryContinue();
         }
 
 
 
         public override void Update()
         {
-            if(IsStoryEnd())
-            {
-                //TODO:結束對話系統
-            }
+            m_DelegateGameSystemUpdate();
         }
 
         public void GetName(Action<string> action)
@@ -66,9 +55,37 @@ namespace Unreal.Dialogue
             m_SetName = action;
         }
 
+        public void GetSentence(Action<string> action)
+        {
+            m_SetSentence = action;
+        }
 
+        public void GetAvatar(Action<Sprite> action)
+        {
+            m_SetAvatar = action;
+        }
 
-        public void RefreshView()
+        public void GetChoicePanel(Action action)
+        {
+            m_SetChoicePanel = action;
+        }
+
+        public Dictionary<int, Action> GettChoiceActionBtns()
+        {
+            return m_ChoiceActionBtns;
+        }
+
+        public Dictionary<int, string> GetBtnText()
+        {
+            return m_BtnTexts;
+        }
+
+        public Sprite GetImage()
+        {
+            return m_Avatar;
+        }
+
+        public void StoryContinue()
         {
             
             if(m_Story.canContinue)
@@ -79,16 +96,7 @@ namespace Unreal.Dialogue
             }
             else if (m_Story.currentChoices.Count > 0)
             {
-
-                //TODO:產生出比較不會出事情的Btn系統
-                for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
-                {
-                    Choice choice = m_Story.currentChoices[buttonNum];
-                    string choiceText = choice.text.Trim();
-                    //TODO:與其一次設定一個Btn，不如一次記錄完所有的東西，再傳給DialgoueUI做設定
-                    m_MustBeRemove_SetChoiceBtn(buttonNum, () => OnClickChoiceButton(choice), choiceText);
-                }
-                m_MustBeRemove_SetChoicePanel();
+                SetStoryChoice();
             }
            
             if(!m_Story.canContinue && m_Story.currentChoices.Count <= 0)
@@ -100,31 +108,38 @@ namespace Unreal.Dialogue
 
         public void SplitSentenceAndSetSentenceandName(string sentence)
         {
-            if (sentence.Contains(":") || sentence.Contains("："))
+            if (sentence.Contains(":") || sentence.Contains("："))//TODO:全形跟半行的問題
             {
                 
-                string[] data = sentence.Split(':'); //TODO:全形跟半行的問題
+                string[] data = sentence.Split(':');
                 m_TmpName = data[0];
                 m_TmpSentence = data[1];
                 if (m_TmpName.Equals("Player"))
                 {
                     m_CharacterNameLocal.SetReference("Name", "Default"); //TODO:之後研究名字輸入
-                    m_MustBeRemove_SetName(m_CharacterNameLocal.GetLocalizedString());
+                    m_AvatarLocal.SetReference("Avatar", "Player");
+                    m_Avatar = m_AvatarLocal.LoadAsset();
+                    m_SetName(m_CharacterNameLocal.GetLocalizedString());
+
                 }
                 else
                 {
-                    m_MustBeRemove_SetName(m_TmpName);
+                    m_AvatarLocal.SetReference("Avatar", m_TmpName);
+                    m_Avatar = m_AvatarLocal.LoadAsset();
+                    m_SetName(m_TmpName);
+                    m_SetAvatar(m_Avatar);
                 }
 
-                m_MustBeRemove_SetSentence(m_TmpSentence);
+                m_SetSentence(m_TmpSentence);
 
             }
             else
             {
                 m_TmpName = "";
                 m_TmpSentence = sentence;
-                m_MustBeRemove_SetName(m_TmpName);
-                m_MustBeRemove_SetSentence(m_TmpSentence);
+                m_SetName(m_TmpName);
+                m_SetSentence(m_TmpSentence);
+             
             }
         }
 
@@ -134,28 +149,40 @@ namespace Unreal.Dialogue
             m_InkAsset = storyTextAsset;
         }
 
+        private void SetStoryChoice()
+        {
+            Dictionary<int, Action> tmpActions = new Dictionary<int, Action>();
+            Dictionary<int, string> tmpBtnText = new Dictionary<int, string>();
+            //TODO:產生出比較不會出事情的Btn系統
+            for (int buttonNum = 0; buttonNum < m_Story.currentChoices.Count; buttonNum++)
+            {
+                    Choice choice = m_Story.currentChoices[buttonNum];
+                    tmpActions.Add(buttonNum,() => OnClickChoiceButton(choice));
+                    string choiceText = choice.text.Trim();
+                    tmpBtnText.Add(buttonNum, choiceText);
+                   
+              
+            }
+            m_ChoiceActionBtns = tmpActions;
+            m_BtnTexts = tmpBtnText;
+            m_SetChoicePanel();
+        }
+
         private void OnClickChoiceButton(Choice choice)
         {
             m_Story.ChooseChoiceIndex(choice.index);
-            RefreshView();
+            StoryContinue();
         }
 
         private void StoryEnd()
         {
             m_StoryEnd = true;
-            //TODO:當文本讀取完畢，呼叫主程式消除對話跟恢復行動
-
         }
 
         public bool IsStoryEnd()
         {
             return m_StoryEnd;
         }
-
-        //public bool IsOnClick()
-        //{
-        //    return m_IsOnClick;
-        //}
     }
 
 }

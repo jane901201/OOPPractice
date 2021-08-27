@@ -23,11 +23,20 @@ MonoBehaviour:
     m_Key: father
     m_Metadata:
       m_Items: []
+  - m_Id: 14112147544276992
+    m_Key: "\u694A\u6708\u82B1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14112606183030784
+    m_Key: Player
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - id: 0
+    - id: 1
   m_KeyGenerator:
-    id: 1
+    id: 2
   references:
     version: 1
     00000000:
@@ -49,6 +58,17 @@ MonoBehaviour:
         m_TypeString: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
     00000001:
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 14112147544276992
+          m_TableCodes:
+          - zh-Hans
+          - zh-TW
+          - en
+        m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    00000002:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1626695572608

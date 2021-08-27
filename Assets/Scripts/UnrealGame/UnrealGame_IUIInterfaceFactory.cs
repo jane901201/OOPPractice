@@ -47,6 +47,17 @@ namespace Unreal
             m_MainMenuUI.Initialize();
         }
 
+        public void SetDialogueUIDelegatInitialize()
+        {
+            m_DialogueUI.m_DelegateInitialize = delegate ()
+            {
+                m_DialogueUI.GetChoiceActionBtns(m_DialogueSystem.GettChoiceActionBtns);
+                m_DialogueUI.GetBtnTexts(m_DialogueSystem.GetBtnText);
+                m_DialogueUI.SetContinueStory(() => m_DialogueSystem.StoryContinue());
+            };
+            m_DialogueUI.Initialize();
+        }
+
         public void SetSaveDataUIDelegateInitialize()
         {
             m_SaveDataUI.m_DelegateInitialize = delegate ()
