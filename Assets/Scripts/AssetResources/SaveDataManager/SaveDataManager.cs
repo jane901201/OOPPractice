@@ -7,6 +7,7 @@ using Unreal.BaseClass;
 /// 獲得目前資料的資訊(從ProjectResoruces獲取)
 /// 呼叫ProjectResources將資料設定為XML檔
 /// 建設Caretaker
+/// TODO:未來在Action的部分可能要先確認是否是null
 /// </summary>
 
 namespace Unreal.AssetResources
@@ -67,12 +68,18 @@ namespace Unreal.AssetResources
 
         public void LoadSaveData(int num)
         {
-            m_ShowDataCheckInfoUI();
-            if(m_Caretaker.GetSaveData(num) != null)
+            if(m_ShowDataCheckInfoUI != null)//TODO:雖然說確實要有防禦型語句...不過...
+            {
+                m_ShowDataCheckInfoUI();
+            }
+            if(m_Caretaker.GetSaveData(num) != null) 
             {
                 //TODO:將檔案回復之類的
                 SaveDataFile tmpSaveDataFile = m_Caretaker.GetSaveData(num);
-                m_GetWantToLoadDavaAlert();
+                if(m_GetWantToLoadDavaAlert != null)
+                {
+                    m_GetWantToLoadDavaAlert();
+                }
             }
             else
             {

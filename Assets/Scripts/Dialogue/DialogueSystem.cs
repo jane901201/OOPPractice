@@ -1,6 +1,7 @@
 using Ink.Runtime;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using Unreal.BaseClass;
@@ -11,26 +12,33 @@ namespace Unreal.Dialogue
 
     public class DialogueSystem : IGameSystem
     {
+        //TODO:消除掉這邊所有的delegate
         public delegate void SetName(string name);
-        public SetName m_SetName;
+        public SetName m_MustBeRemove_SetName;
         public delegate void SetSentence(string sentence);
-        public SetSentence m_SetSentence;
+        public SetSentence m_MustBeRemove_SetSentence;
         public delegate void SetAvatar();
-        public SetAvatar m_SetAvater;
+        public SetAvatar m_MustBeRemove_SetAvater;
         public delegate void SetChoiceBtn(int btnNum, Action OnClickChoiceBtn, string choiceText);
-        public SetChoiceBtn m_SetChoiceBtn;
+        public SetChoiceBtn m_MustBeRemove_SetChoiceBtn;
         public delegate void SetChoicePanel();
-        public SetChoicePanel m_SetChoicePanel;
+        public SetChoicePanel m_MustBeRemove_SetChoicePanel;
 
         private TextAsset m_InkAsset = null;
         private LocalizedString m_CharacterNameLocal;
-        private Story m_Story;
+        private Ink.Runtime.Story m_Story; //TODO:以防萬一，我暫時先加一下Ink的Story的namespace，我怕災難出現
 
+        private Action<string> m_SetName;
+        private Action<string> m_SetSentence;
+        private Action m_SetAvatar;
+        private Func<Dictionary<int, Action>> m_SetChoiceActionBtns;
+        private Func<Dictionary<int, string>> m_SetBtnText;
 
         private string m_TmpName;
         private string m_TmpSentence;
-        private bool m_IsOnClick = false;
+        //private bool m_IsOnClick = false;
         private bool m_StoryEnd = false;
+
 
         public override void Initialize()
         {
@@ -40,7 +48,24 @@ namespace Unreal.Dialogue
             m_TmpName = "";
             m_TmpSentence = "";
             RefreshView();
+            //TODO:m_DelegateInitialize();
         }
+
+
+
+        public override void Update()
+        {
+            if(IsStoryEnd())
+            {
+                //TODO:結束對話系統
+            }
+        }
+
+        public void GetName(Action<string> action)
+        {
+            m_SetName = action;
+        }
+
 
 
         public void RefreshView()
@@ -60,9 +85,10 @@ namespace Unreal.Dialogue
                 {
                     Choice choice = m_Story.currentChoices[buttonNum];
                     string choiceText = choice.text.Trim();
-                    m_SetChoiceBtn(buttonNum, () => OnClickChoiceButton(choice), choiceText);
+                    //TODO:與其一次設定一個Btn，不如一次記錄完所有的東西，再傳給DialgoueUI做設定
+                    m_MustBeRemove_SetChoiceBtn(buttonNum, () => OnClickChoiceButton(choice), choiceText);
                 }
-                m_SetChoicePanel();
+                m_MustBeRemove_SetChoicePanel();
             }
            
             if(!m_Story.canContinue && m_Story.currentChoices.Count <= 0)
@@ -83,22 +109,22 @@ namespace Unreal.Dialogue
                 if (m_TmpName.Equals("Player"))
                 {
                     m_CharacterNameLocal.SetReference("Name", "Default"); //TODO:之後研究名字輸入
-                    m_SetName(m_CharacterNameLocal.GetLocalizedString());
+                    m_MustBeRemove_SetName(m_CharacterNameLocal.GetLocalizedString());
                 }
                 else
                 {
-                    m_SetName(m_TmpName);
+                    m_MustBeRemove_SetName(m_TmpName);
                 }
 
-                m_SetSentence(m_TmpSentence);
+                m_MustBeRemove_SetSentence(m_TmpSentence);
 
             }
             else
             {
                 m_TmpName = "";
                 m_TmpSentence = sentence;
-                m_SetName(m_TmpName);
-                m_SetSentence(m_TmpSentence);
+                m_MustBeRemove_SetName(m_TmpName);
+                m_MustBeRemove_SetSentence(m_TmpSentence);
             }
         }
 
@@ -126,10 +152,10 @@ namespace Unreal.Dialogue
             return m_StoryEnd;
         }
 
-        public bool IsOnClick()
-        {
-            return m_IsOnClick;
-        }
+        //public bool IsOnClick()
+        //{
+        //    return m_IsOnClick;
+        //}
     }
 
 }

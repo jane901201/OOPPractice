@@ -26,10 +26,13 @@ namespace Unreal
         private GameObject m_FightUIObj = null;
 
         private MainMenuUI m_MainMenuUI = null;
+        private DialogueUI m_DialogueUI = null;
         private SaveDataUI m_SaveDataUI = null;
         private GamePauseUI m_GamePauseUI = null;
         private FightUI m_FightUI = null;
         private DataCheckInfoUI m_DataCheckInfoUI = null;
+
+        #region UI創建(未來會用Factory模式代替)
 
         public void LoadMainMenuUI()
         {
@@ -52,10 +55,15 @@ namespace Unreal
         private void CreateMainMenuUI()
         {
             GameObject tmpMainMenuUIObj = SetObjIntoGame(InstantiateMainMenuUI());
-            MainMenuUI tmpMainMenuUI = tmpMainMenuUIObj.GetComponent<MainMenuUI>();
-            tmpMainMenuUI.Initialize();
-            AddUI(tmpMainMenuUI);
+            m_MainMenuUI = tmpMainMenuUIObj.GetComponent<MainMenuUI>();
+            AddUI(m_MainMenuUI);
 
+        }
+
+        public void CreateAndInitinalMainMenuUI()
+        {
+            CreateMainMenuUI();
+            SetMainMenuUIDelegateInitialize();
         }
 
         public void LoadDialogueUI()
@@ -68,7 +76,7 @@ namespace Unreal
             return m_DialogueUIObj;
         }
 
-        public GameObject InstantiateDialogeUI() //之後要改
+        public GameObject InstantiateDialogeUI() //TODO:之後要讓每個Instinate不依賴field variable
         {
             LoadDialogueUI();
             GameObject tmpDialogueUI = Instantiate(GetDialogueUI(), Vector3.zero, Quaternion.identity);
@@ -76,7 +84,12 @@ namespace Unreal
             return tmpDialogueUI;
         }
 
-      
+        private void CreateDialgoueUI()
+        {
+            GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateMainMenuUI());
+            m_DialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
+            AddUI(m_DialogueUI);
+        }
 
         public void LoadSaveDataUI()
         {
@@ -196,7 +209,7 @@ namespace Unreal
         private void CreateAndInitalizeDataCheckInfoUI()
         {
             CreateDataCheckInfoUI();
-            
+            SetDataCheckInfoUIDelegateInitialize();
         }
 
         public void LoadFightUI()
@@ -229,6 +242,43 @@ namespace Unreal
             CreateFightUI();
             SetFightUIDelegateInitialize();
         }
+
+        #endregion
+
+        #region MainMenuUI的Action設置(等整個系統做到一個段落後再決定傳遞多少Action到其他類別比較好吧)
+        private void StartGame()
+        {
+            //TODO:一些物件還有系統的初始化
+            //TODO:m_SaveDataManager.StartGame();
+
+
+
+            SetTempleScene();//TODO:測試用，之後要改
+        }
+
+        private void ContinueGame()
+        {
+            CreateAndInitinalSaveDataUI();
+            CreateAndInitalizeDataCheckInfoUI();
+            SetSaveDataManagerDelegateInitialize();//TODO:我沒有想過SaveDataManager跟DataCheckInfoUI的宣告會出事情......
+        }
+
+        private void LeaveGame()
+        {
+            //TODO:存檔
+            Application.Quit();
+        }
+        #endregion
+
+        #region GamePauseUI的Action設置
+
+        #endregion
+
+        #region 共用
+
+        #endregion
+
+        #region 工具類程式
 
         private Transform GetCanvasTransform()
         {
@@ -270,5 +320,7 @@ namespace Unreal
 
             return instantiateObj;
         }
+
+        #endregion
     }
 }

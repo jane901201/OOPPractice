@@ -38,7 +38,13 @@ namespace Unreal
 
         public void SetMainMenuUIDelegateInitialize()
         {
-
+            m_MainMenuUI.m_DelegateInitialize = delegate ()
+            {
+                m_MainMenuUI.SetStartGame(StartGame);
+                m_MainMenuUI.SetContinueGame(ContinueGame);
+                m_MainMenuUI.SetLeaveGame(LeaveGame);
+            };
+            m_MainMenuUI.Initialize();
         }
 
         public void SetSaveDataUIDelegateInitialize()
@@ -67,6 +73,8 @@ namespace Unreal
             m_GamePauseUI.m_DelegateInitialize = delegate ()
             {
                 m_GamePauseUI.SetSaveDataUI(CreateAndInitinalSaveDataUI);
+                CreateAndInitalizeDataCheckInfoUI();
+                SetSaveDataManagerDelegateInitialize();
             };
             m_GamePauseUI.Initialize();
         }

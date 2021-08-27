@@ -16,7 +16,7 @@ namespace Unreal.UI
 
         public override void Initialize()
         {
-
+            HideDataCheckInfoUI();
         }
 
         public void ShowDataCheckInfoUI()

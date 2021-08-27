@@ -28,6 +28,7 @@ namespace Unreal.UI
         public override void Initialize()
         {
             base.Initialize();
+            //m_DelegateInitialize();
         }
 
         public override void UIUpdate()
@@ -37,7 +38,6 @@ namespace Unreal.UI
 
         public override void Release()
         {
-            //TODO:Listªº²¾°£
             base.Release();
         }
 

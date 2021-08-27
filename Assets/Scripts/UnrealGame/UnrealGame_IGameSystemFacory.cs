@@ -4,6 +4,7 @@ using UnityEngine;
 using Unreal.BaseClass;
 /// <summary>
 /// 暫時將IGameSystem的Delegate的宣告放在這裡
+/// TODO:未來會把DelegateInitialize跟Initialize等等拆開
 /// </summary>
 namespace Unreal
 {
@@ -12,12 +13,12 @@ namespace Unreal
 
         List<IGameSystem> m_GameSystems = new List<IGameSystem>();
 
-        public void AddGameSystem(IGameSystem gameSystem) //還是需要先Release在做移除吧
+        public void AddGameSystem(IGameSystem gameSystem)
         {
             m_GameSystems.Add(gameSystem);
         }
 
-        public void RemoveGameSystem(IGameSystem gameSystem) //還是需要先Release在做移除吧..?
+        public void RemoveGameSystem(IGameSystem gameSystem)
         {
             if(m_GameSystems.Contains(gameSystem))
             {
@@ -56,6 +57,16 @@ namespace Unreal
             {
                 m_SceneController.SetLoadingUI(CreateLoadingUI);
             };
+            m_SceneController.Initialize();
+        }
+
+        public void SetDialgoueSystemDelegateInitialize()
+        {
+            m_DialogueSystem.m_DelegateInitialize = delegate ()
+            {
+
+            };
+            m_DialogueSystem.Initialize();
         }
     }
 }

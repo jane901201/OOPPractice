@@ -27,29 +27,7 @@ namespace Unreal
 
             mainMenuScene.SceneBegin = delegate ()
             {
-                GameObject tmpMainMenuUIObj = SetObjIntoGame(InstantiateMainMenuUI());
-                MainMenuUI tmpMainMenuUI = tmpMainMenuUIObj.GetComponent<MainMenuUI>();
-
-                #region MainMenuUISet
-                tmpMainMenuUI.BeginBtn.onClick.AddListener(
-                    () => SetTempleScene() //TODO:測試用，之後要改
-                );
-
-                tmpMainMenuUI.ContinureBtn.onClick.AddListener(
-                        delegate ()
-                        {
-                            CreateAndInitinalSaveDataUI();
-                            CreateAndInitalizeDataCheckInfoUI();
-                            m_DataCheckInfoUI.HideDataCheckInfoUI();
-                            SetSaveDataManagerDelegateInitialize();
-                        }
-
-                    );
-                tmpMainMenuUI.LeaveBtn.onClick.AddListener(
-                    //TODO:SaveDataFiletoXML
-                    () => Application.Quit()
-                    );
-                #endregion
+                CreateAndInitinalMainMenuUI();     
             };
 
             mainMenuScene.SceneUpdate = delegate
@@ -78,7 +56,6 @@ namespace Unreal
             tmpTempleScene.SceneBegin = delegate ()
             {
                 GameObject tmpDialogueUIObj = SetObjIntoGame(InstantiateDialogeUI());
-                //Debug.Log(m_UIs.Count);
                 DialogueUI tmpDialogueUI = tmpDialogueUIObj.GetComponent<DialogueUI>();
                 AddUI(tmpDialogueUI);
                 tmpDialogueUI.ShowSentencePanel();
@@ -86,12 +63,12 @@ namespace Unreal
 
                 m_DialogueSystem.SetStoryTextAsset(m_Resources.LoadConverationTextAssetInk(table, reference)); //TODO:重點段落，設置存檔的點
 
-                m_DialogueSystem.m_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState); //TODO:要設定在Initinal才比較好
-                m_DialogueSystem.m_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
-                m_DialogueSystem.m_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
+                m_DialogueSystem.m_MustBeRemove_SetChoiceBtn = new DialogueSystem.SetChoiceBtn(tmpDialogueUI.SetAllBtnState); //TODO:要設定在Initinal才比較好
+                m_DialogueSystem.m_MustBeRemove_SetName = new DialogueSystem.SetName(tmpDialogueUI.SetNameText);
+                m_DialogueSystem.m_MustBeRemove_SetSentence = new DialogueSystem.SetSentence(tmpDialogueUI.SetSentenceText);
                 //TODO:m_DialogueSystem.m_SetAvater = new DialogueSystem.SetAvatar(tmpDialogueUI.SetAvatar);
 
-                m_DialogueSystem.m_SetChoicePanel = delegate ()
+                m_DialogueSystem.m_MustBeRemove_SetChoicePanel = delegate ()
                 {
 
                 };
@@ -109,9 +86,9 @@ namespace Unreal
                         if (m_DialogueSystem.IsStoryEnd()) //TODO:IsStoryEnd的判斷要做在m_DialogueSystem裡面
                         {
                             RemoveUI(tmpDialogueUI);
-                            //Debug.Log(m_UIs.Count);
                             tmpDialogueUI.Release();
                             CreateAndInitinalFightUI();
+
                         }
                     }
                    
